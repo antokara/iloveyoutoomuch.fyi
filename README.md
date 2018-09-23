@@ -44,7 +44,8 @@
   1. [Jest](https://jestjs.io/)
   1. [Typescript](https://www.typescriptlang.org/)
   1. [Semantic Release](https://semantic-release.gitbook.io/semantic-release/)
-  1. []()
+  1. [DotEnv](https://github.com/motdotla/dotenv#readme)
+  1. [Babel](https://babeljs.io/)
 
 ### Module Aliases
 
@@ -82,3 +83,7 @@ _note: [webpack-bundle-analyzer](https://github.com/webpack-contrib/webpack-bund
 ## Deployment
 
 git push to `master` triggers `travis-ci` build, which if successful, pushes to production. `.travis.yml` contains the travis-ci build and deployment configuration.
+
+## Credits and Copyrights
+
+1. Icons made by [Freepik](http://www.freepik.com) from [Flaticon](http://www.flaticon.com) is licensed by [CC 3.0 BY](http://creativecommons.org/licenses/by/3.0/)
