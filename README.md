@@ -39,13 +39,14 @@
 ### Primary Tools & Packages
 
   1. [Webpack](https://webpack.js.org)
+  1. [Babel](https://babeljs.io/)
+  1. [Typescript](https://www.typescriptlang.org/)
   1. [React](https://reactjs.org/)
+  1. [react-hot-loader](https://github.com/gaearon/react-hot-loader)
   1. [Redux](https://redux.js.org/)
   1. [Jest](https://jestjs.io/)
-  1. [Typescript](https://www.typescriptlang.org/)
-  1. [Semantic Release](https://semantic-release.gitbook.io/semantic-release/)
   1. [DotEnv](https://github.com/motdotla/dotenv#readme)
-  1. [Babel](https://babeljs.io/)
+  1. [Semantic Release](https://semantic-release.gitbook.io/semantic-release/)
 
 ### Module Aliases
 
