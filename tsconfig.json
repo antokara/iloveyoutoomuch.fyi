@@ -10,10 +10,15 @@
         "allowSyntheticDefaultImports": true,
         "baseUrl": ".",
         "paths": {
+            "Actions/*": ["src/actions/*"],
+            "Components/*": ["src/components/*"],
+            "Constants/*": ["src/constants/*"],
             "Containers/*": ["src/containers/*"],
+            "Helpers/*": ["src/helpers/*"],
+            "Reducers/*": ["src/reducers/*"],
+            "Assets/*": ["src/assets/*"],
+            "ReduxLogger/*": ["redux-logger"],
+            "ReduxDevtoolsExtension/*": ["redux-devtools-extension"],
         }
-    },
-    "files": [
-        "src/index.tsx",
-    ]
+    }
 }
