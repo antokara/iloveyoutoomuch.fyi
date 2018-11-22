@@ -30,35 +30,36 @@
 
 1. [Semantic Versioning](https://semver.org/)
 1. [AngularJS's commit message convention](https://github.com/angular/angular.js/blob/master/DEVELOPERS.md#commits)
-1. [Airbnb JavaScript Style Guide](http://airbnb.io/javascript/)
-1. [Airbnb React/JSX Style Guide](https://github.com/airbnb/javascript/tree/master/react)
-    1. [babel-preset-react](https://github.com/babel/babel/tree/master/packages/babel-preset-react)
+1. [TS Lint Recommended](https://palantir.github.io/tslint/usage/configuration/#configuration-presets)
+   1. [TS Lint React](https://github.com/palantir/tslint-react)
+   1. [TS Lint Microsoft Contrib](https://github.com/Microsoft/tslint-microsoft-contrib)
 1. [Flux Standard Action](https://github.com/redux-utilities/flux-standard-action)
 1. [SiteMaps](https://www.sitemaps.org/protocol.html)
 
 ### Primary Tools & Packages
 
-  1. [Webpack](https://webpack.js.org)
-  1. [Babel](https://babeljs.io/)
-  1. [Typescript](https://www.typescriptlang.org/)
-  1. [React](https://reactjs.org/)
-  1. [react-hot-loader](https://github.com/gaearon/react-hot-loader)
-  1. [Redux](https://redux.js.org/)
-  1. [Jest](https://jestjs.io/)
-  1. [DotEnv](https://github.com/motdotla/dotenv#readme)
-  1. [Semantic Release](https://semantic-release.gitbook.io/semantic-release/)
+1. [Webpack](https://webpack.js.org)
+1. [Babel](https://babeljs.io/)
+1. [Typescript](https://www.typescriptlang.org/)
+1. [React](https://reactjs.org/)
+1. [react-hot-loader](https://github.com/gaearon/react-hot-loader)
+1. [Redux](https://redux.js.org/)
+1. [Jest](https://jestjs.io/)
+1. [DotEnv](https://github.com/motdotla/dotenv#readme)
+1. [Semantic Release](https://semantic-release.gitbook.io/semantic-release/)
+1. [Prettier](https://prettier.io/)
 
 ### Module Aliases
 
 1. Webpack (for development and production)
-    1. file `/config/webpack/common.js`
-    1. key `resolve.alias`
+   1. file `/config/webpack/common.js`
+   1. key `resolve.alias`
 1. Jest (for testing)
-    1. file `package.json`
-    1. key `jest.moduleNameMapper`
+   1. file `package.json`
+   1. key `jest.moduleNameMapper`
 1. esLint (for development)
-    1. file `package.json`
-    1. key `eslintConfig.settings.import/resolver.alias`
+   1. file `package.json`
+   1. key `eslintConfig.settings.import/resolver.alias`
 
 ### Testing
 
@@ -76,8 +77,8 @@ _note: output will be printed in console, as well as in the `reports/coverage` d
 
 `$npm run build`
 
-* *In prod. env. all code (html, css, js) is getting minified / uglified and source maps are getting generated as separate files*
-* output directory of the build is `dist`
+- _In prod. env. all code (html, css, js) is getting minified / uglified and source maps are getting generated as separate files_
+- output directory of the build is `dist`
 
 _note: [webpack-bundle-analyzer](https://github.com/webpack-contrib/webpack-bundle-analyzer) will generate the report in `reports/webpackBundleAnalyzer.html`_
 
