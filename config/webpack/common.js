@@ -107,6 +107,11 @@ module.exports = env => {
               }
             }
           ]
+        },
+        {
+          test: /\.tsx?/,
+          loader: 'stylelint-custom-processor-loader',
+          exclude: /node_modules/
         }
       ]
     }
