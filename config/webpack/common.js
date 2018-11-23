@@ -3,13 +3,17 @@ const FaviconsWebpackPlugin = require('favicons-webpack-plugin');
 const Dotenv = require('dotenv-webpack');
 require('dotenv').config();
 
-module.exports = (env) => {
-  const environment = (env && env.NODE_ENV) ?
-    env.NODE_ENV.toLocaleLowerCase() : 'development';
+module.exports = env => {
+  const environment =
+    env && env.NODE_ENV ? env.NODE_ENV.toLocaleLowerCase() : 'development';
   return {
     entry: {
       // polyfills: path.resolve(__dirname, './polyfills.js'),
-      main: ['react-hot-loader/patch', 'babel-polyfill', path.resolve(__dirname, '../../src/index.tsx')],
+      main: [
+        'react-hot-loader/patch',
+        'babel-polyfill',
+        path.resolve(__dirname, '../../src/index.tsx')
+      ]
       // sw: path.resolve(__dirname, '../../src/sw.js'),
     },
     devtool: environment === 'development' ? 'cheap-source-map' : false,
@@ -34,18 +38,18 @@ module.exports = (env) => {
           opengraph: true,
           twitter: true,
           yandex: false,
-          windows: false,
-        },
+          windows: false
+        }
       }),
       new Dotenv({
         path: path.resolve(__dirname, '../../.env'),
         safe: true,
-        systemvars: true,
-      }),
+        systemvars: true
+      })
     ],
     output: {
       filename: '[name].bundle.js',
-      path: path.resolve(__dirname, '../../dist'),
+      path: path.resolve(__dirname, '../../dist')
     },
     resolve: {
       extensions: ['.js', '.json', '.ts', '.tsx'],
@@ -57,35 +61,18 @@ module.exports = (env) => {
         Containers: path.resolve(__dirname, '../../src/containers/'),
         Helpers: path.resolve(__dirname, '../../src/helpers/'),
         Reducers: path.resolve(__dirname, '../../src/reducers/'),
-        ReduxLogger$: (environment !== 'production' ?
-          'redux-logger' : path.resolve(__dirname, '../../src/helpers/empty.ts')),
-        ReduxDevtoolsExtension$: (environment !== 'production' ?
-          'redux-devtools-extension' : path.resolve(__dirname, '../../src/helpers/empty.ts')),
-      },
+        ReduxLogger$:
+          environment !== 'production'
+            ? 'redux-logger'
+            : path.resolve(__dirname, '../../src/helpers/empty.ts'),
+        ReduxDevtoolsExtension$:
+          environment !== 'production'
+            ? 'redux-devtools-extension'
+            : path.resolve(__dirname, '../../src/helpers/empty.ts')
+      }
     },
     module: {
       rules: [
-        // {
-        //   test: /\.jsx?$/,
-        //   enforce: 'pre',
-        //   exclude: /(node_modules|bower_components)/,
-        //   loader: 'eslint-loader',
-        //   options: {
-        //     cache: true,
-        //     emitError: true,
-        //     failOnWarning: environment !== 'development',
-        //     failOnError: environment !== 'development',
-        //     // Unfortunately, some config options must be duplicated here
-        //     // even though they are defined within package.json[eslintConfig]
-        //     // which is what IDEs use to configure ESLint but this one
-        //     // uses the CLIEngine options instead...
-        //     // @see https://github.com/eslint/eslint/issues/9484
-        //     // @see https://eslint.org/docs/developer-guide/nodejs-api#cliengine
-        //     plugins: [
-        //       'jsx-a11y',
-        //     ],
-        //   },
-        // },
         {
           test: /\.tsx?$/,
           exclude: /(node_modules|assets|reports)/,
@@ -98,33 +85,30 @@ module.exports = (env) => {
                     '@babel/preset-env',
                     {
                       targets: {
-                        browsers: [
-                          '> 5%',
-                          'last 2 versions',
-                        ],
-                      },
-                    },
+                        browsers: ['> 5%', 'last 2 versions']
+                      }
+                    }
                   ],
                   '@babel/preset-typescript',
                   '@babel/preset-react'
                 ],
-                plugins: [
-                  '@babel/plugin-proposal-object-rest-spread',
-                ],
-              },
-            },
-          ],
+                plugins: ['@babel/plugin-proposal-object-rest-spread']
+              }
+            }
+          ]
         },
         {
           test: /\.(png|jpg|gif|svg)$/,
-          use: [{
-            loader: 'file-loader',
-            options: {
-              outputPath: 'assets/',
-            },
-          }],
-        },
-      ],
-    },
+          use: [
+            {
+              loader: 'file-loader',
+              options: {
+                outputPath: 'assets/'
+              }
+            }
+          ]
+        }
+      ]
+    }
   };
 };
