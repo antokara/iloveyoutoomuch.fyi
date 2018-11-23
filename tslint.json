@@ -25,7 +25,9 @@
       "Containers",
       "Helpers",
       "Reducers"
-    ]
+    ],
+    // @see https://github.com/palantir/tslint-react/issues/120
+    "variable-name": [true, "ban-keywords", "check-format", "allow-pascal-case"]
   },
   "rulesDirectory": ["node_modules/tslint-microsoft-contrib"]
 }
