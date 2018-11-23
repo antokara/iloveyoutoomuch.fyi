@@ -51,15 +51,19 @@
 
 ### Module Aliases
 
-1. Webpack (for development and production)
+1. Webpack
    1. file `/config/webpack/common.js`
    1. key `resolve.alias`
-1. Jest (for testing)
+1. Typescript Compiler
+   1. file `tsconfig.json`
+   1. key `compilerOptions.paths`
+1. tsLint
+   1. file `tslint.json`
+   1. key `rules.no-implicit-dependencies`
+   1. key `rules.no-submodule-imports`
+1. Jest
    1. file `package.json`
    1. key `jest.moduleNameMapper`
-1. esLint (for development)
-   1. file `package.json`
-   1. key `eslintConfig.settings.import/resolver.alias`
 
 ### Testing
 

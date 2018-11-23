@@ -2,6 +2,30 @@
   "defaultSeverity": "error",
   "extends": ["tslint:recommended", "tslint-react", "tslint-microsoft-contrib"],
   "jsRules": {},
-  "rules": {},
+  "rules": {
+    // @see https://github.com/palantir/tslint/issues/3364
+    "no-implicit-dependencies": [
+      true,
+      [
+        "Assets",
+        "Actions",
+        "Components",
+        "Constants",
+        "Containers",
+        "Helpers",
+        "Reducers"
+      ]
+    ],
+    "no-submodule-imports": [
+      true,
+      "Assets",
+      "Actions",
+      "Components",
+      "Constants",
+      "Containers",
+      "Helpers",
+      "Reducers"
+    ]
+  },
   "rulesDirectory": ["node_modules/tslint-microsoft-contrib"]
 }
