@@ -1,7 +1,11 @@
+/**
+ * setup file for jest
+ * @see package.json jest.setupFiles
+ */
 // @see https://facebook.github.io/jest/docs/en/getting-started.html
 // @see https://github.com/airbnb/enzyme#installation
-import Enzyme from 'enzyme';
-import Adapter from 'enzyme-adapter-react-16';
+import * as Enzyme from 'enzyme';
+import * as Adapter from 'enzyme-adapter-react-16';
 // to allow date/time mocking
 import { Settings } from 'luxon';
 
@@ -22,16 +26,16 @@ require('@babel/polyfill');
 require('dotenv').config();
 
 // fail the tests when a console.error/warn is invoked
-const { warn } = global.console;
-global.console.warn = (message, ...args) => {
-  warn.apply(console, args);
-  throw message instanceof Error ? message : new Error(message);
-};
-const { error } = global.console;
-global.console.error = (message, ...args) => {
-  error.apply(console, args);
-  throw message instanceof Error ? message : new Error(message);
-};
+// const { warn } = global.console;
+// global.console.warn = (message, ...args) => {
+//   warn.apply(console, args);
+//   throw message instanceof Error ? message : new Error(message);
+// };
+// const { error } = global.console;
+// global.console.error = (message, ...args) => {
+//   error.apply(console, args);
+//   throw message instanceof Error ? message : new Error(message);
+// };
 
 // fixes css specificity between Material-UI JSS and Styled Components
 // by ensuring that the Material-UI JSS is injected before Styled Components
