@@ -50,6 +50,7 @@
 1. [Semantic Release](https://semantic-release.gitbook.io/semantic-release/)
 1. [Prettier](https://prettier.io/)
 1. [Styled Components](https://www.styled-components.com/)
+1. [GraphQL](https://graphql.org/graphql-js/)
 
 ### Module Aliases
 
