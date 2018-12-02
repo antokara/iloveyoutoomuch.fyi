@@ -2,6 +2,9 @@
  * setup file for jest
  * @see package.json jest.setupFiles
  */
+// tslint:disable-next-line no-import-side-effect
+import '@babel/polyfill';
+import * as dotenv from 'dotenv';
 // @see https://facebook.github.io/jest/docs/en/getting-started.html
 // @see https://github.com/airbnb/enzyme#installation
 import * as Enzyme from 'enzyme';
@@ -20,10 +23,11 @@ import { Settings } from 'luxon';
 // @see https://moment.github.io/luxon/docs/manual/zones.html#changing-the-default-zone
 Settings.defaultZoneName = 'utc';
 
+// configure enzyme with React adapter
 Enzyme.configure({ adapter: new Adapter() });
 
-require('@babel/polyfill');
-require('dotenv').config();
+// configure dotenv
+dotenv.config();
 
 // fail the tests when a console.error/warn is invoked
 // const { warn } = global.console;
