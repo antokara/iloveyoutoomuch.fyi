@@ -6,6 +6,7 @@ import styledComponents from 'styled-components';
 
 const Wrapper: React.FunctionComponent = styledComponents.div`
   color: green;
+  font-family: Rochester, sans-serif;
 `;
 
 const Home: React.FunctionComponent = (): React.ReactElement<
