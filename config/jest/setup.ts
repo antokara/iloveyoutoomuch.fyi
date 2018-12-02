@@ -30,16 +30,24 @@ Enzyme.configure({ adapter: new Adapter() });
 dotenv.config();
 
 // fail the tests when a console.error/warn is invoked
-// const { warn } = global.console;
-// global.console.warn = (message, ...args) => {
-//   warn.apply(console, args);
-//   throw message instanceof Error ? message : new Error(message);
-// };
-// const { error } = global.console;
-// global.console.error = (message, ...args) => {
-//   error.apply(console, args);
-//   throw message instanceof Error ? message : new Error(message);
-// };
+const { warn } = global.console;
+global.console.warn = (message: string | Error, ...args: Object[]): void => {
+  warn.apply(global.console, args);
+  if (typeof message === 'string') {
+    throw new Error(message);
+  } else if (typeof message === 'object' && message instanceof Error) {
+    throw message;
+  }
+};
+const { error } = global.console;
+global.console.error = (message: string | Error, ...args: Object[]): void => {
+  error.apply(global.console, args);
+  if (typeof message === 'string') {
+    throw new Error(message);
+  } else if (typeof message === 'object' && message instanceof Error) {
+    throw message;
+  }
+};
 
 // fixes css specificity between Material-UI JSS and Styled Components
 // by ensuring that the Material-UI JSS is injected before Styled Components
