@@ -2,24 +2,27 @@
  * a single route
  */
 interface IRoute {
-  readonly path: string;
+  readonly PATH: string;
 }
 
 /**
  * a collection of routes
  */
 interface IRoutes {
-  readonly [key: string]: IRoute;
+  readonly [KEY: string]: IRoute;
 }
 
 /**
  * the application's routes
  */
 export const ROUTES: IRoutes = {
-  contact: {
-    path: '/contact' // test tslint space between and test unused imports
+  HOME: {
+    PATH: '/'
   },
-  home: {
-    path: '/'
+  CONTACT: {
+    PATH: '/contact'
+  },
+  SAVE_THE_DATE: {
+    PATH: '/save-the-date'
   }
 };
