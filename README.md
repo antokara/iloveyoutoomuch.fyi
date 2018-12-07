@@ -51,6 +51,7 @@
 1. [Prettier](https://prettier.io/)
 1. [Styled Components](https://www.styled-components.com/)
 1. [GraphQL](https://graphql.org/graphql-js/)
+1. [Apollo GraphQL](https://www.apollographql.com)
 
 ### Module Aliases
 
@@ -96,3 +97,4 @@ git push to `master` triggers `travis-ci` build, which if successful, pushes to 
 ## Credits and Copyrights
 
 1. Icons made by [Freepik](http://www.freepik.com) from [Flaticon](http://www.flaticon.com) is licensed by [CC 3.0 BY](http://creativecommons.org/licenses/by/3.0/)
+1. Headless CMS provided by https://www.takeshape.io
