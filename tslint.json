@@ -13,7 +13,8 @@
         "Constants",
         "Containers",
         "Helpers",
-        "Reducers"
+        "Reducers",
+        "Gql"
       ]
     ],
     "no-submodule-imports": [
@@ -24,7 +25,8 @@
       "Constants",
       "Containers",
       "Helpers",
-      "Reducers"
+      "Reducers",
+      "Gql"
     ],
     // @see https://github.com/palantir/tslint-react/issues/120
     "variable-name": [true, "ban-keywords", "check-format", "allow-pascal-case"]

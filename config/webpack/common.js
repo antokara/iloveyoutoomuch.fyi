@@ -52,7 +52,7 @@ module.exports = env => {
       path: path.resolve(__dirname, '../../dist')
     },
     resolve: {
-      extensions: ['.js', '.json', '.ts', '.tsx'],
+      extensions: ['.js', '.json', '.ts', '.tsx', '.gql'],
       alias: {
         Assets: path.resolve(__dirname, '../assets/'),
         Actions: path.resolve(__dirname, '../../src/actions/'),
@@ -61,6 +61,7 @@ module.exports = env => {
         Containers: path.resolve(__dirname, '../../src/containers/'),
         Helpers: path.resolve(__dirname, '../../src/helpers/'),
         Reducers: path.resolve(__dirname, '../../src/reducers/'),
+        Gql: path.resolve(__dirname, '../../src/gql/'),
         ReduxLogger$:
           environment !== 'production'
             ? 'redux-logger'
@@ -112,6 +113,11 @@ module.exports = env => {
           test: /\.tsx?/,
           loader: 'stylelint-custom-processor-loader',
           exclude: /node_modules/
+        },
+        {
+          test: /\.(graphql|gql)$/,
+          exclude: /node_modules/,
+          loader: 'graphql-tag/loader'
         }
       ]
     }

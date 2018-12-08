@@ -5,8 +5,8 @@
 import { Contact } from 'Components/Contact';
 import { Home } from 'Components/Home';
 import { NotFound } from 'Components/NotFound';
-import { SaveTheDate } from 'Components/SaveTheDate';
 import { ROUTES } from 'Constants/ROUTES';
+import { SaveTheDate } from 'Containers/SaveTheDate';
 import * as React from 'react';
 import { Route, Switch } from 'react-router';
 

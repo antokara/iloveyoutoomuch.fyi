@@ -4,7 +4,9 @@
  */
 import { CssBaseline } from '@material-ui/core';
 import { Routes } from 'Components/Routes';
+import { ApolloClient } from 'Helpers/ApolloClient';
 import * as React from 'react';
+import { ApolloProvider } from 'react-apollo';
 // @todo make this alias to be empty in production?
 import { hot } from 'react-hot-loader';
 import { BrowserRouter as Router } from 'react-router-dom';
@@ -20,9 +22,11 @@ const App: React.FunctionComponent = (): React.ReactElement<
   React.ReactNode
 > => (
   <CssBaseline>
-    <Router>
-      <Routes />
-    </Router>
+    <ApolloProvider client={ApolloClient}>
+      <Router>
+        <Routes />
+      </Router>
+    </ApolloProvider>
   </CssBaseline>
 );
 
