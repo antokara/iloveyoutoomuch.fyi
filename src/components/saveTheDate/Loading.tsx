@@ -1,5 +1,5 @@
 /**
- * Save The Date Component
+ * Save The Date Loading Component
  */
 import * as React from 'react';
 import { graphql } from 'react-apollo';
@@ -9,8 +9,8 @@ const Wrapper: React.FunctionComponent = styledComponents.div`
   color: blue;
 `;
 
-const SaveTheDate: React.FunctionComponent = (): React.ReactElement<
+const Loading: React.FunctionComponent = (): React.ReactElement<
   React.ReactNode
-> => <Wrapper>Save The Date</Wrapper>;
+> => <Wrapper>Loading...</Wrapper>;
 
-export { SaveTheDate };
+export { Loading };
