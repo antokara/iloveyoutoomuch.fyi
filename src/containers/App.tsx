@@ -14,7 +14,7 @@ import * as WebFont from 'webfontloader';
 
 WebFont.load({
   google: {
-    families: ['Catamaran:400:latin', 'Rochester:400:latin']
+    families: ['Caladea:400:latin', 'Rochester:400:latin']
   }
 });
 
