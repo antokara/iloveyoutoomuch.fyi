@@ -2,17 +2,10 @@
  * Save The Date Component
  */
 import { imgUrl } from 'Helpers/misc';
+import { DateTime } from 'luxon';
 import * as React from 'react';
 import { graphql } from 'react-apollo';
 import styledComponents from 'styled-components';
-import GridList from '@material-ui/core/GridList';
-import Grid from '@material-ui/core/Grid';
-import GridListTile from '@material-ui/core/GridListTile';
-import { DateTime } from 'luxon';
-
-const Wrapper: React.FunctionComponent = styledComponents.div`
-  overflow: hidden;
-`;
 
 const CoupleNames: React.FunctionComponent = styledComponents.div`
   position: absolute;
@@ -22,14 +15,6 @@ const CoupleNames: React.FunctionComponent = styledComponents.div`
   font-family: Rochester, sans-serif;
   font-size: 4rem;
   text-shadow: 1px 1px 4px #000;
-`;
-
-const Calendar: React.FunctionComponent = styledComponents.div`
-  background: #597067;
-  color: #fff;
-  height: 27vh;
-  text-align: center;
-  padding: 1rem;
 `;
 
 const Title: React.FunctionComponent = styledComponents.div`
@@ -57,69 +42,85 @@ const Separator: React.FunctionComponent = styledComponents.hr`
   margin: 1rem auto;
 `;
 
-const cellHeight: number = () => window.innerHeight / 5;
+const Grid: React.FunctionComponent = styledComponents.div`
+  height: calc(100vh - 8px);
+  width: calc(100vw - 8px);
+  display: grid;
+  grid-template-columns: 20% 20% 20% 1fr 10% 10%;
+  grid-template-rows: 31% 31% 38%;
+  grid-template-areas:
+    "waterfall waterfall waterfall umbrella leaning leaning"
+    "waterfall waterfall waterfall umbrella calendar calendar"
+    "laughing laughing hugging hugging tree tree";
+  grid-gap: 4px;
+`;
+
+const GridCell: React.FunctionComponent = styledComponents.div`
+  position: relative;
+  overflow: hidden;
+  background-image: url(${p => p.img});
+  background-size: cover;
+  background-position-y: 100%;
+`;
+
+const Waterfall: React.FunctionComponent = styledComponents(GridCell)`
+  grid-area: waterfall;
+`;
+
+const Umbrella: React.FunctionComponent = styledComponents(GridCell)`
+  grid-area: umbrella;
+`;
+
+const Leaning: React.FunctionComponent = styledComponents(GridCell)`
+  grid-area: leaning;
+`;
+
+const Calendar: React.FunctionComponent = styledComponents(GridCell)`
+  grid-area: calendar;
+  background: #597067;
+  color: #fff;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`;
+
+const Laughing: React.FunctionComponent = styledComponents(GridCell)`
+  grid-area: laughing;
+`;
+
+const Hugging: React.FunctionComponent = styledComponents(GridCell)`
+  grid-area: hugging;
+`;
+
+const Tree: React.FunctionComponent = styledComponents(GridCell)`
+  grid-area: tree;
+`;
 
 const Loaded: React.FunctionComponent = ({
   data
 }): React.ReactElement<React.ReactNode> => (
-  <Wrapper>
-    <GridList cellHeight={cellHeight()} spacing={3}>
-      <GridListTile key={data.photos[0]._id} cols={1.2} rows={3}>
-        <img
-          src={imgUrl(data.photos[0].photo.path, '?fit=clip&w=1200')}
-          alt={data.photos[0].photo.title}
-        />
-        <CoupleNames>{data.coupleNames}</CoupleNames>
-      </GridListTile>
-      <GridListTile key={data.photos[1]._id} cols={0.4} rows={3}>
-        <img
-          src={imgUrl(data.photos[1].photo.path, '?fit=clip&h=500')}
-          alt={data.photos[1].photo.title}
-        />
-      </GridListTile>
-      <GridListTile key={data.photos[2]._id} cols={0.4} rows={3}>
-        <Grid container spacing={0}>
-          <Grid item xs={12}>
-            <img
-              src={imgUrl(data.photos[2].photo.path, '?fit=clip&h=300')}
-              alt={data.photos[2].photo.title}
-            />
-          </Grid>
-          <Grid item xs={12}>
-            <Calendar>
-              <Title>{data.title}</Title>
-              <Separator />
-              <Date>
-                {DateTime.fromISO(data.dateTime).toLocaleString(
-                  DateTime.DATE_FULL
-                )}
-              </Date>
-              <Separator />
-              <Location>{data.location}</Location>
-            </Calendar>
-          </Grid>
-        </Grid>
-      </GridListTile>
-      <GridListTile key={data.photos[3]._id} cols={0.6} rows={2}>
-        <img
-          src={imgUrl(data.photos[3].photo.path, '?fit=clip&h=450')}
-          alt={data.photos[3].photo.title}
-        />
-      </GridListTile>
-      <GridListTile key={data.photos[4]._id} cols={0.6} rows={2}>
-        <img
-          src={imgUrl(data.photos[4].photo.path, '?fit=clip&h=450')}
-          alt={data.photos[4].photo.title}
-        />
-      </GridListTile>
-      <GridListTile key={data.photos[5]._id} cols={0.8} rows={2}>
-        <img
-          src={imgUrl(data.photos[5].photo.path, '?fit=clip&h=450')}
-          alt={data.photos[5].photo.title}
-        />
-      </GridListTile>
-    </GridList>
-  </Wrapper>
+  <Grid>
+    <Waterfall img={imgUrl(data.photos[0].photo.path, '?fit=max&w=1200')}>
+      <CoupleNames>{data.coupleNames}</CoupleNames>
+    </Waterfall>
+    <Umbrella img={imgUrl(data.photos[1].photo.path, '?fit=max&h=700')} />
+    <Leaning img={imgUrl(data.photos[2].photo.path, '?fit=max&h=300')} />
+    <Calendar>
+      <div>
+        <Title>{data.title}</Title>
+        <Separator />
+        <Date>
+          {DateTime.fromISO(data.dateTime).toLocaleString(DateTime.DATE_FULL)}
+        </Date>
+        <Separator />
+        <Location>{data.location}</Location>
+      </div>
+    </Calendar>
+    <Laughing img={imgUrl(data.photos[3].photo.path, '?fit=max&h=450')} />
+    <Hugging img={imgUrl(data.photos[4].photo.path, '?fit=max&h=450')} />
+    <Tree img={imgUrl(data.photos[5].photo.path, '?fit=max&h=450')} />
+  </Grid>
 );
 
 export { Loaded };
