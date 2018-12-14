@@ -61,12 +61,26 @@ const Grid: React.FunctionComponent = styledComponents.div`
     "laughing hugging hugging tree tree tree";
   grid-gap: 4px;
 
-  @media (max-width: 1420px) {
+  @media (orientation: landscape) and (max-width: 1420px) {
     grid-template-columns: 20% 20% 15% 1fr 10% 15%;
   }
 
-  @media (max-width: 1420px) {
+  @media (orientation: landscape) and (max-width: 1420px) {
     grid-template-columns: 25% 15% 15% 1fr 10% 15%;
+  }
+
+  @media (orientation: landscape) and (max-width: 1220px) {
+    grid-template-columns: 24% 13% 13% 1fr 10% 20%;
+  }
+
+  @media (orientation: portrait) {
+    grid-template-columns: repeat(5, 20%);
+    grid-template-rows: 50% repeat(3, 40%);
+    grid-template-areas:
+      "waterfall waterfall waterfall waterfall waterfall"
+      "leaning leaning leaning calendar calendar"
+      "umbrella umbrella tree tree tree"
+      "laughing laughing laughing hugging hugging";
   }
 `;
 
