@@ -9,29 +9,28 @@ import styledComponents from 'styled-components';
 
 const CoupleNames: React.FunctionComponent = styledComponents.div`
   position: absolute;
-  left: 3rem;
-  top: 3rem;
+  left: 1em;
+  top: 1em;
   color: #fff;
   font-family: Rochester, sans-serif;
-  font-size: 4rem;
+  font-size: 4em;
   text-shadow: 1px 1px 4px #000;
 `;
 
 const Title: React.FunctionComponent = styledComponents.div`
   font-family: Rochester, sans-serif;
-  font-size: 2.5rem;
-  letter-spacing: 0.5rem;
+  font-size: 2.5em;
   opacity: 0.8;
 `;
 
 const Date: React.FunctionComponent = styledComponents.div`
   font-family: Caladea, sans-serif;
-  font-size: 2rem;
+  font-size: 2em;
 `;
 
 const Location: React.FunctionComponent = styledComponents.div`
   font-family: Caladea, sans-serif;
-  font-size: 2rem;
+  font-size: 2em;
 `;
 
 const Separator: React.FunctionComponent = styledComponents.hr`
@@ -39,7 +38,7 @@ const Separator: React.FunctionComponent = styledComponents.hr`
   border: none;
   border-bottom: 1px solid rgba(255, 255, 255, 0.5);
   width: 80%;
-  margin: 1rem auto;
+  margin: 1em auto;
 `;
 
 const Grid: React.FunctionComponent = styledComponents.div`
@@ -51,7 +50,7 @@ const Grid: React.FunctionComponent = styledComponents.div`
   grid-template-areas:
     "waterfall waterfall waterfall umbrella leaning leaning"
     "waterfall waterfall waterfall umbrella calendar calendar"
-    "laughing laughing hugging hugging tree tree";
+    "laughing hugging hugging tree tree tree";
   grid-gap: 4px;
 `;
 
@@ -83,6 +82,7 @@ const Calendar: React.FunctionComponent = styledComponents(GridCell)`
   display: flex;
   align-items: center;
   justify-content: center;
+  letter-spacing: 0.3em;
 `;
 
 const Laughing: React.FunctionComponent = styledComponents(GridCell)`
