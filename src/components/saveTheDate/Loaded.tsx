@@ -15,6 +15,14 @@ const CoupleNames: React.FunctionComponent = styledComponents.div`
   font-family: Rochester, sans-serif;
   font-size: 4em;
   text-shadow: 1px 1px 4px #000;
+
+  @media (max-width: 1400px) {
+    font-size: 3.5em;
+  }
+
+  @media (max-width: 1300px) {
+    font-size: 3em;
+  }
 `;
 
 const Title: React.FunctionComponent = styledComponents.div`
@@ -52,6 +60,14 @@ const Grid: React.FunctionComponent = styledComponents.div`
     "waterfall waterfall waterfall umbrella calendar calendar"
     "laughing hugging hugging tree tree tree";
   grid-gap: 4px;
+
+  @media (max-width: 1420px) {
+    grid-template-columns: 20% 20% 15% 1fr 10% 15%;
+  }
+
+  @media (max-width: 1420px) {
+    grid-template-columns: 25% 15% 15% 1fr 10% 15%;
+  }
 `;
 
 const GridCell: React.FunctionComponent = styledComponents.div`
@@ -64,14 +80,17 @@ const GridCell: React.FunctionComponent = styledComponents.div`
 
 const Waterfall: React.FunctionComponent = styledComponents(GridCell)`
   grid-area: waterfall;
+  background-position-x: 100%;
 `;
 
 const Umbrella: React.FunctionComponent = styledComponents(GridCell)`
   grid-area: umbrella;
+  background-position-x: 50%;
 `;
 
 const Leaning: React.FunctionComponent = styledComponents(GridCell)`
   grid-area: leaning;
+  background-position-x: 100%;
 `;
 
 const Calendar: React.FunctionComponent = styledComponents(GridCell)`
@@ -95,6 +114,12 @@ const Laughing: React.FunctionComponent = styledComponents(GridCell)`
 
 const Hugging: React.FunctionComponent = styledComponents(GridCell)`
   grid-area: hugging;
+  background-position-x: 50%;
+  background-position-y: 50%;
+
+  @media (max-width: 1600px) {
+    background-position-y: 60%;
+  }
 `;
 
 const Tree: React.FunctionComponent = styledComponents(GridCell)`
