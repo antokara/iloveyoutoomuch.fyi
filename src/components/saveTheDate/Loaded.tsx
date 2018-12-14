@@ -23,6 +23,18 @@ const CoupleNames: React.FunctionComponent = styledComponents.div`
   @media (max-width: 1300px) {
     font-size: 3em;
   }
+
+  @media (max-width: 500px) {
+    font-size: 2em;
+  }
+
+  @media (orientation: landscape) and (max-height: 600px) {
+    font-size: 2.5em;
+  }
+
+  @media (orientation: landscape) and (max-height: 600px) and (max-width: 850px) {
+    font-size: 2em;
+  }
 `;
 
 const Title: React.FunctionComponent = styledComponents.div`
@@ -73,7 +85,19 @@ const Grid: React.FunctionComponent = styledComponents.div`
     grid-template-columns: 24% 13% 13% 1fr 10% 20%;
   }
 
+  @media (orientation: landscape) and (max-height: 600px) {
+    width: calc(100vw - 16px);
+    grid-template-columns: 20% 20% 10% 20% 30%;
+    grid-template-rows: 50% 40% 90% 90%;
+    grid-template-areas:
+      "waterfall waterfall waterfall umbrella calendar"
+      "waterfall waterfall waterfall umbrella calendar"
+      "leaning leaning leaning laughing laughing"
+      "tree tree tree hugging hugging";
+  }
+
   @media (orientation: portrait) {
+    width: calc(100vw - 16px);
     grid-template-columns: repeat(5, 20%);
     grid-template-rows: 50% repeat(3, 40%);
     grid-template-areas:
@@ -81,6 +105,19 @@ const Grid: React.FunctionComponent = styledComponents.div`
       "leaning leaning leaning calendar calendar"
       "umbrella umbrella tree tree tree"
       "laughing laughing laughing hugging hugging";
+  }
+
+  @media (orientation: portrait) and (max-width: 500px) {
+    grid-template-rows: 40% 20% 30% 25%;
+    grid-template-areas:
+      "waterfall waterfall waterfall waterfall waterfall"
+      "calendar calendar calendar leaning leaning"
+      "umbrella umbrella tree tree tree"
+      "laughing laughing laughing hugging hugging";
+  }
+
+  @media (orientation: portrait) and (max-width: 320px) {
+    grid-template-rows: 40% 25% 30% 25%;
   }
 `;
 
@@ -104,7 +141,7 @@ const Umbrella: React.FunctionComponent = styledComponents(GridCell)`
 
 const Leaning: React.FunctionComponent = styledComponents(GridCell)`
   grid-area: leaning;
-  background-position-x: 100%;
+  background-position-x: 70%;
 `;
 
 const Calendar: React.FunctionComponent = styledComponents(GridCell)`
@@ -117,8 +154,24 @@ const Calendar: React.FunctionComponent = styledComponents(GridCell)`
   justify-content: center;
   letter-spacing: 0.3em;
 
-  @media (max-width: 1600px) {
+  @media (orientation: landscape) and (max-width: 1600px) {
     font-size: 0.8em;
+  }
+
+  @media (orientation: landscape) and (max-height: 600px) {
+    font-size: 0.65em;
+  }
+
+  @media (orientation: portrait) and (max-width: 1000px) {
+    font-size: 0.9em;
+  }
+
+  @media (orientation: portrait) and (max-width: 500px) {
+    font-size: 0.6em;
+  }
+
+  @media (orientation: portrait) and (max-width: 400px) {
+    font-size: 0.5em;
   }
 `;
 
