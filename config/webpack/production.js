@@ -35,9 +35,15 @@ module.exports = env =>
         },
         inject: false,
         template: HtmlWebpackTemplatePlugin,
-        mobile: true,
         lang: 'en-US',
-        appMountId: 'root'
+        appMountId: 'root',
+        meta: [
+          {
+            name: 'viewport',
+            content:
+              'width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0'
+          }
+        ]
       }),
       new BundleAnalyzerPlugin({
         analyzerMode: 'static',
