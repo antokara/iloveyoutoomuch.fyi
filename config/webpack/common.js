@@ -26,7 +26,7 @@ module.exports = env => {
         persistentCache: true,
         inject: true,
         background: '#fff',
-        title: 'Antonios & Stephanie Wedding',
+        title: 'Stephanie & Antonios Wedding',
         // @see https://github.com/haydenbleasel/favicons#usage
         icons: {
           android: true,
@@ -84,11 +84,7 @@ module.exports = env => {
                 presets: [
                   [
                     '@babel/preset-env',
-                    {
-                      targets: {
-                        browsers: ['> 5%', 'last 2 versions']
-                      }
-                    }
+                    { targets: { browsers: ['> 5%', 'last 2 versions'] } }
                   ],
                   '@babel/preset-typescript',
                   '@babel/preset-react'
@@ -100,14 +96,7 @@ module.exports = env => {
         },
         {
           test: /\.(png|jpg|gif|svg)$/,
-          use: [
-            {
-              loader: 'file-loader',
-              options: {
-                outputPath: 'assets/'
-              }
-            }
-          ]
+          use: [{ loader: 'file-loader', options: { outputPath: 'assets/' } }]
         },
         {
           test: /\.tsx?/,
