@@ -43,7 +43,7 @@ const Separator: React.FunctionComponent = styledComponents.hr`
 
 const Grid: React.FunctionComponent = styledComponents.div`
   height: calc(100vh - 8px);
-  width: calc(100vw - 8px);
+  width: 100vw;
   display: grid;
   grid-template-columns: 20% 20% 20% 1fr 10% 10%;
   grid-template-rows: 31% 31% 38%;
@@ -83,6 +83,10 @@ const Calendar: React.FunctionComponent = styledComponents(GridCell)`
   align-items: center;
   justify-content: center;
   letter-spacing: 0.3em;
+
+  @media (max-width: 1600px) {
+    font-size: 0.8em;
+  }
 `;
 
 const Laughing: React.FunctionComponent = styledComponents(GridCell)`
