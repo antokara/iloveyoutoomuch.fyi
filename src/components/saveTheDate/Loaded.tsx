@@ -304,7 +304,7 @@ const Hugging: React.FunctionComponent = styledComponents(GridCell)`
   }
 
   @media (orientation: landscape) and (max-width: 1420px) {
-    background-image: url(${p => p.img}&h=250);
+    background-image: url(${p => p.img}&w=280);
   }
 
   @media (orientation: landscape) and (max-height: 600px) {
@@ -330,7 +330,7 @@ const Tree: React.FunctionComponent = styledComponents(GridCell)`
   animation-delay: 0.6s;
 
   @media (orientation: landscape) and (max-width: 1420px) {
-    background-image: url(${p => p.img}&h=250);
+    background-image: url(${p => p.img}&w=280);
   }
 
   @media (orientation: landscape) and (max-height: 600px) {
@@ -371,8 +371,8 @@ const Loaded: React.FunctionComponent = ({
       </div>
     </Calendar>
     <Laughing img={imgUrl(data.photos[3].photo.path, '?fit=max&h=450')} />
-    <Hugging img={imgUrl(data.photos[4].photo.path, '?fit=max&h=450')} />
-    <Tree img={imgUrl(data.photos[5].photo.path, '?fit=max&h=450')} />
+    <Hugging img={imgUrl(data.photos[4].photo.path, '?fit=max&w=770')} />
+    <Tree img={imgUrl(data.photos[5].photo.path, '?fit=max&w=770')} />
   </Grid>
 );
 
