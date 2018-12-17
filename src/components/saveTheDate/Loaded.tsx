@@ -5,7 +5,29 @@ import { imgUrl } from 'Helpers/misc';
 import { DateTime } from 'luxon';
 import * as React from 'react';
 import { graphql } from 'react-apollo';
-import styledComponents from 'styled-components';
+import styledComponents, { keyframes } from 'styled-components';
+
+const slideIn = keyframes`
+  from {
+    transform: translateX(-25%);
+    opacity: 0;
+  }
+
+  to {
+    transform: rotate(360deg);
+    opacity: 1;
+  }
+`;
+
+const fadeIn = keyframes`
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+`;
 
 const CoupleNames: React.FunctionComponent = styledComponents.div`
   position: absolute;
@@ -15,6 +37,7 @@ const CoupleNames: React.FunctionComponent = styledComponents.div`
   font-family: Rochester, sans-serif;
   font-size: 4em;
   text-shadow: 1px 1px 4px #000;
+  animation: ${slideIn} 1s linear forwards;
 
   @media (max-width: 1400px) {
     font-size: 3.5em;
@@ -127,11 +150,13 @@ const GridCell: React.FunctionComponent = styledComponents.div`
   background-image: url(${p => p.img});
   background-size: cover;
   background-position-y: 100%;
+  opacity: 0;
 `;
 
 const Waterfall: React.FunctionComponent = styledComponents(GridCell)`
   grid-area: waterfall;
   background-position-x: 100%;
+  animation: ${fadeIn} 1s linear forwards;
 
   @media (orientation: landscape) and (max-width: 1420px) {
     background-image: url(${p => p.img}&h=650);
@@ -161,6 +186,8 @@ const Waterfall: React.FunctionComponent = styledComponents(GridCell)`
 const Umbrella: React.FunctionComponent = styledComponents(GridCell)`
   grid-area: umbrella;
   background-position-x: 50%;
+  animation: ${fadeIn} 1s linear forwards;
+  animation-delay: 0.3s;
 
   @media (orientation: landscape) and (max-width: 1420px) {
     background-image: url(${p => p.img}&h=450);
@@ -182,6 +209,8 @@ const Umbrella: React.FunctionComponent = styledComponents(GridCell)`
 const Leaning: React.FunctionComponent = styledComponents(GridCell)`
   grid-area: leaning;
   background-position-x: 70%;
+  animation: ${fadeIn} 1s linear forwards;
+  animation-delay: 0.6s;
 
   @media (orientation: portrait) and (max-width: 1024px) {
     background-image: url(${p => p.img}&h=550);
@@ -213,6 +242,8 @@ const Calendar: React.FunctionComponent = styledComponents(GridCell)`
   align-items: center;
   justify-content: center;
   letter-spacing: 0.3em;
+  animation: ${fadeIn} 1s linear forwards;
+  animation-delay: 0.9s;
 
   @media (orientation: landscape) and (max-width: 1600px) {
     font-size: 0.8em;
@@ -237,6 +268,8 @@ const Calendar: React.FunctionComponent = styledComponents(GridCell)`
 
 const Laughing: React.FunctionComponent = styledComponents(GridCell)`
   grid-area: laughing;
+  animation: ${fadeIn} 1s linear forwards;
+  animation-delay: 0.6s;
 
   @media (orientation: landscape) and (max-width: 1420px) {
     background-image: url(${p => p.img}&h=250);
@@ -263,6 +296,8 @@ const Hugging: React.FunctionComponent = styledComponents(GridCell)`
   grid-area: hugging;
   background-position-x: 50%;
   background-position-y: 50%;
+  animation: ${fadeIn} 1s linear forwards;
+  animation-delay: 0.6s;
 
   @media (max-width: 1600px) {
     background-position-y: 60%;
@@ -291,6 +326,8 @@ const Hugging: React.FunctionComponent = styledComponents(GridCell)`
 
 const Tree: React.FunctionComponent = styledComponents(GridCell)`
   grid-area: tree;
+  animation: ${fadeIn} 1s linear forwards;
+  animation-delay: 0.6s;
 
   @media (orientation: landscape) and (max-width: 1420px) {
     background-image: url(${p => p.img}&h=250);
