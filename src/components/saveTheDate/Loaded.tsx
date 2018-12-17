@@ -132,16 +132,76 @@ const GridCell: React.FunctionComponent = styledComponents.div`
 const Waterfall: React.FunctionComponent = styledComponents(GridCell)`
   grid-area: waterfall;
   background-position-x: 100%;
+
+  @media (orientation: landscape) and (max-width: 1420px) {
+    background-image: url(${p => p.img}&h=650);
+  }
+
+  @media (orientation: landscape) and (max-width: 1024px) {
+    background-image: url(${p => p.img}&w=550);
+  }
+
+  @media (orientation: landscape) and (max-width: 1024px) {
+    background-image: url(${p => p.img}&h=550);
+  }
+
+  @media (orientation: portrait) and (max-width: 1024px) {
+    background-image: url(${p => p.img}&w=1024);
+  }
+
+  @media (orientation: portrait) and (max-width: 768px) {
+    background-image: url(${p => p.img}&w=770);
+  }
+
+  @media (orientation: portrait) and (max-width: 500px) {
+    background-image: url(${p => p.img}&w=1000);
+  }
 `;
 
 const Umbrella: React.FunctionComponent = styledComponents(GridCell)`
   grid-area: umbrella;
   background-position-x: 50%;
+
+  @media (orientation: landscape) and (max-width: 1420px) {
+    background-image: url(${p => p.img}&h=450);
+  }
+
+  @media (orientation: landscape) and (max-height: 600px) {
+    background-image: url(${p => p.img}&h=360);
+  }
+
+  @media (orientation: portrait) and (max-width: 768px) {
+    background-image: url(${p => p.img}&h=450);
+  }
+
+  @media (orientation: portrait) and (max-width: 500px) {
+    background-image: url(${p => p.img}&h=250);
+  }
 `;
 
 const Leaning: React.FunctionComponent = styledComponents(GridCell)`
   grid-area: leaning;
   background-position-x: 70%;
+
+  @media (orientation: portrait) and (max-width: 1024px) {
+    background-image: url(${p => p.img}&h=550);
+  }
+
+  @media (orientation: landscape) and (max-width: 1420px) {
+    background-image: url(${p => p.img}&h=210);
+  }
+
+  @media (orientation: landscape) and (max-height: 600px) {
+    background-image: url(${p => p.img}&h=360);
+  }
+
+  @media (orientation: portrait) and (max-width: 768px) {
+    background-image: url(${p => p.img}&h=450);
+  }
+
+  @media (orientation: portrait) and (max-width: 500px) {
+    background-image: url(${p => p.img}&h=200);
+  }
 `;
 
 const Calendar: React.FunctionComponent = styledComponents(GridCell)`
@@ -177,6 +237,26 @@ const Calendar: React.FunctionComponent = styledComponents(GridCell)`
 
 const Laughing: React.FunctionComponent = styledComponents(GridCell)`
   grid-area: laughing;
+
+  @media (orientation: landscape) and (max-width: 1420px) {
+    background-image: url(${p => p.img}&h=250);
+  }
+
+  @media (orientation: landscape) and (max-height: 600px) {
+    background-image: url(${p => p.img}&h=360);
+  }
+
+  @media (orientation: portrait) and (max-width: 1024px) {
+    background-image: url(${p => p.img}&h=550);
+  }
+
+  @media (orientation: portrait) and (max-width: 768px) {
+    background-image: url(${p => p.img}&h=450);
+  }
+
+  @media (orientation: portrait) and (max-width: 500px) {
+    background-image: url(${p => p.img}&h=250);
+  }
 `;
 
 const Hugging: React.FunctionComponent = styledComponents(GridCell)`
@@ -187,10 +267,50 @@ const Hugging: React.FunctionComponent = styledComponents(GridCell)`
   @media (max-width: 1600px) {
     background-position-y: 60%;
   }
+
+  @media (orientation: landscape) and (max-width: 1420px) {
+    background-image: url(${p => p.img}&h=250);
+  }
+
+  @media (orientation: landscape) and (max-height: 600px) {
+    background-image: url(${p => p.img}&h=360);
+  }
+
+  @media (orientation: portrait) and (max-width: 1024px) {
+    background-image: url(${p => p.img}&h=550);
+  }
+
+  @media (orientation: portrait) and (max-width: 768px) {
+    background-image: url(${p => p.img}&h=450);
+  }
+
+  @media (orientation: portrait) and (max-width: 500px) {
+    background-image: url(${p => p.img}&h=250);
+  }
 `;
 
 const Tree: React.FunctionComponent = styledComponents(GridCell)`
   grid-area: tree;
+
+  @media (orientation: landscape) and (max-width: 1420px) {
+    background-image: url(${p => p.img}&h=250);
+  }
+
+  @media (orientation: landscape) and (max-height: 600px) {
+    background-image: url(${p => p.img}&h=360);
+  }
+
+  @media (orientation: portrait) and (max-width: 1024px) {
+    background-image: url(${p => p.img}&h=550);
+  }
+
+  @media (orientation: portrait) and (max-width: 768px) {
+    background-image: url(${p => p.img}&h=450);
+  }
+
+  @media (orientation: portrait) and (max-width: 500px) {
+    background-image: url(${p => p.img}&h=250);
+  }
 `;
 
 const Loaded: React.FunctionComponent = ({
