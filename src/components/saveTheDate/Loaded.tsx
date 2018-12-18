@@ -346,7 +346,7 @@ const Tree: React.FunctionComponent = styledComponents(GridCell)`
   }
 
   @media (orientation: portrait) and (max-width: 500px) {
-    background-image: url(${p => p.img}&h=250);
+    background-image: url(${p => p.img}&h=350);
   }
 `;
 
