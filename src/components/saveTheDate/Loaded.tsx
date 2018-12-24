@@ -32,7 +32,9 @@ const Loaded: React.FunctionComponent = ({
         <Title>{data.title}</Title>
         <Separator />
         <Date>
-          {DateTime.fromISO(data.dateTime).toLocaleString(DateTime.DATE_FULL)}
+          {DateTime.fromISO(data.dateTime)
+            .setZone('Europe/Athens')
+            .toLocaleString(DateTime.DATE_FULL)}
         </Date>
         <Separator />
         <Location>{data.location}</Location>
