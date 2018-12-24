@@ -5,7 +5,6 @@ query getSaveTheDate {
     location
     photos {
       photo {
-        _id
         caption
         credit
         description
