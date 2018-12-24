@@ -37,6 +37,10 @@ module.exports = env =>
         template: HtmlWebpackTemplatePlugin,
         lang: 'en-US',
         appMountId: 'root',
+        googleAnalytics: {
+          trackingId: process.env.GA_TRACKING_ID,
+          pageViewOnLoad: true
+        },
         meta: [
           {
             name: 'viewport',
