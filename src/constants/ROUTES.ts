@@ -23,6 +23,6 @@ export const ROUTES: IRoutes = {
     PATH: '/contact'
   },
   SAVE_THE_DATE: {
-    PATH: '/save-the-date'
+    PATH: '/save-the-date/:guest?'
   }
 };

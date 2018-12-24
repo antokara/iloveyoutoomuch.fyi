@@ -33,14 +33,11 @@ module.exports = env =>
           useShortDoctype: true,
           collapseWhitespace: true
         },
+        baseHref: '/',
         inject: false,
         template: HtmlWebpackTemplatePlugin,
         lang: 'en-US',
         appMountId: 'root',
-        googleAnalytics: {
-          trackingId: process.env.GA_TRACKING_ID,
-          pageViewOnLoad: true
-        },
         meta: [
           {
             name: 'viewport',
