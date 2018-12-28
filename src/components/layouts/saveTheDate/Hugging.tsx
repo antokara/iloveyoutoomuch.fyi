@@ -1,5 +1,5 @@
-import { GridCell } from 'Components/saveTheDate/GridCell';
-import { fadeIn } from 'Components/saveTheDate/keyframes/fadeIn';
+import { GridCell } from 'Components/layouts/saveTheDate/GridCell';
+import { fadeIn } from 'Components/layouts/saveTheDate/keyframes/fadeIn';
 import styledComponents from 'styled-components';
 
 const Hugging: React.FunctionComponent = styledComponents(GridCell)`

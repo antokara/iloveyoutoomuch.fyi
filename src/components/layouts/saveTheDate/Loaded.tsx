@@ -1,19 +1,19 @@
 /**
  * Save The Date Component
  */
-import { Calendar } from 'Components/saveTheDate/Calendar';
-import { CoupleNames } from 'Components/saveTheDate/CoupleNames';
-import { Date } from 'Components/saveTheDate/Date';
-import { Grid } from 'Components/saveTheDate/Grid';
-import { Hugging } from 'Components/saveTheDate/Hugging';
-import { Laughing } from 'Components/saveTheDate/Laughing';
-import { Leaning } from 'Components/saveTheDate/Leaning';
-import { Location } from 'Components/saveTheDate/Location';
-import { Separator } from 'Components/saveTheDate/Separator';
-import { Title } from 'Components/saveTheDate/Title';
-import { Tree } from 'Components/saveTheDate/Tree';
-import { Umbrella } from 'Components/saveTheDate/Umbrella';
-import { Waterfall } from 'Components/saveTheDate/Waterfall';
+import { Calendar } from 'Components/layouts/saveTheDate/Calendar';
+import { CoupleNames } from 'Components/layouts/saveTheDate/CoupleNames';
+import { Date } from 'Components/layouts/saveTheDate/Date';
+import { Grid } from 'Components/layouts/saveTheDate/Grid';
+import { Hugging } from 'Components/layouts/saveTheDate/Hugging';
+import { Laughing } from 'Components/layouts/saveTheDate/Laughing';
+import { Leaning } from 'Components/layouts/saveTheDate/Leaning';
+import { Location } from 'Components/layouts/saveTheDate/Location';
+import { Separator } from 'Components/layouts/saveTheDate/Separator';
+import { Title } from 'Components/layouts/saveTheDate/Title';
+import { Tree } from 'Components/layouts/saveTheDate/Tree';
+import { Umbrella } from 'Components/layouts/saveTheDate/Umbrella';
+import { Waterfall } from 'Components/layouts/saveTheDate/Waterfall';
 import { imgUrl } from 'Helpers/misc';
 import { DateTime } from 'luxon';
 import * as React from 'react';

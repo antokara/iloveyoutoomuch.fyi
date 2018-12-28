@@ -3,7 +3,7 @@
  * the main container of the whole application
  */
 import { CssBaseline } from '@material-ui/core';
-import { Routes } from 'Components/Routes';
+import { Routes } from 'Components/layouts/Routes';
 import { ApolloClient } from 'Helpers/ApolloClient';
 import * as React from 'react';
 import { ApolloProvider } from 'react-apollo';

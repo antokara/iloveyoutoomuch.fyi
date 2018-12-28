@@ -1,9 +1,7 @@
 /**
- * Application Component
- * the main component of the whole application
+ * Layouts Routes Component
+ * the Routes that define which layout will be applied to the current route
  */
-import { Contact } from 'Components/Contact';
-import { NotFound } from 'Components/NotFound';
 import { ROUTES } from 'Constants/ROUTES';
 import { SaveTheDate } from 'Containers/layouts/SaveTheDate';
 import { Themed } from 'Containers/layouts/Themed';
@@ -14,14 +12,12 @@ const Routes: React.FunctionComponent = (): React.ReactElement<
   React.ReactNode
 > => (
   <Switch>
-    <Route exact={true} path={ROUTES.HOME.PATH} component={Themed} />
-    <Route exact={true} path={ROUTES.CONTACT.PATH} component={Contact} />
     <Route
       exact={true}
       path={ROUTES.SAVE_THE_DATE.PATH}
       component={SaveTheDate}
     />
-    <Route component={NotFound} />
+    <Route component={Themed} />
   </Switch>
 );
 

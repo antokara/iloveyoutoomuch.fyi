@@ -1,4 +1,4 @@
-import { slideIn } from 'Components/saveTheDate/keyframes/slideIn';
+import { slideIn } from 'Components/layouts/saveTheDate/keyframes/slideIn';
 import styledComponents, { keyframes } from 'styled-components';
 
 const CoupleNames: React.FunctionComponent = styledComponents.div`

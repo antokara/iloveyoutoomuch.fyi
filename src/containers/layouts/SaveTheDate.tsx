@@ -1,7 +1,7 @@
 /**
  * Save The Date Container
  */
-import { SaveTheDate as SaveTheDateComponent } from 'Components/saveTheDate/SaveTheDate';
+import { SaveTheDate as SaveTheDateComponent } from 'Components/layouts/saveTheDate/SaveTheDate';
 import * as getSaveTheDate from 'Gql/getSaveTheDate';
 import * as React from 'react';
 import { graphql } from 'react-apollo';
