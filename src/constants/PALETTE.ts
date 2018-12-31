@@ -9,12 +9,12 @@ interface IColors {
  * the application's colors
  */
 export const PALETTE: IColors = {
-  DARK_RED: '#fb4d57ff',
-  LIGHT_RED: '#ef655eff',
-  PINK: '#ffb8a4ff',
-  DARK_GREEN: '#317067ff',
-  LIGHT_GREEN: '#68a176ff',
-  DARK_CYAN: '#34b9b4ff',
-  MEDIUM_CYAN: '#84c5bdff',
-  LIGHT_CYAN: '#bde3d4ff'
+  DARK_RED: '#fb4d57',
+  LIGHT_RED: '#ef655e',
+  PINK: '#ffb8a4',
+  DARK_GREEN: '#317067',
+  LIGHT_GREEN: '#68a176',
+  DARK_CYAN: '#34b9b4',
+  MEDIUM_CYAN: '#84c5bd',
+  LIGHT_CYAN: '#bde3d4'
 };

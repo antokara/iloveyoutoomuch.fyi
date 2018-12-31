@@ -16,12 +16,7 @@ const Loaded: React.FunctionComponent = ({
   <div>
     <Background img={imgUrl(data.background.path, '?fit=max&w=1920')} />
     <Header>{data.header}</Header>
-    <SubHeader>{data.subHeader}</SubHeader>
-    <EventDate>
-      {DateTime.fromISO(data.eventDateTime)
-        .setZone('Europe/Athens')
-        .toLocaleString(DateTime.DATE_FULL)}
-    </EventDate>
+    <SubHeader eventDateTime={data.eventDateTime}>{data.subHeader}</SubHeader>
     <Routes />
   </div>
 );

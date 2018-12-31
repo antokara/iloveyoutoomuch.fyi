@@ -33,7 +33,7 @@ StyleProvider.propTypes = {
 };
 
 StyleProvider.defaultProps = {
-  children: null
+  children: undefined
 };
 
 export { StyleProvider };
