@@ -2,10 +2,10 @@
  * Themed Layout / Loaded Component
  */
 import { Background } from 'Components/layouts/themed/Background';
+import { EventDate } from 'Components/layouts/themed/EventDate';
 import { Header } from 'Components/layouts/themed/Header';
 import { Routes } from 'Components/layouts/themed/Routes';
 import { SubHeader } from 'Components/layouts/themed/SubHeader';
-import { EventDate } from 'Components/layouts/themed/EventDate';
 import { imgUrl } from 'Helpers/misc';
 import { DateTime } from 'luxon';
 import * as React from 'react';
