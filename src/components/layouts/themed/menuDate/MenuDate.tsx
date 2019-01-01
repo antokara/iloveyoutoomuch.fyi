@@ -1,6 +1,6 @@
-import { Button, Grid } from '@material-ui/core';
-import { MenuRounded } from '@material-ui/icons';
-import { EventDate } from 'Components/layouts/themed/menu/EventDate';
+import { Grid } from '@material-ui/core';
+import { EventDate } from 'Components/layouts/themed/menuDate/EventDate';
+import { Menu } from 'Components/layouts/themed/menuDate/Menu';
 import { DateTime } from 'luxon';
 import * as React from 'react';
 import styledComponents from 'styled-components';
@@ -11,25 +11,12 @@ const GridContainer: React.FunctionComponent = styledComponents(Grid)`
   max-width: 18em;
 `;
 
-const Icon: React.FunctionComponent = styledComponents(MenuRounded)`
-  margin-right: ${p => p.theme.spacing.unit}px;
-`;
-
-const Label: React.FunctionComponent = styledComponents.span`
-  font-weight: bold;
-  font-family: Caladea, sans-serif;
-  text-shadow: 1px 1px 2px #000;
-`;
-
-const Menu: React.FunctionComponent = ({
+const MenuDate: React.FunctionComponent = ({
   eventDateTime
 }): React.ReactElement<React.ReactNode> => (
   <GridContainer container justify="space-between" alignItems="center">
     <Grid item>
-      <Button color="primary">
-        <Icon />
-        <Label>Menu</Label>
-      </Button>
+      <Menu />
     </Grid>
     <Grid item>
       <EventDate>
@@ -41,4 +28,4 @@ const Menu: React.FunctionComponent = ({
   </GridContainer>
 );
 
-export { Menu };
+export { MenuDate };

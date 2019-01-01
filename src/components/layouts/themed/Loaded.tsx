@@ -3,7 +3,7 @@
  */
 import { Background } from 'Components/layouts/themed/Background';
 import { Header } from 'Components/layouts/themed/Header';
-import { Menu } from 'Components/layouts/themed/menu/Menu';
+import { MenuDate } from 'Components/layouts/themed/menuDate/MenuDate';
 import { Routes } from 'Components/layouts/themed/Routes';
 import { SubHeader } from 'Components/layouts/themed/SubHeader';
 import { imgUrl } from 'Helpers/misc';
@@ -16,7 +16,7 @@ const Loaded: React.FunctionComponent = ({
     <Background img={imgUrl(data.background.path, '?fit=max&w=1920')} />
     <Header>{data.header}</Header>
     <SubHeader>{data.subHeader}</SubHeader>
-    <Menu eventDateTime={data.eventDateTime} />
+    <MenuDate eventDateTime={data.eventDateTime} />
     <Routes />
   </div>
 );
