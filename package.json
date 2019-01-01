@@ -101,6 +101,7 @@
     "jest-styled-components": "^6.3.1",
     "jss": "^9.8.7",
     "luxon": "^1.9.0",
+    "polished": "^2.3.1",
     "prop-types": "^15.6.2",
     "react": "^16.7.0",
     "react-apollo": "^2.3.3",

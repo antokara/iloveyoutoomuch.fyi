@@ -1,5 +1,6 @@
 import { createMuiTheme } from '@material-ui/core';
 import { PALETTE } from 'Constants/PALETTE';
+import { transparentize } from 'polished';
 
 // style components Theme Object with Material UI theme combined
 // @see https://www.styled-components.com/docs/advanced#theming
@@ -17,8 +18,11 @@ const THEME = {
         main: PALETTE.PINK,
         contrastText: 'rgba(255, 255, 255, 0.87)'
       },
+      text: {
+        primary: PALETTE.LIGHT_RED
+      },
       background: {
-        paper: PALETTE.LIGHT_CYAN
+        paper: transparentize(0.1, PALETTE.LIGHT_CYAN)
       }
     }
   })
