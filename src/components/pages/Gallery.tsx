@@ -10,8 +10,8 @@ import * as React from 'react';
 //   font-family: Rochester, sans-serif;
 // `;
 
-const Home: React.FunctionComponent = (): React.ReactElement<
+const Gallery: React.FunctionComponent = (): React.ReactElement<
   React.ReactNode
-> => <PageWrapper />;
+> => <PageWrapper>Gallery</PageWrapper>;
 
-export { Home };
+export { Gallery };
