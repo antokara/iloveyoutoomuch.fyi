@@ -16,6 +16,9 @@ const THEME = {
       primary: {
         main: PALETTE.PINK,
         contrastText: 'rgba(255, 255, 255, 0.87)'
+      },
+      background: {
+        paper: PALETTE.LIGHT_CYAN
       }
     }
   })
