@@ -16,7 +16,7 @@ const Loaded: React.FunctionComponent = ({
     <Background img={imgUrl(data.background.path, '?fit=max&w=1920')} />
     <Header>{data.header}</Header>
     <SubHeader>{data.subHeader}</SubHeader>
-    <MenuDate eventDateTime={data.eventDateTime} />
+    <MenuDate eventDateTime={data.eventDateTime} menu={data.menu} />
     <Routes />
   </div>
 );

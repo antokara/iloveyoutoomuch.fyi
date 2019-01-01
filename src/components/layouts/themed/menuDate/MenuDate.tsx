@@ -12,11 +12,12 @@ const GridContainer: React.FunctionComponent = styledComponents(Grid)`
 `;
 
 const MenuDate: React.FunctionComponent = ({
-  eventDateTime
+  eventDateTime,
+  menu
 }): React.ReactElement<React.ReactNode> => (
   <GridContainer container justify="space-between" alignItems="center">
     <Grid item>
-      <Menu />
+      <Menu items={menu} />
     </Grid>
     <Grid item>
       <EventDate>
