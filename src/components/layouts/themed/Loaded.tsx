@@ -2,8 +2,8 @@
  * Themed Layout / Loaded Component
  */
 import { Background } from 'Components/layouts/themed/Background';
-import { EventDate } from 'Components/layouts/themed/EventDate';
 import { Header } from 'Components/layouts/themed/Header';
+import { Menu } from 'Components/layouts/themed/menu/Menu';
 import { Routes } from 'Components/layouts/themed/Routes';
 import { SubHeader } from 'Components/layouts/themed/SubHeader';
 import { imgUrl } from 'Helpers/misc';
@@ -16,7 +16,8 @@ const Loaded: React.FunctionComponent = ({
   <div>
     <Background img={imgUrl(data.background.path, '?fit=max&w=1920')} />
     <Header>{data.header}</Header>
-    <SubHeader eventDateTime={data.eventDateTime}>{data.subHeader}</SubHeader>
+    <SubHeader>{data.subHeader}</SubHeader>
+    <Menu eventDateTime={data.eventDateTime} />
     <Routes />
   </div>
 );
