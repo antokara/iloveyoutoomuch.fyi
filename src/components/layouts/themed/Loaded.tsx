@@ -7,7 +7,6 @@ import { Menu } from 'Components/layouts/themed/menu/Menu';
 import { Routes } from 'Components/layouts/themed/Routes';
 import { SubHeader } from 'Components/layouts/themed/SubHeader';
 import { imgUrl } from 'Helpers/misc';
-import { DateTime } from 'luxon';
 import * as React from 'react';
 
 const Loaded: React.FunctionComponent = ({
