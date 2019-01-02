@@ -11,6 +11,7 @@ query getTheme {
     eventDateTime
     header
     menu {
+      _id
       title
       url
     }

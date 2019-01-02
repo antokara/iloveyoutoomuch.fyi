@@ -16,7 +16,12 @@ const Label: React.FunctionComponent = styledComponents.span`
 
 const buildItems = (handleClose, items) =>
   items.map(item => (
-    <MenuItem onClick={handleClose} component={Link} to={item.url}>
+    <MenuItem
+      key={item._id}
+      onClick={handleClose}
+      component={Link}
+      to={item.url}
+    >
       {item.title}
     </MenuItem>
   ));
