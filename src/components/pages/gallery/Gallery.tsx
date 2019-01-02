@@ -17,8 +17,11 @@ const Gallery: React.FunctionComponent = ({
 }): React.ReactElement<React.ReactNode> => (
   <PageWrapper>
     <GridList cellHeight={160} cols={3}>
-      {data.photos.map(photo => (
-        <GridListTile key={photo.photo._id} cols={1}>
+      {data.photos.map((photo, index) => (
+        <GridListTile
+          key={photo.photo._id}
+          cols={[0, 3, 7, 10, 14, 17, 18].indexOf(index) !== -1 ? 2 : 1}
+        >
           <img
             src={imgUrl(photo.photo.path, '?fit=max&w=500')}
             alt={photo.photo.title}
