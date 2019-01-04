@@ -1,11 +1,11 @@
 /**
  * Themed Layout / Loaded Component
  */
-import { Background } from 'Components/layouts/themed/Background';
 import { Header } from 'Components/layouts/themed/Header';
 import { MenuDate } from 'Components/layouts/themed/menuDate/MenuDate';
 import { Routes } from 'Components/layouts/themed/Routes';
 import { SubHeader } from 'Components/layouts/themed/SubHeader';
+import { Background } from 'Containers/layouts/themed/Background';
 import { imgUrl } from 'Helpers/misc';
 import * as React from 'react';
 

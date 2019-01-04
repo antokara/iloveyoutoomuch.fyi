@@ -4,7 +4,7 @@
  */
 import { ROUTES } from 'Constants/ROUTES';
 import { SaveTheDate } from 'Containers/layouts/SaveTheDate';
-import { Themed } from 'Containers/layouts/Themed';
+import { Themed } from 'Containers/layouts/themed/Themed';
 import * as React from 'react';
 import { Route, Switch } from 'react-router';
 

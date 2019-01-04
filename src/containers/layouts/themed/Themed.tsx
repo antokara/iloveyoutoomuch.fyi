@@ -1,5 +1,5 @@
 /**
- * Save The Date Container
+ * Themed Layout Container
  */
 import { Themed as ThemedComponent } from 'Components/layouts/themed/Themed';
 import * as getTheme from 'Gql/getTheme';
