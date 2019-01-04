@@ -6,9 +6,17 @@ import * as React from 'react';
 import styledComponents from 'styled-components';
 
 const GridContainer: React.FunctionComponent = styledComponents(Grid)`
-  font-size: 1.5em;
+  font-size: 1em;
   margin: 0.3em auto;
   max-width: 18em;
+
+  @media (orientation: landscape) and (min-width: 1024px) {
+    font-size: 1.25em;
+  }
+
+  @media (orientation: landscape) and (min-width: 1440px) {
+    font-size: 1.5em;
+  }
 `;
 
 const MenuDate: React.FunctionComponent = ({

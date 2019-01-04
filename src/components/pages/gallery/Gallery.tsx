@@ -24,12 +24,12 @@ const Gallery: React.FunctionComponent = ({
   data
 }): React.ReactElement<React.ReactNode> => (
   <PageWrapper>
-    <MediaQuery maxWidth={1224}>
+    <MediaQuery maxWidth={1023}>
       <GridList cellHeight={160} cols={3}>
         {GridTiles(data.photos, [0, 3, 7, 10, 14, 17, 18])}
       </GridList>
     </MediaQuery>
-    <MediaQuery minWidth={1225}>
+    <MediaQuery minWidth={1024}>
       <GridList cellHeight={230} cols={5}>
         {GridTiles(data.photos, [0, 2, 4, 5, 6, 7, 10, 11, 14, 17, 18, 19])}
       </GridList>

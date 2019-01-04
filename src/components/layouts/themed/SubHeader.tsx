@@ -4,7 +4,15 @@ import styledComponents from 'styled-components';
 const Wrapper: React.FunctionComponent = styledComponents.div`
   text-align: center;
   margin-top: 1vh;
-  font-size: 1.5em;
+  font-size: 1em;
+
+  @media (orientation: landscape) and (min-width: 1024px) {
+    font-size: 1.25em;
+  }
+
+  @media (orientation: landscape) and (min-width: 1440px) {
+    font-size: 1.5em;
+  }
 `;
 
 const Text: React.FunctionComponent = styledComponents.div`
