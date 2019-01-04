@@ -8,19 +8,31 @@ import * as React from 'react';
 import { default as Lightbox } from 'react-image-lightbox';
 import 'react-image-lightbox/style.css';
 import { default as MediaQuery } from 'react-responsive';
+import styledComponents from 'styled-components';
+
+const Tile = styledComponents(GridListTile)`
+  cursor: pointer;
+  transition: all 0.3s;
+
+  &:hover {
+    transform: scale(1.05);
+    z-index: 1;
+  }
+`;
+
+const Grid = styledComponents(GridList)`
+  overflow: hidden;
+`;
 
 const GridTiles: React.FunctionComponent = (photos, widePhotos, onClick) =>
   photos.map((photo, index: number) => (
-    <GridListTile
-      key={photo.photo._id}
-      cols={widePhotos.indexOf(index) !== -1 ? 2 : 1}
-    >
+    <Tile key={photo.photo._id} cols={widePhotos.indexOf(index) !== -1 ? 2 : 1}>
       <img
         onClick={() => onClick(index)}
         src={imgUrl(photo.photo.path, '?fit=max&w=500')}
         alt={photo.photo.title}
       />
-    </GridListTile>
+    </Tile>
   ));
 
 class Gallery extends React.PureComponent {
@@ -38,7 +50,7 @@ class Gallery extends React.PureComponent {
     const { data } = this.props;
     const { photoIndex, isOpen } = this.state;
     const images = data.photos.map(photo => ({
-      src: imgUrl(photo.photo.path, '?fit=max&w=500'),
+      src: imgUrl(photo.photo.path, '?fit=max&w=1024'),
       caption: photo.photo.credit
         ? `credits: ${photo.photo.credit.blocks[0].text}`
         : ''
@@ -47,18 +59,18 @@ class Gallery extends React.PureComponent {
       <React.Fragment>
         <PageWrapper>
           <MediaQuery maxWidth={1023}>
-            <GridList cellHeight={160} cols={3}>
+            <Grid cellHeight={160} cols={3}>
               {GridTiles(data.photos, [0, 3, 7, 10, 14, 17, 18], this.open)}
-            </GridList>
+            </Grid>
           </MediaQuery>
           <MediaQuery minWidth={1024}>
-            <GridList cellHeight={230} cols={5}>
+            <Grid cellHeight={230} cols={5}>
               {GridTiles(
                 data.photos,
                 [0, 2, 4, 5, 6, 7, 10, 11, 14, 17, 18, 19],
                 this.open
               )}
-            </GridList>
+            </Grid>
           </MediaQuery>
         </PageWrapper>
         {isOpen && (
