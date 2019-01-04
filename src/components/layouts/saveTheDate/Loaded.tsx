@@ -14,7 +14,7 @@ import { Title } from 'Components/layouts/saveTheDate/Title';
 import { Tree } from 'Components/layouts/saveTheDate/Tree';
 import { Umbrella } from 'Components/layouts/saveTheDate/Umbrella';
 import { Waterfall } from 'Components/layouts/saveTheDate/Waterfall';
-import { imgUrl } from 'Helpers/misc';
+import { imgUrl } from 'Helpers/imgUrl';
 import { DateTime } from 'luxon';
 import * as React from 'react';
 

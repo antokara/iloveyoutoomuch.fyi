@@ -1,4 +1,4 @@
-import { imgUrl } from 'Helpers/misc';
+import { imgUrl } from 'Helpers/imgUrl';
 import * as React from 'react';
 
 const Photo: React.FunctionComponent = ({

@@ -6,7 +6,7 @@ import { MenuDate } from 'Components/layouts/themed/menuDate/MenuDate';
 import { Routes } from 'Components/layouts/themed/Routes';
 import { SubHeader } from 'Components/layouts/themed/SubHeader';
 import { Background } from 'Containers/layouts/themed/Background';
-import { imgUrl } from 'Helpers/misc';
+import { imgUrl } from 'Helpers/imgUrl';
 import * as React from 'react';
 
 const Loaded: React.FunctionComponent = ({
