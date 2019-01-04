@@ -10,11 +10,11 @@ const GridContainer: React.FunctionComponent = styledComponents(Grid)`
   margin: 0.3em auto;
   max-width: 18em;
 
-  @media (orientation: landscape) and (min-width: 1024px) {
+  @media (min-width: 1024px) {
     font-size: 1.25em;
   }
 
-  @media (orientation: landscape) and (min-width: 1440px) {
+  @media (min-width: 1440px) {
     font-size: 1.5em;
   }
 `;
