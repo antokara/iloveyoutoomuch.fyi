@@ -21,7 +21,8 @@ const Tile = styledComponents(GridListTile)`
 `;
 
 const Grid = styledComponents(GridList)`
-  overflow: hidden;
+  overflow: hidden !important;
+  padding: 0.5em;
 `;
 
 const GridTiles: React.FunctionComponent = (photos, widePhotos, onClick) =>
