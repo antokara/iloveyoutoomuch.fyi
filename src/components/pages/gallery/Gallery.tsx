@@ -16,7 +16,7 @@ const GridTiles: React.FunctionComponent = (photos, widePhotos, onClick) =>
       cols={widePhotos.indexOf(index) !== -1 ? 2 : 1}
     >
       <img
-        onClick={onClick}
+        onClick={() => onClick(index)}
         src={imgUrl(photo.photo.path, '?fit=max&w=500')}
         alt={photo.photo.title}
       />
@@ -37,9 +37,12 @@ class Gallery extends React.PureComponent {
   public render(): React.ReactNode {
     const { data } = this.props;
     const { photoIndex, isOpen } = this.state;
-    const images = data.photos.map(photo =>
-      imgUrl(photo.photo.path, '?fit=max&w=500')
-    );
+    const images = data.photos.map(photo => ({
+      src: imgUrl(photo.photo.path, '?fit=max&w=500'),
+      caption: photo.photo.credit
+        ? `credits: ${photo.photo.credit.blocks[0].text}`
+        : ''
+    }));
     return (
       <React.Fragment>
         <PageWrapper>
@@ -60,9 +63,12 @@ class Gallery extends React.PureComponent {
         </PageWrapper>
         {isOpen && (
           <Lightbox
-            mainSrc={images[photoIndex]}
-            nextSrc={images[(photoIndex + 1) % images.length]}
-            prevSrc={images[(photoIndex + images.length - 1) % images.length]}
+            enableZoom={false}
+            mainSrc={images[photoIndex].src}
+            nextSrc={images[(photoIndex + 1) % images.length].src}
+            prevSrc={
+              images[(photoIndex + images.length - 1) % images.length].src
+            }
             onCloseRequest={() => this.setState({ isOpen: false })}
             onMovePrevRequest={() =>
               this.setState({
@@ -74,14 +80,15 @@ class Gallery extends React.PureComponent {
                 photoIndex: (photoIndex + 1) % images.length
               })
             }
+            imageCaption={images[photoIndex].caption}
           />
         )}
       </React.Fragment>
     );
   }
 
-  private open(): void {
-    this.setState({ isOpen: true });
+  private open(index: number): void {
+    this.setState({ photoIndex: index, isOpen: true });
   }
 }
 
