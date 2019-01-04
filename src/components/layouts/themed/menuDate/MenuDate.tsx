@@ -21,14 +21,15 @@ const GridContainer: React.FunctionComponent = styledComponents(Grid)`
 
 const MenuDate: React.FunctionComponent = ({
   eventDateTime,
-  menu
+  menu,
+  location
 }): React.ReactElement<React.ReactNode> => (
   <GridContainer container justify="space-between" alignItems="center">
     <Grid item>
       <Menu items={menu} />
     </Grid>
     <Grid item>
-      <EventDate>
+      <EventDate path={location.pathname}>
         {DateTime.fromISO(eventDateTime)
           .setZone('Europe/Athens')
           .toLocaleString(DateTime.DATE_FULL)}
