@@ -19,6 +19,9 @@ export const ROUTES: IRoutes = {
   HOME: {
     PATH: '/'
   },
+  RSVP: {
+    PATH: '/rsvp'
+  },
   GALLERY: {
     PATH: '/gallery'
   },

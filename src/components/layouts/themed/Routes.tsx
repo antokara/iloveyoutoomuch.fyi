@@ -9,6 +9,7 @@ import { Contact } from 'Containers/pages/Contact';
 import { Gallery } from 'Containers/pages/Gallery';
 import { Information } from 'Containers/pages/Information';
 import { Registry } from 'Containers/pages/Registry';
+import { Rsvp } from 'Containers/pages/Rsvp';
 import { Story } from 'Containers/pages/Story';
 import * as React from 'react';
 import { Route, Switch } from 'react-router';
@@ -19,6 +20,7 @@ const Routes: React.FunctionComponent = (): React.ReactElement<
   <Switch>
     <Route exact={true} path={ROUTES.HOME.PATH} component={Home} />
     <Route exact={true} path={ROUTES.STORY.PATH} component={Story} />
+    <Route exact={true} path={ROUTES.RSVP.PATH} component={Rsvp} />
     <Route exact={true} path={ROUTES.GALLERY.PATH} component={Gallery} />
     <Route exact={true} path={ROUTES.REGISTRY.PATH} component={Registry} />
     <Route

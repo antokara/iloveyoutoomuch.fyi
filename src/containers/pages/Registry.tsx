@@ -1,7 +1,7 @@
 /**
  * Registry Container
  * returns the Loading indicator component while the GraphQL is pending and
- * when loaded, it returns the Registry component
+ * when loaded, it returns the Generic component
  */
 import { Generic } from 'Components/pages/Generic';
 import { Loading } from 'Components/shared/Loading';

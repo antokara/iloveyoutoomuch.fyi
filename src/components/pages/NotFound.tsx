@@ -15,7 +15,7 @@ const NotFound: React.FunctionComponent = (): React.ReactElement<
   React.ReactNode
 > => (
   <PageWrapper>
-    <Wrapper>Please check back soon!</Wrapper>
+    <Wrapper>Page not found!</Wrapper>
   </PageWrapper>
 );
 

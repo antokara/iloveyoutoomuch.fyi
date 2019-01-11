@@ -1,0 +1,5 @@
+query getRsvp {
+  rsvp {
+    body
+  }
+}
