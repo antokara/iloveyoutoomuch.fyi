@@ -1,6 +1,7 @@
 /**
  * Save The Date Component
  */
+import { Back } from 'Components/layouts/saveTheDate/Back';
 import { Calendar } from 'Components/layouts/saveTheDate/Calendar';
 import { CoupleNames } from 'Components/layouts/saveTheDate/CoupleNames';
 import { Date } from 'Components/layouts/saveTheDate/Date';
@@ -43,6 +44,7 @@ const Loaded: React.FunctionComponent = ({
     <Laughing img={imgUrl(data.photos[3].photo.path, '?fit=max&h=450')} />
     <Hugging img={imgUrl(data.photos[4].photo.path, '?fit=max&w=770')} />
     <Tree img={imgUrl(data.photos[5].photo.path, '?fit=max&w=770')} />
+    <Back />
   </Grid>
 );
 
