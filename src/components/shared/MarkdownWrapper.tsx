@@ -23,6 +23,10 @@ const MarkdownWrapper: React.FunctionComponent = styledComponents.div`
     padding: 0.1em 0.5em;
   }
 
+  h3 {
+    margin: 1.5em auto 0.5em auto;
+  }
+
   h1,
   h2,
   h3 {
