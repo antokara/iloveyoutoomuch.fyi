@@ -8,15 +8,12 @@ import { Loading } from 'Components/shared/Loading';
 import * as getContact from 'Gql/getContact';
 import * as React from 'react';
 import { graphql } from 'react-apollo';
-import { withRouter } from 'react-router';
 
 const ContactContainer: React.FunctionComponent = ({
   data
 }): React.ReactElement<React.ReactNode> =>
   data.loading ? <Loading /> : <ContactComponent body={data.contact.body} />;
 
-const Contact: React.ComponentClass = graphql(getContact)(
-  withRouter(ContactContainer)
-);
+const Contact: React.ComponentClass = graphql(getContact)(ContactContainer);
 
 export { Contact };

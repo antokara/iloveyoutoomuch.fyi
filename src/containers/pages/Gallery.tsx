@@ -8,15 +8,12 @@ import { Loading } from 'Components/shared/Loading';
 import * as getGallery from 'Gql/getGallery';
 import * as React from 'react';
 import { graphql } from 'react-apollo';
-import { withRouter } from 'react-router';
 
 const GalleryContainer: React.FunctionComponent = ({
   data
 }): React.ReactElement<React.ReactNode> =>
   data.loading ? <Loading /> : <GalleryComponent data={data.gallery} />;
 
-const Gallery: React.ComponentClass = graphql(getGallery)(
-  withRouter(GalleryContainer)
-);
+const Gallery: React.ComponentClass = graphql(getGallery)(GalleryContainer);
 
 export { Gallery };

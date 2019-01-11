@@ -25,6 +25,9 @@ export const ROUTES: IRoutes = {
   CONTACT: {
     PATH: '/contact'
   },
+  REGISTRY: {
+    PATH: '/registry'
+  },
   SAVE_THE_DATE: {
     PATH: '/save-the-date/:guest?'
   }

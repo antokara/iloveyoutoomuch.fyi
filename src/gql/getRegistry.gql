@@ -1,0 +1,5 @@
+query getRegistry {
+  registry {
+    body
+  }
+}
