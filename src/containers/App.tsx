@@ -22,7 +22,7 @@ ReactGA.pageview(window.location.pathname + window.location.search);
 
 WebFont.load({
   google: {
-    families: ['Caladea:400:latin', 'Rochester:400:latin']
+    families: ['Merienda:400,700:latin', 'Rochester:400:latin']
   }
 });
 

@@ -10,7 +10,7 @@ const Icon: React.FunctionComponent = styledComponents(MenuRounded)`
 
 const Label: React.FunctionComponent = styledComponents.span`
   font-weight: bold;
-  font-family: Caladea, sans-serif;
+  font-family: Merienda, sans-serif;
   text-shadow: 1px 1px 2px #000;
 `;
 

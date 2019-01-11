@@ -11,7 +11,8 @@ const THEME = {
   },
   ...createMuiTheme({
     typography: {
-      useNextVariants: true
+      useNextVariants: true,
+      fontFamily: 'Merienda, sans-serif'
     },
     palette: {
       primary: {

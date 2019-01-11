@@ -10,7 +10,7 @@ import styledComponents from 'styled-components';
  */
 const addShadow: (path: string) => string = (path: string): string => {
   if (path === ROUTES.HOME.PATH) {
-    return 'text-shadow: 0px 0px 20px #fff, 0px 0px 10px #fff, 0px 0px 5px #fff, 0px 0px 2px #fff;';
+    return 'text-shadow: 1px 1px 2px #000, 0px 0px 2px #000;';
   }
 
   return '';
@@ -18,9 +18,10 @@ const addShadow: (path: string) => string = (path: string): string => {
 
 const EventDate: React.FunctionComponent = styledComponents.div`
   transition: all 0.4s;
-  color: ${PALETTE.DARK_RED};
-  font-family: Caladea, sans-serif;
+  color: ${PALETTE.PINK};
   font-size: 0.9em;
+  font-family: Merienda, sans-serif;
+  font-weight: bold;
   text-align: right;
   text-transform: uppercase;
   ${p => addShadow(p.path)};

@@ -5,6 +5,11 @@ const PageWrapper: React.FunctionComponent = styledComponents.div`
   margin: 1em auto;
   color: white;
 
+  @media (min-width: 768px) {
+    max-width: 40em;
+    margin: 2em auto;
+  }
+
   @media (min-width: 1024px) {
     max-width: 60em;
     margin: 2em auto;

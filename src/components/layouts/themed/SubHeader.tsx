@@ -17,7 +17,7 @@ const Wrapper: React.FunctionComponent = styledComponents.div`
 
 const Text: React.FunctionComponent = styledComponents.div`
   color: white;
-  font-family: Caladea, sans-serif;
+  font-family: Merienda, sans-serif;
   text-shadow: 1px 1px 2px #000;
   background: rgba(0, 0, 0, 0.2);
   padding: 0.5em 1em;
