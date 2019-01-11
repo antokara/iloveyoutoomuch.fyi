@@ -25,6 +25,9 @@ export const ROUTES: IRoutes = {
   CONTACT: {
     PATH: '/contact'
   },
+  STORY: {
+    PATH: '/our-story'
+  },
   INFORMATION: {
     PATH: '/information'
   },
