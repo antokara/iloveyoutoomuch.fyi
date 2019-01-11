@@ -8,6 +8,7 @@ import { ROUTES } from 'Constants/ROUTES';
 import { Contact } from 'Containers/pages/Contact';
 import { Gallery } from 'Containers/pages/Gallery';
 import { Registry } from 'Containers/pages/Registry';
+import { Information } from 'Containers/pages/Information';
 import * as React from 'react';
 import { Route, Switch } from 'react-router';
 
@@ -18,6 +19,11 @@ const Routes: React.FunctionComponent = (): React.ReactElement<
     <Route exact={true} path={ROUTES.HOME.PATH} component={Home} />
     <Route exact={true} path={ROUTES.GALLERY.PATH} component={Gallery} />
     <Route exact={true} path={ROUTES.REGISTRY.PATH} component={Registry} />
+    <Route
+      exact={true}
+      path={ROUTES.INFORMATION.PATH}
+      component={Information}
+    />
     <Route exact={true} path={ROUTES.CONTACT.PATH} component={Contact} />
     <Route component={NotFound} />
   </Switch>
