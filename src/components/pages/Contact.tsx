@@ -2,19 +2,17 @@
  * Contact page Component
  */
 import { PageWrapper } from 'Components/layouts/themed/PageWrapper';
+import { MarkdownWrapper } from 'Components/shared/MarkdownWrapper';
 import * as React from 'react';
-import styledComponents from 'styled-components';
+import * as ReactMarkdown from 'react-markdown';
 
-const Wrapper: React.FunctionComponent = styledComponents.div`
-  color: red;
-  text-align: center;
-`;
-
-const Contact: React.FunctionComponent = (): React.ReactElement<
-  React.ReactNode
-> => (
+const Contact: React.FunctionComponent = ({
+  body
+}): React.ReactElement<React.ReactNode> => (
   <PageWrapper>
-    <Wrapper>Please check back soon!</Wrapper>
+    <MarkdownWrapper>
+      <ReactMarkdown source={body} />
+    </MarkdownWrapper>
   </PageWrapper>
 );
 

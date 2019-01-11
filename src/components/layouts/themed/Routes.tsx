@@ -2,10 +2,10 @@
  * themed Routes Component
  * defines which themed page component will be applied to the current route
  */
-import { Contact } from 'Components/pages/Contact';
 import { Home } from 'Components/pages/Home';
 import { NotFound } from 'Components/pages/NotFound';
 import { ROUTES } from 'Constants/ROUTES';
+import { Contact } from 'Containers/pages/Contact';
 import { Gallery } from 'Containers/pages/Gallery';
 import * as React from 'react';
 import { Route, Switch } from 'react-router';
