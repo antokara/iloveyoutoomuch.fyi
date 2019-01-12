@@ -5,13 +5,16 @@
 import { CssBaseline, MuiThemeProvider } from '@material-ui/core';
 import { Routes } from 'Components/layouts/Routes';
 import { StyleProvider } from 'Components/StyleProvider';
+import { ConnectedRouter } from 'connected-react-router';
 import { THEME } from 'Constants/THEME';
 import { ApolloClient } from 'Helpers/ApolloClient';
+import { history } from 'Helpers/history';
+import { store } from 'Helpers/store';
 import * as React from 'react';
 import { ApolloProvider } from 'react-apollo';
 import * as ReactGA from 'react-ga';
 import { hot } from 'react-hot-loader';
-import { BrowserRouter as Router } from 'react-router-dom';
+import { Provider } from 'react-redux';
 import { ThemeProvider } from 'styled-components';
 // @todo make this alias to be empty in production?
 import * as WebFont from 'webfontloader';
@@ -33,11 +36,13 @@ const App: React.FunctionComponent = (): React.ReactElement<
     <MuiThemeProvider theme={THEME}>
       <ThemeProvider theme={THEME}>
         <CssBaseline>
-          <ApolloProvider client={ApolloClient}>
-            <Router>
-              <Routes />
-            </Router>
-          </ApolloProvider>
+          <Provider store={store}>
+            <ConnectedRouter history={history}>
+              <ApolloProvider client={ApolloClient}>
+                <Routes />
+              </ApolloProvider>
+            </ConnectedRouter>
+          </Provider>
         </CssBaseline>
       </ThemeProvider>
     </MuiThemeProvider>
