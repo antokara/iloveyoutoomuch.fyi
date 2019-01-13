@@ -3,12 +3,9 @@
  */
 import {
   Button,
-  FormHelperText,
   Grid,
   IconButton,
-  InputLabel,
   MenuItem,
-  Select,
   TextField
 } from '@material-ui/core';
 import {
@@ -31,6 +28,7 @@ const renderTextField = ({
   ...custom
 }) => (
   <TextField
+    fullWidth
     label={label}
     placeholder={`Enter your ${label}`}
     error={touched && invalid}
@@ -40,19 +38,38 @@ const renderTextField = ({
   />
 );
 
-const renderSelectField = ({ label, input, children, touched, error }) => (
-  <div>
-    <InputLabel>{label}</InputLabel>
-    <Select
-      {...input}
-      inputProps={{
-        name
-      }}
-    >
-      {children}
-    </Select>
-    <FormHelperText>{touched && error}</FormHelperText>
-  </div>
+const renderSelectField = ({
+  label,
+  input,
+  meta: { touched, invalid, error },
+  children,
+  ...custom
+}) => (
+  <TextField
+    select
+    fullWidth
+    label={label}
+    placeholder={`Select your ${label}`}
+    error={touched && invalid}
+    helperText={touched && error}
+    {...input}
+    {...custom}
+  >
+    {children}
+  </TextField>
+  // <div>
+  //   <InputLabel>{label}</InputLabel>
+  //   <Select
+  //     fullWidth
+  //     {...input}
+  //     inputProps={{
+  //       name
+  //     }}
+  //   >
+  //     {children}
+  //   </Select>
+  //   <FormHelperText>{touched && error}</FormHelperText>
+  // </div>
 );
 
 const ages = [
@@ -78,7 +95,7 @@ const renderGuests = ({ fields, meta: { error, submitFailed } }) => (
     {submitFailed && error && <span>{error}</span>}
     <Grid container spacing={8}>
       {fields.map((member, index) => (
-        <Grid item xs={12} key={index}>
+        <Grid item container xs={12} key={index} spacing={16}>
           <Grid item xs={4}>
             <Field
               component={renderTextField}
