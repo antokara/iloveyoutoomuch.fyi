@@ -2,9 +2,8 @@ import styledComponents from 'styled-components';
 
 const Grid: React.FunctionComponent = styledComponents.div`
   height: calc(100vh - 8px);
-  width: 100vw;
   display: grid;
-  grid-template-columns: 20% 20% 20% 1fr 10% 10%;
+  grid-template-columns: 20fr 20fr 20fr 20fr 10fr 10fr;
   grid-template-rows: 31% 31% 38%;
   grid-template-areas:
     "waterfall waterfall waterfall umbrella leaning leaning"
@@ -13,20 +12,19 @@ const Grid: React.FunctionComponent = styledComponents.div`
   grid-gap: 4px;
 
   @media (orientation: landscape) and (max-width: 1420px) {
-    grid-template-columns: 20% 20% 15% 1fr 10% 15%;
+    grid-template-columns: 20fr 20fr 15fr 20fr 10fr 15fr;
   }
 
   @media (orientation: landscape) and (max-width: 1420px) {
-    grid-template-columns: 25% 15% 15% 1fr 10% 15%;
+    grid-template-columns: 25fr 15fr 15fr 20fr 10fr 15fr;
   }
 
   @media (orientation: landscape) and (max-width: 1220px) {
-    grid-template-columns: 24% 13% 13% 1fr 10% 20%;
+    grid-template-columns: 24fr 13fr 13fr 20fr 10fr 20fr;
   }
 
   @media (orientation: landscape) and (max-height: 600px) {
-    width: calc(100vw - 16px);
-    grid-template-columns: 20% 20% 10% 20% 30%;
+    grid-template-columns: 20fr 20fr 10fr 20fr 30fr;
     grid-template-rows: 50% 40% 90% 90%;
     grid-template-areas:
       "waterfall waterfall waterfall umbrella calendar"
@@ -36,8 +34,7 @@ const Grid: React.FunctionComponent = styledComponents.div`
   }
 
   @media (orientation: portrait) {
-    width: calc(100vw - 16px);
-    grid-template-columns: repeat(5, 20%);
+    grid-template-columns: repeat(5, 20fr);
     grid-template-rows: 50% repeat(3, 40%);
     grid-template-areas:
       "waterfall waterfall waterfall waterfall waterfall"
