@@ -17,7 +17,7 @@ const RsvpContainer: React.FunctionComponent = ({
 
 const Rsvp: React.ComponentClass = graphql(getRsvp)(
   reduxForm({
-    form: 'coach/memberDetail/highlight',
+    form: 'rsvp',
     enableReinitialize: true
   })(RsvpContainer)
 );
