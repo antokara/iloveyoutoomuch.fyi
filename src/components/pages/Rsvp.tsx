@@ -57,19 +57,6 @@ const renderSelectField = ({
   >
     {children}
   </TextField>
-  // <div>
-  //   <InputLabel>{label}</InputLabel>
-  //   <Select
-  //     fullWidth
-  //     {...input}
-  //     inputProps={{
-  //       name
-  //     }}
-  //   >
-  //     {children}
-  //   </Select>
-  //   <FormHelperText>{touched && error}</FormHelperText>
-  // </div>
 );
 
 const ages = [
@@ -96,7 +83,7 @@ const renderGuests = ({ fields, meta: { error, submitFailed } }) => (
     <Grid container spacing={8}>
       {fields.map((member, index) => (
         <Grid item container xs={12} key={index} spacing={16}>
-          <Grid item xs={4}>
+          <Grid item xs={6} md={4}>
             <Field
               component={renderTextField}
               name={`${member}.firstName`}
@@ -106,7 +93,7 @@ const renderGuests = ({ fields, meta: { error, submitFailed } }) => (
               validate={[validators.required]}
             />
           </Grid>
-          <Grid item xs={4}>
+          <Grid item xs={6} md={4}>
             <Field
               component={renderTextField}
               name={`${member}.lastName`}
@@ -116,7 +103,7 @@ const renderGuests = ({ fields, meta: { error, submitFailed } }) => (
               validate={[validators.required]}
             />
           </Grid>
-          <Grid item xs={3}>
+          <Grid item xs={6} md={3}>
             <Field
               name={`${member}.age`}
               label="Age *"
@@ -130,7 +117,7 @@ const renderGuests = ({ fields, meta: { error, submitFailed } }) => (
               ))}
             </Field>
           </Grid>
-          <Grid item xs={1}>
+          <Grid item>
             <IconButton
               onClick={() => fields.remove(index)}
               aria-label="Remove Guest"
