@@ -6,17 +6,19 @@ import { PageWrapper } from 'Components/layouts/themed/PageWrapper';
 import { imgUrl } from 'Helpers/imgUrl';
 import * as React from 'react';
 import { default as Lightbox } from 'react-image-lightbox';
-import 'react-image-lightbox/style.css';
 import { default as MediaQuery } from 'react-responsive';
 import styledComponents from 'styled-components';
+import 'react-image-lightbox/style.css';
 
 const Tile = styledComponents(GridListTile)`
   cursor: pointer;
   transition: all 0.3s;
 
-  &:hover {
-    transform: scale(1.05);
-    z-index: 1;
+  @media (hover: hover) {
+    &:hover {
+      transform: scale(1.05);
+      z-index: 1;
+    }
   }
 `;
 
