@@ -4,7 +4,7 @@
   "description": "Wedding Web Site",
   "main": "index.html",
   "scripts": {
-    "start": "webpack-dev-server --config ./config/webpack/development.js",
+    "start": "node --max-old-space-size=8192 node_modules/webpack-dev-server/bin/webpack-dev-server.js --config ./config/webpack/development.js",
     "test": "jest",
     "test-coverage": "jest --coverage",
     "build": "webpack --config ./config/webpack/production.js --env.NODE_ENV=production --env.production --progress"
