@@ -69,62 +69,83 @@ const ages = [
   }
 ];
 
-const renderGuests = ({ fields, meta: { error, submitFailed } }) => (
-  <React.Fragment>
-    <Button type="button" onClick={() => fields.push({})}>
-      Add Guest &nbsp; <AddCircleOutline />
-    </Button>
-    {submitFailed && error && <span>{error}</span>}
-    <Grid container spacing={8}>
-      {fields.map((member, index) => (
-        <Grid item container xs={12} key={index} spacing={16}>
-          <Grid item xs={6} md={4}>
-            <Field
-              component={renderTextField}
-              name={`${member}.firstName`}
-              label="First Name *"
-              type="text"
-              disabled={false}
-              validate={[validators.required]}
-            />
+class RenderGuests extends React.Component {
+  componentWillMount() {
+    const { fields } = this.props;
+    if (!fields.length) {
+      fields.push({});
+    }
+  }
+
+  render() {
+    const {
+      fields,
+      meta: { error, submitFailed }
+    } = this.props;
+    return (
+      <Grid container spacing={8}>
+        {fields.map((member, index) => (
+          <Grid item container xs={12} key={index} spacing={16}>
+            <Grid item xs={6} md={4}>
+              <Field
+                component={renderTextField}
+                name={`${member}.firstName`}
+                label="First Name *"
+                type="text"
+                disabled={false}
+                validate={[validators.required]}
+              />
+            </Grid>
+            <Grid item xs={6} md={4}>
+              <Field
+                component={renderTextField}
+                name={`${member}.lastName`}
+                label="Last Name *"
+                type="text"
+                disabled={false}
+                validate={[validators.required]}
+              />
+            </Grid>
+            <Grid item xs={6} md={3}>
+              <Field
+                name={`${member}.age`}
+                label="Age *"
+                component={renderSelectField}
+                validate={[validators.required]}
+              >
+                {ages.map(age => (
+                  <MenuItem key={age.value} value={age.value}>
+                    {age.label}
+                  </MenuItem>
+                ))}
+              </Field>
+            </Grid>
+            {index > 0 && (
+              <Grid item>
+                <IconButton
+                  onClick={() => fields.remove(index)}
+                  aria-label="Remove Guest"
+                >
+                  <RemoveCircleOutline color="secondary" />
+                </IconButton>
+              </Grid>
+            )}
           </Grid>
-          <Grid item xs={6} md={4}>
-            <Field
-              component={renderTextField}
-              name={`${member}.lastName`}
-              label="Last Name *"
-              type="text"
-              disabled={false}
-              validate={[validators.required]}
-            />
+        ))}
+        {fields.length < 8 && (
+          <Grid item xs={12}>
+            <Button type="button" onClick={() => fields.push({})}>
+              Add Guest &nbsp; <AddCircleOutline />
+            </Button>
           </Grid>
-          <Grid item xs={6} md={3}>
-            <Field
-              name={`${member}.age`}
-              label="Age *"
-              component={renderSelectField}
-              validate={[validators.required]}
-            >
-              {ages.map(age => (
-                <MenuItem key={age.value} value={age.value}>
-                  {age.label}
-                </MenuItem>
-              ))}
-            </Field>
-          </Grid>
-          <Grid item>
-            <IconButton
-              onClick={() => fields.remove(index)}
-              aria-label="Remove Guest"
-            >
-              <RemoveCircleOutline color="secondary" />
-            </IconButton>
-          </Grid>
+        )}
+        <Grid item xs={12}>
+          {submitFailed && error && <span>{error}</span>}
         </Grid>
-      ))}
-    </Grid>
-  </React.Fragment>
-);
+      </Grid>
+    );
+  }
+}
 
 const Rsvp: React.FunctionComponent = ({
   body,
@@ -137,7 +158,7 @@ const Rsvp: React.FunctionComponent = ({
       <form onSubmit={handleSubmit}>
         <Grid container spacing={8}>
           <Grid item xs={12}>
-            <FieldArray name="guests" component={renderGuests} />
+            <FieldArray name="guests" component={RenderGuests} />
           </Grid>
           <Grid item xs={6}>
             <Button variant="contained" color="secondary" type="button">
