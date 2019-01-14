@@ -8,12 +8,7 @@ import {
   MenuItem,
   TextField
 } from '@material-ui/core';
-import {
-  AddCircleOutline,
-  RemoveCircleOutline,
-  ThumbDown,
-  ThumbUp
-} from '@material-ui/icons';
+import { AddCircleOutline, RemoveCircleOutline } from '@material-ui/icons';
 import { PageWrapper } from 'Components/layouts/themed/PageWrapper';
 import { MarkdownWrapper } from 'Components/shared/MarkdownWrapper';
 import { validators } from 'Helpers/validators';
@@ -146,12 +141,12 @@ const Rsvp: React.FunctionComponent = ({
           </Grid>
           <Grid item xs={6}>
             <Button variant="contained" color="secondary" type="button">
-              Will not Attend &nbsp; <ThumbDown />
+              Regretfully Decline
             </Button>
           </Grid>
           <Grid item xs={6}>
             <Button variant="contained" color="primary" type="button">
-              Will Attend &nbsp; <ThumbUp />
+              Will Attend
             </Button>
           </Grid>
         </Grid>
