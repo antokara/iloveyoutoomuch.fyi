@@ -146,7 +146,7 @@ const Rsvp: React.FunctionComponent = ({
           </Grid>
           <Grid item xs={6}>
             <Button variant="contained" color="primary" type="button">
-              Will Attend
+              Joyfully Accept
             </Button>
           </Grid>
         </Grid>

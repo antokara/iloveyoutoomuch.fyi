@@ -30,12 +30,11 @@ const MarkdownWrapper: React.FunctionComponent = styledComponents.div`
   h1,
   h2,
   h3 {
-    color: ${PALETTE.LIGHT_GREEN};
+    color: ${PALETTE.DARK_CYAN};
   }
 
   a {
-    color: ${PALETTE.LIGHT_RED};
-    text-decoration: none;
+    color: ${PALETTE.LIGHT_CYAN};
   }
 
   p {
