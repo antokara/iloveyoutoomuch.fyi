@@ -161,8 +161,8 @@ const Rsvp: React.FunctionComponent = ({
             <FieldArray name="guests" component={RenderGuests} />
           </Grid>
           <Grid item xs={6}>
-            <Button variant="contained" color="secondary" type="button">
-              Regretfully Decline
+            <Button variant="outlined" color="secondary" type="button">
+              Sadly Decline
             </Button>
           </Grid>
           <Grid item xs={6}>
