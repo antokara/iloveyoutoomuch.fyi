@@ -150,23 +150,34 @@ class RenderGuests extends React.Component {
 
 const Rsvp: React.FunctionComponent = ({
   body,
-  onSubmit
+  onAccept,
+  onDecline
 }): React.ReactElement<React.ReactNode> => (
   <PageWrapper>
     <MarkdownWrapper>
       <ReactMarkdown source={body} />
-      <form onSubmit={onSubmit}>
+      <form>
         <Grid container spacing={8}>
           <Grid item xs={12}>
             <FieldArray name="guests" component={RenderGuests} />
           </Grid>
           <Grid item xs={6}>
-            <Button variant="outlined" color="secondary" type="button">
+            <Button
+              variant="outlined"
+              color="secondary"
+              type="button"
+              onClick={onDecline}
+            >
               Sadly Decline
             </Button>
           </Grid>
           <Grid item xs={6}>
-            <Button variant="contained" color="primary" type="button">
+            <Button
+              variant="contained"
+              color="primary"
+              type="button"
+              onClick={onAccept}
+            >
               Joyfully Accept
             </Button>
           </Grid>
@@ -177,7 +188,8 @@ const Rsvp: React.FunctionComponent = ({
 );
 
 Rsvp.propTypes = {
-  onSubmit: PropTypes.func.isRequired
+  onAccept: PropTypes.func.isRequired,
+  onDecline: PropTypes.func.isRequired
 };
 
 export { Rsvp };

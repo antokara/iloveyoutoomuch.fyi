@@ -15,6 +15,8 @@ class RsvpContainer extends React.Component {
   constructor(props) {
     super(props);
     this.submitHandler = this.submitHandler.bind(this);
+    this.onAccept = this.onAccept.bind(this);
+    this.onDecline = this.onDecline.bind(this);
   }
 
   /**
@@ -24,15 +26,29 @@ class RsvpContainer extends React.Component {
     console.log('submitHandler', values);
   }
 
+  private onAccept(): void {
+    const { handleSubmit } = this.props;
+    console.log('onAccept');
+    handleSubmit(this.submitHandler);
+  }
+
+  private onDecline(): void {
+    const { handleSubmit } = this.props;
+    console.log('onDecline');
+    handleSubmit(this.submitHandler);
+  }
+
   render() {
     const { data, handleSubmit } = this.props;
     if (data.loading) {
       return <Loading />;
     }
+
     return (
       <RsvpComponent
         body={data.rsvp.body}
-        onSubmit={handleSubmit(this.submitHandler)}
+        onAccept={this.onAccept}
+        onDecline={this.onDecline}
       />
     );
   }
@@ -40,7 +56,8 @@ class RsvpContainer extends React.Component {
 
 RsvpContainer.propTypes = {
   data: PropTypes.objectOf(PropTypes.any),
-  handleSubmit: PropTypes.func.isRequired
+  handleSubmit: PropTypes.func.isRequired,
+  submit: PropTypes.func.isRequired
 };
 
 const Rsvp: React.ComponentClass = graphql(getRsvp)(
