@@ -11,12 +11,11 @@ import {
 import { AddCircleOutline, RemoveCircleOutline } from '@material-ui/icons';
 import { PageWrapper } from 'Components/layouts/themed/PageWrapper';
 import { MarkdownWrapper } from 'Components/shared/MarkdownWrapper';
-import { PALETTE } from 'Constants/PALETTE';
 import { validators } from 'Helpers/validators';
+import * as PropTypes from 'prop-types';
 import * as React from 'react';
 import * as ReactMarkdown from 'react-markdown';
 import { Field, FieldArray } from 'redux-form';
-import styledComponents from 'styled-components';
 
 const renderTextField = ({
   label,
@@ -151,13 +150,12 @@ class RenderGuests extends React.Component {
 
 const Rsvp: React.FunctionComponent = ({
   body,
-  // provided by redux-form
-  handleSubmit
+  onSubmit
 }): React.ReactElement<React.ReactNode> => (
   <PageWrapper>
     <MarkdownWrapper>
       <ReactMarkdown source={body} />
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={onSubmit}>
         <Grid container spacing={8}>
           <Grid item xs={12}>
             <FieldArray name="guests" component={RenderGuests} />
@@ -177,5 +175,9 @@ const Rsvp: React.FunctionComponent = ({
     </MarkdownWrapper>
   </PageWrapper>
 );
+
+Rsvp.propTypes = {
+  onSubmit: PropTypes.func.isRequired
+};
 
 export { Rsvp };
