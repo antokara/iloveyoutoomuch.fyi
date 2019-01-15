@@ -17,8 +17,11 @@ const THEME = {
     palette: {
       type: 'dark',
       primary: {
-        main: PALETTE.PINK,
+        main: PALETTE.DARK_CYAN,
         contrastText: 'rgba(255, 255, 255, 0.87)'
+      },
+      secondary: {
+        main: PALETTE.LIGHT_RED
       },
       text: {
         primary: PALETTE.LIGHT_RED

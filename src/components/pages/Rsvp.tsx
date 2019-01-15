@@ -11,10 +11,12 @@ import {
 import { AddCircleOutline, RemoveCircleOutline } from '@material-ui/icons';
 import { PageWrapper } from 'Components/layouts/themed/PageWrapper';
 import { MarkdownWrapper } from 'Components/shared/MarkdownWrapper';
+import { PALETTE } from 'Constants/PALETTE';
 import { validators } from 'Helpers/validators';
 import * as React from 'react';
 import * as ReactMarkdown from 'react-markdown';
 import { Field, FieldArray } from 'redux-form';
+import styledComponents from 'styled-components';
 
 const renderTextField = ({
   label,

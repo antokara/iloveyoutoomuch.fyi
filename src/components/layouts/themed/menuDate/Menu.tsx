@@ -1,5 +1,6 @@
 import { Button, Menu as CoreMenu, MenuItem } from '@material-ui/core';
 import { MenuRounded } from '@material-ui/icons';
+import { PALETTE } from 'Constants/PALETTE';
 import * as React from 'react';
 import { Link } from 'react-router-dom';
 import styledComponents from 'styled-components';
@@ -12,6 +13,10 @@ const Label: React.FunctionComponent = styledComponents.span`
   font-weight: bold;
   font-family: Merienda, sans-serif;
   text-shadow: 1px 1px 2px #000;
+`;
+
+const Wrapper: React.FunctionComponent = styledComponents.div`
+  color: ${PALETTE.PINK};
 `;
 
 const buildItems = (handleClose, items) =>
@@ -35,9 +40,9 @@ class Menu extends React.PureComponent {
     const { anchorEl } = this.state;
     const { items } = this.props;
     return (
-      <div>
+      <Wrapper>
         <Button
-          color="primary"
+          color="inherit"
           aria-owns={anchorEl ? 'menu' : undefined}
           aria-haspopup="true"
           onClick={this.handleClick}
@@ -53,7 +58,7 @@ class Menu extends React.PureComponent {
         >
           {buildItems(this.handleClose, items)}
         </CoreMenu>
-      </div>
+      </Wrapper>
     );
   }
 
