@@ -15,7 +15,6 @@ const THEME = {
       fontFamily: 'Merienda, sans-serif'
     },
     palette: {
-      type: 'dark',
       primary: {
         main: PALETTE.DARK_CYAN,
         contrastText: 'rgba(255, 255, 255, 0.87)'
@@ -27,8 +26,7 @@ const THEME = {
         primary: PALETTE.LIGHT_RED
       },
       background: {
-        paper: transparentize(0.1, PALETTE.LIGHT_CYAN),
-        default: 'white'
+        paper: transparentize(0.1, PALETTE.LIGHT_CYAN)
       }
     }
   })

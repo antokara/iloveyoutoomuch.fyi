@@ -13,7 +13,7 @@ const addShadow: (path: string) => string = (path: string): string => {
     return 'text-shadow: 1px 1px 2px #000, 0px 0px 2px #000;';
   }
 
-  return '';
+  return 'text-shadow: 1px 1px 2px #000;';
 };
 
 const EventDate: React.FunctionComponent = styledComponents.div`

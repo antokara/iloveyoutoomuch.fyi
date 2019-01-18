@@ -9,7 +9,7 @@ import styledComponents from 'styled-components';
  */
 const addFilter: (path: string) => string = (path: string): string => {
   if (path !== ROUTES.HOME.PATH) {
-    return 'filter: brightness(0.25) grayscale(1)';
+    return 'filter: blur(4px) grayscale(0.5);opacity: 0.4;';
   }
 
   return '';
@@ -26,7 +26,7 @@ const Background: React.FunctionComponent = styledComponents.div`
   background-size: cover;
   background-position: center 60%;
   z-index: -1;
-  ${p => addFilter(p.location.pathname)};
+  ${p => addFilter(p.location.pathname)}
 `;
 
 export { Background };

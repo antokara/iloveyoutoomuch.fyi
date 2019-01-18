@@ -8,7 +8,6 @@ import styledComponents from 'styled-components';
 const MarkdownWrapper: React.FunctionComponent = styledComponents.div`
   text-align: center;
   font-family: Merienda, sans-serif;
-  color: #fff;
   font-size: 0.75em;
 
   h1 {
