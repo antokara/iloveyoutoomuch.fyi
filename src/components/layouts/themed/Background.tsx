@@ -9,7 +9,7 @@ import styledComponents from 'styled-components';
  */
 const addFilter: (path: string) => string = (path: string): string => {
   if (path !== ROUTES.HOME.PATH) {
-    return 'filter: blur(4px) grayscale(0.5);opacity: 0.4;';
+    return 'filter: blur(4px) grayscale(0.5);opacity: 0.25;';
   }
 
   return '';
