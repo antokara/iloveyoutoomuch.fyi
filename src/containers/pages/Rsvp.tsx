@@ -28,14 +28,14 @@ class RsvpContainer extends React.Component {
 
   private onAccept(): void {
     const { handleSubmit } = this.props;
-    console.log('onAccept');
-    handleSubmit(this.submitHandler);
+    handleSubmit(values => this.submitHandler({ ...values, accepted: true }))();
   }
 
   private onDecline(): void {
     const { handleSubmit } = this.props;
-    console.log('onDecline');
-    handleSubmit(this.submitHandler);
+    handleSubmit(values =>
+      this.submitHandler({ ...values, accepted: false })
+    )();
   }
 
   render() {
