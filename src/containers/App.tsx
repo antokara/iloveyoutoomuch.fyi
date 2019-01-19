@@ -35,15 +35,14 @@ const App: React.FunctionComponent = (): React.ReactElement<
   <StyleProvider>
     <MuiThemeProvider theme={THEME}>
       <ThemeProvider theme={THEME}>
-        <CssBaseline>
-          <Provider store={store}>
-            <ConnectedRouter history={history}>
-              <ApolloProvider client={ApolloClient}>
-                <Routes />
-              </ApolloProvider>
-            </ConnectedRouter>
-          </Provider>
-        </CssBaseline>
+        <Provider store={store}>
+          <ConnectedRouter history={history}>
+            <ApolloProvider client={ApolloClient}>
+              <CssBaseline />
+              <Routes />
+            </ApolloProvider>
+          </ConnectedRouter>
+        </Provider>
       </ThemeProvider>
     </MuiThemeProvider>
   </StyleProvider>
