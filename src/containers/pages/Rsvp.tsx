@@ -6,6 +6,7 @@
 import { Rsvp as RsvpComponent } from 'Components/pages/Rsvp';
 import { Loading } from 'Components/shared/Loading';
 import * as getRsvp from 'Gql/getRsvp';
+import { withGoogleReCaptcha } from 'Helpers/withGoogleReCaptcha';
 import * as PropTypes from 'prop-types';
 import * as React from 'react';
 import { graphql } from 'react-apollo';
@@ -39,7 +40,7 @@ class RsvpContainer extends React.Component {
   }
 
   render() {
-    const { data, handleSubmit } = this.props;
+    const { data } = this.props;
     if (data.loading) {
       return <Loading />;
     }
@@ -64,7 +65,12 @@ const Rsvp: React.ComponentClass = graphql(getRsvp)(
   reduxForm({
     form: 'rsvp',
     enableReinitialize: true
-  })(RsvpContainer)
+  })(
+    withGoogleReCaptcha(RsvpContainer, {
+      siteKey: process.env.RE_CAPTCHA_SITE_KEY,
+      action: 'rsvp'
+    })
+  )
 );
 
 export { Rsvp };
