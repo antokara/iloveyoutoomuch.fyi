@@ -148,44 +148,109 @@ class RenderGuests extends React.Component {
   }
 }
 
-const Rsvp: React.FunctionComponent = ({
-  body,
-  onAccept,
-  onDecline
-}): React.ReactElement<React.ReactNode> => (
-  <PageWrapper>
-    <MarkdownWrapper>
-      <ReactMarkdown source={body} />
-      <form>
-        <Grid container spacing={8}>
-          <Grid item xs={12}>
-            <FieldArray name="guests" component={RenderGuests} />
-          </Grid>
-          <Grid item xs={6}>
-            <Button
-              variant="outlined"
-              color="secondary"
-              type="button"
-              onClick={onDecline}
-            >
-              Sadly Decline
-            </Button>
-          </Grid>
-          <Grid item xs={6}>
-            <Button
-              variant="contained"
-              color="primary"
-              type="button"
-              onClick={onAccept}
-            >
-              Joyfully Accept
-            </Button>
-          </Grid>
-        </Grid>
-      </form>
-    </MarkdownWrapper>
-  </PageWrapper>
-);
+/**
+ * check if the Google reCaptcha is available in the global variable
+ */
+const isGoogleReCaptchaAvailable: () => boolean = (): boolean =>
+  typeof window !== undefined && typeof window.grecaptcha === 'object';
+
+class Rsvp extends React.Component {
+  private isGoogleReCaptchaAvailableTimer: Timer;
+
+  constructor(props) {
+    super(props);
+    this.state = {
+      googleReCaptchaAvailable: false,
+      googleReCaptchaToken: undefined
+    };
+    this.isGoogleReCaptchaAvailable = this.isGoogleReCaptchaAvailable.bind(
+      this
+    );
+  }
+
+  protected componentDidMount(): void {
+    // load the google reCaptcha v3 script tag
+    // we cannot dynamically import because there are no CORS headers unfortunately
+    // so the FETCH fails...
+    const script = document.createElement('script');
+    script.src = `https://www.google.com/recaptcha/api.js?render=${
+      process.env.RE_CAPTCHA_SITE_KEY
+    }`;
+    document.body.appendChild(script);
+    // check for the Google reCaptcha availability with a timer
+    this.isGoogleReCaptchaAvailableTimer = setInterval(
+      this.isGoogleReCaptchaAvailable,
+      500
+    );
+  }
+
+  /**
+   * checks if the Google reCaptcha is available (invoked from the timer)
+   * @see componentDidMount
+   *
+   * if it is available, it changes the state of "googleReCaptchaAvailable" to true
+   * and clears the isGoogleReCaptchaAvailableTimer.
+   *
+   * after that, it attempts to get the token and if successful
+   * it sets it in the state "googleReCaptchaToken"
+   */
+  private isGoogleReCaptchaAvailable(): void {
+    if (isGoogleReCaptchaAvailable()) {
+      this.setState({ googleReCaptchaAvailable: true });
+      clearInterval(this.isGoogleReCaptchaAvailableTimer);
+      this.isGoogleReCaptchaAvailableTimer = undefined;
+      window.grecaptcha.ready(() => {
+        window.grecaptcha
+          .execute(process.env.RE_CAPTCHA_SITE_KEY, { action: 'RSVP' })
+          .then(
+            (token: string): void => {
+              this.setState({
+                googleReCaptchaToken: token
+              });
+            }
+          );
+      });
+    }
+  }
+
+  render() {
+    const { body, onAccept, onDecline } = this.props;
+    return (
+      <PageWrapper>
+        <MarkdownWrapper>
+          <ReactMarkdown source={body} />
+          <form>
+            <Grid container spacing={8}>
+              <Grid item xs={12}>
+                <FieldArray name="guests" component={RenderGuests} />
+              </Grid>
+              <Grid item xs={6}>
+                <Button
+                  variant="outlined"
+                  color="secondary"
+                  type="button"
+                  onClick={onDecline}
+                >
+                  Sadly Decline
+                </Button>
+              </Grid>
+              <Grid item xs={6}>
+                <Button
+                  variant="contained"
+                  color="primary"
+                  type="button"
+                  onClick={onAccept}
+                >
+                  Joyfully Accept
+                </Button>
+              </Grid>
+            </Grid>
+          </form>
+        </MarkdownWrapper>
+      </PageWrapper>
+    );
+  }
+}
 
 Rsvp.propTypes = {
   onAccept: PropTypes.func.isRequired,
