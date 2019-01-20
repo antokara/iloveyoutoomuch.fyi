@@ -14,8 +14,32 @@ export const rsvp = data => dispatch => {
   });
 
   // initiate the fetch and return the promise
+  // @todo try to use redux-promise or remove it
   return fetchApi(process.env.RSVP_API_URL, {
     method: FETCH_METHODS.POST,
     body: JSON.stringify(data)
+  }).then(response => {
+    if (response.status !== 200) {
+      // failure
+      dispatch({
+        type: ACTION_TYPES.RSVP,
+        payload: new Error('failed'),
+        error: true,
+        meta: {
+          data,
+          status: STATUSES.FAILED
+        }
+      });
+    }
+
+    // success
+    dispatch({
+      type: ACTION_TYPES.RSVP,
+      payload: 'ok',
+      meta: {
+        data,
+        status: STATUSES.SUCCEEDED
+      }
+    });
   });
 };
