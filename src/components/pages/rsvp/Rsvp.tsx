@@ -32,6 +32,8 @@ class Rsvp extends React.Component {
       default:
         return this.form();
       case STATUSES.FAILED:
+        // show error message and form,
+        // to allow the user to retry
         return (
           <React.Fragment>
             <Error>{error}</Error>
