@@ -3,6 +3,7 @@
  */
 import { Button, CircularProgress, Grid } from '@material-ui/core';
 import { PageWrapper } from 'Components/layouts/themed/PageWrapper';
+import { Error } from 'Components/pages/rsvp/Error';
 import { Guests } from 'Components/pages/rsvp/Guests';
 import { MarkdownWrapper } from 'Components/shared/MarkdownWrapper';
 import { STATUSES } from 'Constants/STATUSES';
@@ -31,7 +32,12 @@ class Rsvp extends React.Component {
       default:
         return this.form();
       case STATUSES.FAILED:
-        return error;
+        return (
+          <React.Fragment>
+            <Error>{error}</Error>
+            {this.form()}
+          </React.Fragment>
+        );
       case STATUSES.PENDING:
         return <CircularProgress />;
       case STATUSES.SUCCEEDED:
