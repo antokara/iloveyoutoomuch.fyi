@@ -4,7 +4,7 @@
  * when loaded, it returns the Generic component
  */
 import { rsvp } from 'Actions/rsvp';
-import { Rsvp as RsvpComponent } from 'Components/pages/Rsvp';
+import { Rsvp as RsvpComponent } from 'Components/pages/rsvp/Rsvp';
 import { Loading } from 'Components/shared/Loading';
 import * as getRsvp from 'Gql/getRsvp';
 import { withGoogleReCaptcha } from 'Helpers/withGoogleReCaptcha';
