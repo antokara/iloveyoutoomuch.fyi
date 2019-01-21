@@ -81,7 +81,12 @@ class RenderGuests extends React.Component {
   render() {
     const {
       fields,
-      meta: { error, submitFailed }
+      meta: { error, submitFailed },
+      addGuest,
+      age,
+      firstName,
+      lastName,
+      removeGuest
     } = this.props;
     return (
       <Grid container spacing={8}>
@@ -91,7 +96,7 @@ class RenderGuests extends React.Component {
               <Field
                 component={renderTextField}
                 name={`${member}.firstName`}
-                label="First Name *"
+                label={`${firstName} *`}
                 type="text"
                 disabled={false}
                 validate={[validators.required]}
@@ -101,7 +106,7 @@ class RenderGuests extends React.Component {
               <Field
                 component={renderTextField}
                 name={`${member}.lastName`}
-                label="Last Name *"
+                label={`${lastName} *`}
                 type="text"
                 disabled={false}
                 validate={[validators.required]}
@@ -110,7 +115,7 @@ class RenderGuests extends React.Component {
             <Grid item xs={6} md={3}>
               <Field
                 name={`${member}.age`}
-                label="Age *"
+                label={`${age} *`}
                 component={renderSelectField}
                 validate={[validators.required]}
               >
@@ -125,7 +130,7 @@ class RenderGuests extends React.Component {
               <Grid item>
                 <IconButton
                   onClick={() => fields.remove(index)}
-                  aria-label="Remove Guest"
+                  aria-label={removeGuest}
                 >
                   <RemoveCircleOutline color="secondary" />
                 </IconButton>
@@ -136,7 +141,7 @@ class RenderGuests extends React.Component {
         {fields.length < 8 && (
           <Grid item xs={12}>
             <Button type="button" onClick={() => fields.push({})}>
-              Add Guest &nbsp; <AddCircleOutline />
+              {addGuest} &nbsp; <AddCircleOutline />
             </Button>
           </Grid>
         )}
@@ -149,7 +154,17 @@ class RenderGuests extends React.Component {
 }
 
 const Rsvp: React.FunctionComponent = ({
+  accept,
+  addGuest,
+  age,
   body,
+  decline,
+  error,
+  firstName,
+  lastName,
+  removeGuest,
+  successAccept,
+  successDecline,
   onAccept,
   onDecline
 }): React.ReactElement<React.ReactNode> => (
@@ -159,7 +174,17 @@ const Rsvp: React.FunctionComponent = ({
       <form>
         <Grid container spacing={8}>
           <Grid item xs={12}>
-            <FieldArray name="guests" component={RenderGuests} />
+            <FieldArray
+              name="guests"
+              component={RenderGuests}
+              props={{
+                addGuest,
+                age,
+                firstName,
+                lastName,
+                removeGuest
+              }}
+            />
           </Grid>
           <Grid item xs={6}>
             <Button
@@ -168,7 +193,7 @@ const Rsvp: React.FunctionComponent = ({
               type="button"
               onClick={onDecline}
             >
-              Sadly Decline
+              {decline}
             </Button>
           </Grid>
           <Grid item xs={6}>
@@ -178,7 +203,7 @@ const Rsvp: React.FunctionComponent = ({
               type="button"
               onClick={onAccept}
             >
-              Joyfully Accept
+              {accept}
             </Button>
           </Grid>
         </Grid>

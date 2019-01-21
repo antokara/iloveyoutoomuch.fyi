@@ -1,5 +1,15 @@
 query getRsvp {
   rsvp {
+    accept
+    addGuest
+    age
     body
+    decline
+    error
+    firstName
+    lastName
+    removeGuest
+    successAccept
+    successDecline
   }
 }

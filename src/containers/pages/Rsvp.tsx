@@ -53,6 +53,17 @@ class RsvpContainer extends React.Component {
     return (
       <RsvpComponent
         body={data.rsvp.body}
+        accept={data.rsvp.accept}
+        addGuest={data.rsvp.addGuest}
+        age={data.rsvp.age}
+        body={data.rsvp.body}
+        decline={data.rsvp.decline}
+        error={data.rsvp.error}
+        firstName={data.rsvp.firstName}
+        lastName={data.rsvp.lastName}
+        removeGuest={data.rsvp.removeGuest}
+        successAccept={data.rsvp.successAccept}
+        successDecline={data.rsvp.successDecline}
         onAccept={this.onAccept}
         onDecline={this.onDecline}
       />
