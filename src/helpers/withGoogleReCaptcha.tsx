@@ -1,7 +1,6 @@
 /**
  * Google ReCaptcha Component
  */
-import * as PropTypes from 'prop-types';
 import * as React from 'react';
 import reactDisplayName from 'react-display-name';
 

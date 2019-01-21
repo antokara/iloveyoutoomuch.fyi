@@ -3,6 +3,7 @@
  */
 import {
   Button,
+  CircularProgress,
   Grid,
   IconButton,
   MenuItem,
@@ -11,6 +12,7 @@ import {
 import { AddCircleOutline, RemoveCircleOutline } from '@material-ui/icons';
 import { PageWrapper } from 'Components/layouts/themed/PageWrapper';
 import { MarkdownWrapper } from 'Components/shared/MarkdownWrapper';
+import { STATUSES } from 'Constants/STATUSES';
 import { validators } from 'Helpers/validators';
 import * as PropTypes from 'prop-types';
 import * as React from 'react';
@@ -153,24 +155,52 @@ class RenderGuests extends React.Component {
   }
 }
 
-const Rsvp: React.FunctionComponent = ({
-  accept,
-  addGuest,
-  age,
-  body,
-  decline,
-  error,
-  firstName,
-  lastName,
-  removeGuest,
-  successAccept,
-  successDecline,
-  onAccept,
-  onDecline
-}): React.ReactElement<React.ReactNode> => (
-  <PageWrapper>
-    <MarkdownWrapper>
-      <ReactMarkdown source={body} />
+class Rsvp extends React.Component {
+  isInProgress() {
+    const { status } = this.props;
+
+    return status === STATUSES.PENDING;
+  }
+
+  subRender() {
+    const {
+      status,
+      error,
+      successAccept,
+      successDecline,
+      accepted
+    } = this.props;
+
+    switch (status) {
+      default:
+        return this.form();
+      case STATUSES.FAILED:
+        return error;
+      case STATUSES.PENDING:
+        return <CircularProgress />;
+      case STATUSES.SUCCEEDED:
+        if (accepted) {
+          return successAccept;
+        }
+
+        return successDecline;
+    }
+  }
+
+  form() {
+    const {
+      accept,
+      addGuest,
+      age,
+      decline,
+      firstName,
+      lastName,
+      removeGuest,
+      onAccept,
+      onDecline
+    } = this.props;
+
+    return (
       <form>
         <Grid container spacing={8}>
           <Grid item xs={12}>
@@ -208,13 +238,41 @@ const Rsvp: React.FunctionComponent = ({
           </Grid>
         </Grid>
       </form>
-    </MarkdownWrapper>
-  </PageWrapper>
-);
+    );
+  }
+
+  render() {
+    const { body } = this.props;
+    return (
+      <PageWrapper>
+        <MarkdownWrapper>
+          <ReactMarkdown source={body} />
+          {this.subRender()}
+        </MarkdownWrapper>
+      </PageWrapper>
+    );
+  }
+}
 
 Rsvp.propTypes = {
   onAccept: PropTypes.func.isRequired,
-  onDecline: PropTypes.func.isRequired
+  onDecline: PropTypes.func.isRequired,
+  addGuest: PropTypes.string.isRequired,
+  age: PropTypes.string.isRequired,
+  body: PropTypes.string.isRequired,
+  decline: PropTypes.string.isRequired,
+  error: PropTypes.string.isRequired,
+  firstName: PropTypes.string.isRequired,
+  lastName: PropTypes.string.isRequired,
+  removeGuest: PropTypes.string.isRequired,
+  successAccept: PropTypes.string.isRequired,
+  successDecline: PropTypes.string.isRequired,
+  status: PropTypes.string.isRequired,
+  accepted: PropTypes.bool
+};
+
+Rsvp.defaultProps = {
+  accepted: undefined
 };
 
 export { Rsvp };

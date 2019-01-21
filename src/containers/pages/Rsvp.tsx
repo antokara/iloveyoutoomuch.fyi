@@ -24,11 +24,11 @@ class RsvpContainer extends React.Component {
   }
 
   /**
-   * called from the onSubmit event of the form
+   * @see onAccept()
+   * @see onDecline()
    */
   private submitHandler(values: object): void {
     const { rsvp } = this.props;
-    console.log('submitHandler', values);
     rsvp(values);
   }
 
@@ -45,7 +45,7 @@ class RsvpContainer extends React.Component {
   }
 
   render() {
-    const { data } = this.props;
+    const { data, accepted, status } = this.props;
     if (data.loading) {
       return <Loading />;
     }
@@ -66,6 +66,8 @@ class RsvpContainer extends React.Component {
         successDecline={data.rsvp.successDecline}
         onAccept={this.onAccept}
         onDecline={this.onDecline}
+        status={status}
+        accepted={accepted}
       />
     );
   }
@@ -78,6 +80,11 @@ RsvpContainer.propTypes = {
   rsvp: PropTypes.func.isRequired
 };
 
+const mapStateToProps = state => ({
+  status: state.rsvp.status,
+  accepted: state.rsvp.accepted
+});
+
 const mapDispatchToProps = dispatch => ({
   rsvp: bindActionCreators(rsvp, dispatch)
 });
@@ -89,7 +96,7 @@ const Rsvp: React.ComponentClass = graphql(getRsvp)(
   })(
     withGoogleReCaptcha(
       connect(
-        null,
+        mapStateToProps,
         mapDispatchToProps
       )(RsvpContainer),
       {
