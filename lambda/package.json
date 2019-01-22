@@ -5,6 +5,7 @@
   "scripts": {},
   "dependencies": {
     "aws-sdk": "^2.391.0",
+    "dotenv": "^6.2.0",
     "node-fetch": "^2.3.0",
     "truncate": "^2.0.1"
   }

@@ -2,7 +2,6 @@ import { ACTION_TYPES } from 'Constants/ACTION_TYPES';
 import { FETCH_METHODS } from 'Constants/FETCH_METHODS';
 import { STATUSES } from 'Constants/STATUSES';
 import { fetchApi } from 'Helpers/fetchApi';
-import { exception } from 'react-ga';
 
 export const rsvp = data => dispatch => {
   // dispatch the pending action
@@ -21,7 +20,7 @@ export const rsvp = data => dispatch => {
     body: JSON.stringify(data)
   })
     .then(response => {
-      if (response.status !== 200) {
+      if (response.status !== 201) {
         // failure - API failed
         dispatch({
           type: ACTION_TYPES.RSVP,
@@ -44,7 +43,7 @@ export const rsvp = data => dispatch => {
         }
       });
     })
-    .catch((e: exception) => {
+    .catch(e => {
       // failure - probably network issue
       dispatch({
         type: ACTION_TYPES.RSVP,
