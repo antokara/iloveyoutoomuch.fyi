@@ -9,17 +9,17 @@ AWS.config.update({ region: 'us-east-2' });
 var dynamoDb = new AWS.DynamoDB({ apiVersion: '2012-08-10' });
 
 /**
- * Stores Guest Entry into Dynamo DB
+ * Stores Guest Entry into Dynamo DB in a "synchronous" fashion using async/wait
  * @param {boolean} accepted
  * @param {string} firstName
  * @param {string} lastName
  * @param {string} age
  */
-async function storeGuest(accepted, firstName, lastName, age) {
+const storeGuest = async (accepted, firstName, lastName, age) => {
   var params = {
     Item: {
       id: {
-        s: new Date().toISOString()
+        S: new Date().toISOString()
       },
       firstName: {
         S: firstName
@@ -36,15 +36,30 @@ async function storeGuest(accepted, firstName, lastName, age) {
     },
     TableName: 'iloveyoutoomuch.fyi-rsvp'
   };
-  return await dynamoDb.put(params).promise();
-}
+
+  // wait for the promise to return
+  return await new Promise((resolve, reject) => {
+    // handle db client failure
+    try {
+      dynamoDb.putItem(params, (err, data) => {
+        // handle db server failure
+        if (err) {
+          reject(err);
+        } else {
+          resolve(data);
+        }
+      });
+    } catch (e) {
+      reject(e);
+    }
+  });
+};
 
 // @see https://docs.aws.amazon.com/lambda/latest/dg/nodejs-prog-model-handler.html
-exports.handler = function(event, context, callback) {
+exports.handler = (event, context, callback) => {
   let body = {};
   let statusCode = 201;
 
-  // process.env.AWS_DYNAMO_DB_ARN
   // process.env.RE_CAPTCHA_SECRET_KEY
 
   if (event.body) {
@@ -56,7 +71,7 @@ exports.handler = function(event, context, callback) {
       body.guests.length < 10
     ) {
       const accepted = body.accepted === true;
-      body.guests.map(function(guest) {
+      body.guests.map(guest => {
         const firstName = truncate(String(guest.firstName), 20, {
           ellipsis: null
         });
@@ -64,7 +79,6 @@ exports.handler = function(event, context, callback) {
           ellipsis: null
         });
         const age = truncate(String(guest.age), 7, { ellipsis: null });
-        //console.log('accepted: ', accepted, firstName, lastName, age);
         try {
           storeGuest(accepted, firstName, lastName, age);
         } catch (e) {
