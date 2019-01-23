@@ -92,11 +92,6 @@ exports.handler = (event, context, callback) => {
       statusCode = 400;
     }
   }
-  // standard response object
-  var response = {
-    statusCode: statusCode,
-    headers: {},
-    body: null
-  };
+  var response = {};
   callback(null, response);
 };
