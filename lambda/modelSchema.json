@@ -20,13 +20,19 @@
       "required": ["firstName", "lastName", "age"],
       "properties": {
         "firstName": {
-          "type": "string"
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 20
         },
         "lastName": {
-          "type": "string"
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 20
         },
         "age": {
-          "type": "string"
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 6
         }
       }
     }
