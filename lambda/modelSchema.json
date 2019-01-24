@@ -9,7 +9,9 @@
     },
     "guests": {
       "type": "array",
-      "items": { "$ref": "#/definitions/guest" }
+      "items": { "$ref": "#/definitions/guest" },
+      "maxItems": 10,
+      "minItems": 1
     }
   },
   "definitions": {
