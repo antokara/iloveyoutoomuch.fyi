@@ -22,6 +22,7 @@ const withGoogleReCaptcha = (WrappedComponent, { action, siteKey }) => {
       super(props);
       this.state = {
         available: false,
+        ready: false,
         token: undefined
       };
       this.isAvailable = this.isAvailable.bind(this);
@@ -54,6 +55,7 @@ const withGoogleReCaptcha = (WrappedComponent, { action, siteKey }) => {
         this.isAvailableTimer = undefined;
         this.setState({ available: true });
         window.grecaptcha.ready(() => {
+          this.setState({ ready: true });
           window.grecaptcha.execute(siteKey, { action }).then(
             (token: string): void => {
               this.setState({
@@ -68,10 +70,11 @@ const withGoogleReCaptcha = (WrappedComponent, { action, siteKey }) => {
     render() {
       // filter out unused props
       const { action, ...passThroughProps } = this.props;
-      const { ready, token } = this.state;
+      const { available, ready, token } = this.state;
       return (
         <WrappedComponent
           {...passThroughProps}
+          googleReCaptchaAvailable={available}
           googleReCaptchaReady={ready}
           googleReCaptchaToken={token}
         />

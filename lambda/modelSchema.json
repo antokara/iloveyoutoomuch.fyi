@@ -2,10 +2,16 @@
   "$schema": "http://json-schema.org/draft-07/schema#",
   "title": "rsvp",
   "type": "object",
-  "required": ["accepted", "guests"],
+  "required": ["accepted", "guests", "token"],
+  "maxProperties": 3,
   "properties": {
     "accepted": {
       "type": "boolean"
+    },
+    "token": {
+      "type": "string",
+      "minLength": 10,
+      "maxLength": 512
     },
     "guests": {
       "type": "array",

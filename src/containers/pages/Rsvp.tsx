@@ -33,20 +33,30 @@ class RsvpContainer extends React.Component {
   }
 
   private onAccept(): void {
-    const { handleSubmit } = this.props;
-    handleSubmit(values => this.submitHandler({ ...values, accepted: true }))();
+    const { handleSubmit, googleReCaptchaToken } = this.props;
+    handleSubmit(values =>
+      this.submitHandler({
+        ...values,
+        accepted: true,
+        token: googleReCaptchaToken
+      })
+    )();
   }
 
   private onDecline(): void {
-    const { handleSubmit } = this.props;
+    const { handleSubmit, googleReCaptchaToken } = this.props;
     handleSubmit(values =>
-      this.submitHandler({ ...values, accepted: false })
+      this.submitHandler({
+        ...values,
+        accepted: false,
+        token: googleReCaptchaToken
+      })
     )();
   }
 
   render() {
-    const { data, accepted, status } = this.props;
-    if (data.loading) {
+    const { data, accepted, status, googleReCaptchaToken } = this.props;
+    if (data.loading || !googleReCaptchaToken) {
       return <Loading />;
     }
 
@@ -77,7 +87,12 @@ RsvpContainer.propTypes = {
   data: PropTypes.objectOf(PropTypes.any),
   handleSubmit: PropTypes.func.isRequired,
   submit: PropTypes.func.isRequired,
-  rsvp: PropTypes.func.isRequired
+  rsvp: PropTypes.func.isRequired,
+  googleReCaptchaToken: PropTypes.string
+};
+
+RsvpContainer.defaultProps = {
+  googleReCaptchaToken: undefined
 };
 
 const mapStateToProps = state => ({
