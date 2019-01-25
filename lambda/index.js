@@ -1,9 +1,10 @@
 'use strict';
-// require('dotenv').config();
+require('dotenv').config();
 const AWS = require('aws-sdk');
-// const fetch = require('node-fetch');
-const reCapUrl = 'https://www.google.com/recaptcha/api/siteverify';
-
+const fetch = require('node-fetch');
+const uuidv4 = require('uuid/v4');
+const GOOGLE_RECAPTCHA_VERIFY_URL =
+  'https://www.google.com/recaptcha/api/siteverify';
 AWS.config.update({ region: 'us-east-2' });
 var dynamoDb = new AWS.DynamoDB({ apiVersion: '2012-08-10' });
 
@@ -32,7 +33,7 @@ const storeGuest = (accepted, firstName, lastName, age) => {
   var params = {
     Item: {
       id: {
-        S: new Date().toISOString()
+        S: uuidv4()
       },
       firstName: {
         S: firstName
@@ -45,34 +46,37 @@ const storeGuest = (accepted, firstName, lastName, age) => {
       },
       accepted: {
         BOOL: accepted
+      },
+      created: {
+        S: new Date().toISOString()
       }
     },
     TableName: 'iloveyoutoomuch.fyi-rsvp'
   };
 
-  // wait for the promise to return
-  return new Promise((resolve, reject) => {
-    // handle db client failure
-    try {
-      dynamoDb.putItem(params, (err, data) => {
-        // handle db server failure
-        if (err) {
-          reject(err);
-        } else {
-          resolve(data);
-        }
-      });
-    } catch (e) {
-      reject(e);
-    }
-  });
+  return dynamoDb.putItem(params).promise();
 };
 
 // @see https://docs.aws.amazon.com/lambda/latest/dg/nodejs-prog-model-handler.html
 exports.handler = async event => {
-  const reponse = {};
-  reponse.code = 201;
-  // process.env.RE_CAPTCHA_SECRET_KEY
+  const response = {
+    code: 201
+  };
+
+  // verify the Google reCaptcha v3 token
+  const reCaptchaResponse = await fetch(GOOGLE_RECAPTCHA_VERIFY_URL, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+    body: `secret=${process.env.RE_CAPTCHA_SECRET_KEY}&response=${event.token}`
+  });
+  const data = await reCaptchaResponse.json();
+  if (!data.success) {
+    response.code = 400;
+    response.message = 'failed';
+    return response;
+  }
+
+  // iterate and store each guest
   await asyncForEach(event.guests, async guest => {
     try {
       await storeGuest(
@@ -84,10 +88,10 @@ exports.handler = async event => {
     } catch (e) {
       console.log('failed to write to dynamodb, with code:', e.code);
       // internal error
-      reponse.code = 500;
-      reponse.message = 'failed to write to db';
+      response.code = 500;
+      response.message = 'failed to write to db';
     }
   });
 
-  return reponse;
+  return response;
 };
