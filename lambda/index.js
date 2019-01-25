@@ -59,10 +59,6 @@ const storeGuest = (accepted, firstName, lastName, age) => {
 
 // @see https://docs.aws.amazon.com/lambda/latest/dg/nodejs-prog-model-handler.html
 exports.handler = async event => {
-  const response = {
-    code: 201
-  };
-
   // verify the Google reCaptcha v3 token
   const reCaptchaResponse = await fetch(GOOGLE_RECAPTCHA_VERIFY_URL, {
     method: 'POST',
@@ -71,9 +67,7 @@ exports.handler = async event => {
   });
   const data = await reCaptchaResponse.json();
   if (!data.success) {
-    response.code = 400;
-    response.message = 'failed';
-    return response;
+    throw new Error('code: 400, failed');
   }
 
   // iterate and store each guest
@@ -88,10 +82,7 @@ exports.handler = async event => {
     } catch (e) {
       console.log('failed to write to dynamodb, with code:', e.code);
       // internal error
-      response.code = 500;
-      response.message = 'failed to write to db';
+      throw new Error('code: 500, failed to write to db');
     }
   });
-
-  return response;
 };

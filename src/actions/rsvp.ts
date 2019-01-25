@@ -22,7 +22,7 @@ export const rsvp = data => dispatch => {
     .then(response => {
       if (response.status !== 201) {
         // failure - API failed
-        dispatch({
+        return dispatch({
           type: ACTION_TYPES.RSVP,
           payload: new Error('failed'),
           error: true,
