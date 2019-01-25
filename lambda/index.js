@@ -1,21 +1,34 @@
 'use strict';
-require('dotenv').config();
+// require('dotenv').config();
 const AWS = require('aws-sdk');
-const fetch = require('node-fetch');
-const truncate = require('truncate');
+// const fetch = require('node-fetch');
 const reCapUrl = 'https://www.google.com/recaptcha/api/siteverify';
 
 AWS.config.update({ region: 'us-east-2' });
 var dynamoDb = new AWS.DynamoDB({ apiVersion: '2012-08-10' });
 
 /**
- * Stores Guest Entry into Dynamo DB in a "synchronous" fashion using async/wait
+ * forEach that supports async await
+ *
+ * @param {array} array
+ * @param {function} callback
+ * @see https://codeburst.io/javascript-async-await-with-foreach-b6ba62bbf404
+ */
+async function asyncForEach(array, callback) {
+  for (let index = 0; index < array.length; index++) {
+    await callback(array[index], index, array);
+  }
+}
+
+/**
+ * Stores Guest Entry into Dynamo DB
  * @param {boolean} accepted
  * @param {string} firstName
  * @param {string} lastName
  * @param {string} age
+ * @return Promise
  */
-const storeGuest = async (accepted, firstName, lastName, age) => {
+const storeGuest = (accepted, firstName, lastName, age) => {
   var params = {
     Item: {
       id: {
@@ -38,7 +51,7 @@ const storeGuest = async (accepted, firstName, lastName, age) => {
   };
 
   // wait for the promise to return
-  return await new Promise((resolve, reject) => {
+  return new Promise((resolve, reject) => {
     // handle db client failure
     try {
       dynamoDb.putItem(params, (err, data) => {
@@ -56,42 +69,25 @@ const storeGuest = async (accepted, firstName, lastName, age) => {
 };
 
 // @see https://docs.aws.amazon.com/lambda/latest/dg/nodejs-prog-model-handler.html
-exports.handler = (event, context, callback) => {
-  let body = {};
-  let statusCode = 201;
-
+exports.handler = async event => {
+  const reponse = {};
+  reponse.code = 201;
   // process.env.RE_CAPTCHA_SECRET_KEY
-
-  if (event.body) {
-    body = JSON.parse(event.body);
-    // validate
-    if (
-      typeof body.accepted !== undefined &&
-      Array.isArray(body.guests) &&
-      body.guests.length < 10
-    ) {
-      const accepted = body.accepted === true;
-      body.guests.map(guest => {
-        const firstName = truncate(String(guest.firstName), 20, {
-          ellipsis: null
-        });
-        const lastName = truncate(String(guest.lastName), 20, {
-          ellipsis: null
-        });
-        const age = truncate(String(guest.age), 7, { ellipsis: null });
-        try {
-          storeGuest(accepted, firstName, lastName, age);
-        } catch (e) {
-          console.log('failed to write to dynamodb, with code:', e.code);
-          // internal error
-          statusCode = 500;
-        }
-      });
-    } else {
-      // bad request
-      statusCode = 400;
+  await asyncForEach(event.guests, async guest => {
+    try {
+      await storeGuest(
+        event.accepted,
+        guest.firstName,
+        guest.lastName,
+        guest.age
+      );
+    } catch (e) {
+      console.log('failed to write to dynamodb, with code:', e.code);
+      // internal error
+      reponse.code = 500;
+      reponse.message = 'failed to write to db';
     }
-  }
-  var response = {};
-  callback(null, response);
+  });
+
+  return reponse;
 };
