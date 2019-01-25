@@ -5,6 +5,7 @@ import { Button, CircularProgress, Grid } from '@material-ui/core';
 import { PageWrapper } from 'Components/layouts/themed/PageWrapper';
 import { Error } from 'Components/pages/rsvp/Error';
 import { Guests } from 'Components/pages/rsvp/Guests';
+import { Success } from 'Components/pages/rsvp/Success';
 import { MarkdownWrapper } from 'Components/shared/MarkdownWrapper';
 import { STATUSES } from 'Constants/STATUSES';
 import * as PropTypes from 'prop-types';
@@ -43,11 +44,14 @@ class Rsvp extends React.Component {
       case STATUSES.PENDING:
         return <CircularProgress />;
       case STATUSES.SUCCEEDED:
+        let message: string;
         if (accepted) {
-          return successAccept;
+          message = successAccept;
+        } else {
+          message = successDecline;
         }
 
-        return successDecline;
+        return <Success>{message}</Success>;
     }
   }
 
