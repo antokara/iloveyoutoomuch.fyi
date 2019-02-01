@@ -59,14 +59,15 @@ const storeGuest = (accepted, firstName, lastName, age) => {
 
 // @see https://docs.aws.amazon.com/lambda/latest/dg/nodejs-prog-model-handler.html
 exports.handler = async event => {
-  // verify the Google reCaptcha v3 token
+  // Google reCaptcha v3
   const reCaptchaResponse = await fetch(GOOGLE_RECAPTCHA_VERIFY_URL, {
     method: 'POST',
     headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
     body: `secret=${process.env.RE_CAPTCHA_SECRET_KEY}&response=${event.token}`
   });
   const data = await reCaptchaResponse.json();
-  if (!data.success) {
+  // verify the token and the validate the score
+  if (!data.success || data.score < 0.5) {
     throw new Error('code: 400, failed');
   }
 
