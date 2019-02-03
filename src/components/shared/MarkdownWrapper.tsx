@@ -6,15 +6,14 @@ import { PALETTE } from 'Constants/PALETTE';
 import styledComponents from 'styled-components';
 
 const MarkdownWrapper: React.FunctionComponent = styledComponents.div`
-  text-align: center;
   font-family: Merienda, sans-serif;
   font-size: 0.75em;
 
   h1 {
-    font-size: 1.75em;
-    border-bottom: 1px solid #ffffff5c;
-    display: inline-block;
-    padding: 0.1em 0.5em;
+    font-size: 2.9em;
+    font-weight: normal;
+    padding: 0;
+    margin: 0;
   }
 
   h2 {
@@ -29,8 +28,21 @@ const MarkdownWrapper: React.FunctionComponent = styledComponents.div`
   h1,
   h2,
   h3 {
+    font-family: Rochester, sans-serif;
     color: ${PALETTE.DARK_CYAN};
-    text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.5);
+    display: block;
+    text-align: right;
+    float: right;
+    position: relative;
+    z-index: 1;
+
+    img {
+      display: block;
+      border: 5px solid lightgray;
+      margin: -0.25em 0 0.25em 0.25em;
+      z-index: -1;
+      position: relative;
+    }
   }
 
   a {
@@ -45,6 +57,10 @@ const MarkdownWrapper: React.FunctionComponent = styledComponents.div`
 
   p {
     line-height: 1.75em;
+
+    &:nth-of-type(1) {
+      padding-top: 11em;
+    }
   }
 
   @media (min-width: 768px) {
