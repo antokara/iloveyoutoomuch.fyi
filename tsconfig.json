@@ -17,7 +17,7 @@
       "Helpers/*": ["src/helpers/*"],
       "Reducers/*": ["src/reducers/*"],
       "Gql/*": ["src/gql/*"],
-      "Assets/*": ["src/assets/*"],
+      "Assets/*": ["assets/*"],
       "ReduxLogger/*": ["redux-logger"],
       "ReduxDevtoolsExtension/*": ["redux-devtools-extension"]
     }

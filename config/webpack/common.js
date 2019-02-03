@@ -54,7 +54,7 @@ module.exports = env => {
     resolve: {
       extensions: ['.js', '.json', '.ts', '.tsx', '.gql'],
       alias: {
-        Assets: path.resolve(__dirname, '../assets/'),
+        Assets: path.resolve(__dirname, '../../assets/'),
         Actions: path.resolve(__dirname, '../../src/actions/'),
         Components: path.resolve(__dirname, '../../src/components/'),
         Constants: path.resolve(__dirname, '../../src/constants/'),
@@ -74,6 +74,10 @@ module.exports = env => {
     },
     module: {
       rules: [
+        {
+          test: /\.(png|jpg|gif|svg)$/,
+          use: [{ loader: 'file-loader', options: { outputPath: 'assets/' } }]
+        },
         {
           test: /\.tsx?$/,
           exclude: /(node_modules|assets|reports)/,
@@ -96,10 +100,6 @@ module.exports = env => {
               }
             }
           ]
-        },
-        {
-          test: /\.(png|jpg|gif|svg)$/,
-          use: [{ loader: 'file-loader', options: { outputPath: 'assets/' } }]
         },
         {
           test: /\.tsx?/,
