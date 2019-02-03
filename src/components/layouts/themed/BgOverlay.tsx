@@ -7,6 +7,7 @@ import styledComponents from 'styled-components';
 const Wrapper: React.FunctionComponent = styledComponents.div`
   position: relative;
   overflow: hidden;
+  min-height: 100%;
 `;
 
 const Children: React.FunctionComponent = styledComponents.div`
