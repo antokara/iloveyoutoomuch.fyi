@@ -13,7 +13,7 @@ const Generic: React.FunctionComponent = ({
   <BgOverlay>
     <PageWrapper>
       <MarkdownWrapper>
-        <ReactMarkdown source={body} />
+        <ReactMarkdown source={body} escapeHtml={false} />
       </MarkdownWrapper>
     </PageWrapper>
   </BgOverlay>

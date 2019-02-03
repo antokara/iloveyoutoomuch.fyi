@@ -38,10 +38,16 @@ const MarkdownWrapper: React.FunctionComponent = styledComponents.div`
 
     img {
       display: block;
-      border: 5px solid lightgray;
+      border: 4px solid lightgray;
       margin: -0.25em 0 0.25em 0.25em;
       z-index: -1;
       position: relative;
+      max-width: 50vw;
+
+      &.no-border {
+        margin: 0.25em 0 0.25em 0.25em;
+        border: none;
+      }
     }
   }
 
