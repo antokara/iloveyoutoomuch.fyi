@@ -13,6 +13,30 @@ const Wrapper: React.FunctionComponent = styledComponents.div`
 const Children: React.FunctionComponent = styledComponents.div`
   position: relative;
   padding-top: 4.5em;
+
+  @media (min-width: 601px) and (max-width: 650px) {
+    padding-top: 5em;
+  }
+
+  @media (min-width: 651px) and (max-width: 700px) {
+    padding-top: 5.5em;
+  }
+
+  @media (min-width: 701px) and (max-width: 768px) {
+    padding-top: 6em;
+  }
+
+  @media (min-width: 851px) and (max-width: 1000px) {
+    padding-top: 5.5em;
+  }
+
+  @media (min-width: 1001px) and (max-width: 1110px) {
+    padding-top: 6em;
+  }
+
+  @media (min-width: 1111px) and (max-width: 1150px) {
+    padding-top: 7em;
+  }
 `;
 
 const SVG: React.FunctionComponent = styledComponents(InlineSVG)`
