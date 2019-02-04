@@ -9,32 +9,16 @@ const MarkdownWrapper: React.FunctionComponent = styledComponents.div`
   font-family: Merienda, sans-serif;
   font-size: 0.75em;
 
-  h1 {
-    font-size: 2.9em;
-    font-weight: normal;
-    padding: 0;
-    margin: 0;
-  }
-
-  h2 {
-    font-size: 1.5em;
-    padding: 0.1em 0.5em;
-  }
-
-  h3 {
-    margin: 1.5em auto 0.5em auto;
-  }
-
   h1,
   h2,
   h3 {
     font-family: Rochester, sans-serif;
     color: ${PALETTE.DARK_CYAN};
     display: block;
-    text-align: right;
-    float: right;
     position: relative;
     z-index: 1;
+    font-weight: normal;
+    margin: 0;
 
     img {
       display: block;
@@ -51,6 +35,40 @@ const MarkdownWrapper: React.FunctionComponent = styledComponents.div`
     }
   }
 
+  h1 {
+    font-size: 2.9em;
+    font-weight: normal;
+    padding: 0;
+    margin: -1em 0 0 0;
+    text-align: right;
+    float: right;
+  }
+
+  h2 {
+    font-size: 2em;
+  }
+
+  h3 {
+    font-size: 1.5em;
+  }
+
+  p {
+    line-height: 1.75em;
+  }
+
+  .clear {
+    clear: both;
+  }
+
+  > span {
+    img:nth-of-type(1) {
+      float: left;
+      margin: 0.25em 1em 0.25em 0;
+      max-width: 50vw;
+      border: 4px solid lightgray;
+    }
+  }
+
   a {
     color: ${PALETTE.DARK_RED};
     text-decoration: none;
@@ -61,12 +79,9 @@ const MarkdownWrapper: React.FunctionComponent = styledComponents.div`
     }
   }
 
-  p {
-    line-height: 1.75em;
-
-    &:nth-of-type(1) {
-      padding-top: 11em;
-    }
+  ul {
+    list-style: none;
+    line-height: 2em;
   }
 
   @media (min-width: 768px) {

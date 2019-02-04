@@ -12,7 +12,7 @@ const Wrapper: React.FunctionComponent = styledComponents.div`
 
 const Children: React.FunctionComponent = styledComponents.div`
   position: relative;
-  padding-top: 3em;
+  padding-top: 4.5em;
 `;
 
 const SVG: React.FunctionComponent = styledComponents(InlineSVG)`

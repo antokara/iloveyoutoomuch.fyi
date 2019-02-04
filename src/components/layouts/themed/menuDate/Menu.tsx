@@ -2,7 +2,7 @@ import { Button, Menu as CoreMenu, MenuItem } from '@material-ui/core';
 import { MenuRounded } from '@material-ui/icons';
 import { PALETTE } from 'Constants/PALETTE';
 import * as React from 'react';
-import { Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import styledComponents from 'styled-components';
 
 const Icon: React.FunctionComponent = styledComponents(MenuRounded)`
@@ -19,16 +19,25 @@ const Wrapper: React.FunctionComponent = styledComponents.div`
   color: ${PALETTE.PINK};
 `;
 
+const Item: React.FunctionComponent = styledComponents(MenuItem)`
+  &.active,
+  &.active:hover,
+  &.active:focus {
+    background: ${p => p.theme.palette.action.selected};
+  }
+`;
+
 const buildItems = (handleClose, items) =>
   items.map(item => (
-    <MenuItem
+    <Item
       key={item._id}
       onClick={handleClose}
-      component={Link}
+      component={NavLink}
       to={item.url}
+      exact
     >
       {item.title}
-    </MenuItem>
+    </Item>
   ));
 
 class Menu extends React.PureComponent {
@@ -55,6 +64,7 @@ class Menu extends React.PureComponent {
           anchorEl={anchorEl}
           open={Boolean(anchorEl)}
           onClose={this.handleClose}
+          disableAutoFocusItem
         >
           {buildItems(this.handleClose, items)}
         </CoreMenu>
