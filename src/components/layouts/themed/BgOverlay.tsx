@@ -46,6 +46,11 @@ const SVG: React.FunctionComponent = styledComponents(InlineSVG)`
   width: 100%;
   height: auto;
   overflow: hidden;
+
+  svg {
+    width: 175%;
+    height: auto;
+  }
 `;
 
 const BgOverlay: React.FunctionComponent = ({
