@@ -4,6 +4,7 @@
 import { Button, CircularProgress, Grid } from '@material-ui/core';
 import { PageWrapper } from 'Components/layouts/themed/PageWrapper';
 import { Error } from 'Components/pages/rsvp/Error';
+import { Footer } from 'Components/pages/rsvp/Footer';
 import { Guests } from 'Components/pages/rsvp/Guests';
 import { Success } from 'Components/pages/rsvp/Success';
 import { MarkdownWrapper } from 'Components/shared/MarkdownWrapper';
@@ -116,6 +117,7 @@ class Rsvp extends React.Component {
         <MarkdownWrapper>
           <ReactMarkdown source={body} />
           {this.subRender()}
+          <Footer />
         </MarkdownWrapper>
       </PageWrapper>
     );
