@@ -4,7 +4,6 @@
  * when loaded, it returns the Generic component
  */
 import { rsvp } from 'Actions/rsvp';
-import { HideReCaptchaBadge } from 'Components/pages/rsvp/HideReCaptchaBadge';
 import { Rsvp as RsvpComponent } from 'Components/pages/rsvp/Rsvp';
 import { Loading } from 'Components/shared/Loading';
 import * as getRsvp from 'Gql/getRsvp';
@@ -58,36 +57,28 @@ class RsvpContainer extends React.Component {
   render() {
     const { data, accepted, status, googleReCaptchaToken } = this.props;
     if (data.loading || !googleReCaptchaToken) {
-      return (
-        <React.Fragment>
-          <Loading />
-          <HideReCaptchaBadge />
-        </React.Fragment>
-      );
+      return <Loading />;
     }
 
     return (
-      <React.Fragment>
-        <RsvpComponent
-          body={data.rsvp.body}
-          accept={data.rsvp.accept}
-          addGuest={data.rsvp.addGuest}
-          age={data.rsvp.age}
-          body={data.rsvp.body}
-          decline={data.rsvp.decline}
-          error={data.rsvp.error}
-          firstName={data.rsvp.firstName}
-          lastName={data.rsvp.lastName}
-          removeGuest={data.rsvp.removeGuest}
-          successAccept={data.rsvp.successAccept}
-          successDecline={data.rsvp.successDecline}
-          onAccept={this.onAccept}
-          onDecline={this.onDecline}
-          status={status}
-          accepted={accepted}
-        />
-        <HideReCaptchaBadge />
-      </React.Fragment>
+      <RsvpComponent
+        body={data.rsvp.body}
+        accept={data.rsvp.accept}
+        addGuest={data.rsvp.addGuest}
+        age={data.rsvp.age}
+        body={data.rsvp.body}
+        decline={data.rsvp.decline}
+        error={data.rsvp.error}
+        firstName={data.rsvp.firstName}
+        lastName={data.rsvp.lastName}
+        removeGuest={data.rsvp.removeGuest}
+        successAccept={data.rsvp.successAccept}
+        successDecline={data.rsvp.successDecline}
+        onAccept={this.onAccept}
+        onDecline={this.onDecline}
+        status={status}
+        accepted={accepted}
+      />
     );
   }
 }

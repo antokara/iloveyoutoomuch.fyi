@@ -4,6 +4,7 @@
  */
 import { CssBaseline, MuiThemeProvider } from '@material-ui/core';
 import { Routes } from 'Components/layouts/Routes';
+import { HideReCaptchaBadge } from 'Components/pages/rsvp/HideReCaptchaBadge';
 import { StyleProvider } from 'Components/StyleProvider';
 import { ConnectedRouter } from 'connected-react-router';
 import { THEME } from 'Constants/THEME';
@@ -32,20 +33,23 @@ WebFont.load({
 const App: React.FunctionComponent = (): React.ReactElement<
   React.ReactNode
 > => (
-  <StyleProvider>
-    <MuiThemeProvider theme={THEME}>
-      <ThemeProvider theme={THEME}>
-        <Provider store={store}>
-          <ConnectedRouter history={history}>
-            <ApolloProvider client={ApolloClient}>
-              <CssBaseline />
-              <Routes />
-            </ApolloProvider>
-          </ConnectedRouter>
-        </Provider>
-      </ThemeProvider>
-    </MuiThemeProvider>
-  </StyleProvider>
+  <React.Fragment>
+    <StyleProvider>
+      <MuiThemeProvider theme={THEME}>
+        <ThemeProvider theme={THEME}>
+          <Provider store={store}>
+            <ConnectedRouter history={history}>
+              <ApolloProvider client={ApolloClient}>
+                <CssBaseline />
+                <Routes />
+              </ApolloProvider>
+            </ConnectedRouter>
+          </Provider>
+        </ThemeProvider>
+      </MuiThemeProvider>
+    </StyleProvider>
+    <HideReCaptchaBadge />
+  </React.Fragment>
 );
 
 const containerApp: React.FunctionComponent = hot(module)(App);
