@@ -91,54 +91,6 @@ const MarkdownWrapper: React.FunctionComponent = styledComponents.div`
   @media (min-width: 1024px) {
     font-size: 1em;
   }
-
-  @media (min-width: 450px) and (max-width: 550px) {
-    p:nth-of-type(1) {
-      padding-top: 2em;
-    }
-  }
-
-  @media (min-width: 551px) and (max-width: 600px) {
-    p:nth-of-type(1) {
-      padding-top: 2.5em;
-    }
-  }
-
-  @media (min-width: 601px) and (max-width: 768px) {
-    p:nth-of-type(1) {
-      padding-top: 2.5em;
-    }
-  }
-
-  @media (min-width: 769px) and (max-width: 800px) {
-    p:nth-of-type(1) {
-      padding-top: 4em;
-    }
-  }
-
-  @media (min-width: 801px) and (max-width: 850px) {
-    p:nth-of-type(1) {
-      padding-top: 5em;
-    }
-  }
-
-  @media (min-width: 851px) and (max-width: 1000px) {
-    p:nth-of-type(1) {
-      padding-top: 6em;
-    }
-  }
-
-  @media (min-width: 1001px) and (max-width: 1023px) {
-    p:nth-of-type(1) {
-      padding-top: 7em;
-    }
-  }
-
-  @media (min-width: 1024px) and (max-width: 1150px) {
-    p:nth-of-type(1) {
-      padding-top: 5em;
-    }
-  }
 `;
 
 export { MarkdownWrapper };
