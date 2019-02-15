@@ -60,12 +60,26 @@ const MarkdownWrapper: React.FunctionComponent = styledComponents.div`
     clear: both;
   }
 
+  .marginTop {
+    margin-top: 3.5em;
+  }
+
   > span {
     img:nth-of-type(1) {
       float: left;
       margin: 0.25em 1em 0.25em 0;
       max-width: 50vw;
       border: 4px solid lightgray;
+    }
+  }
+
+  .right {
+    float: right;
+    padding-left: 1em;
+
+    img:nth-of-type(1) {
+      float: none;
+      margin: -0.25em 0 0 0;
     }
   }
 
@@ -80,8 +94,9 @@ const MarkdownWrapper: React.FunctionComponent = styledComponents.div`
   }
 
   ul {
-    list-style: none;
     line-height: 2em;
+    list-style-position: inside;
+    padding-inline-start: 0.5em;
   }
 
   @media (min-width: 768px) {
