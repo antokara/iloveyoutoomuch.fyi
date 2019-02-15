@@ -2,9 +2,11 @@
  * Rsvp page Component
  */
 import { Button, CircularProgress, Grid } from '@material-ui/core';
+import { BgOverlay } from 'Components/layouts/themed/BgOverlay';
 import { PageWrapper } from 'Components/layouts/themed/PageWrapper';
 import { Error } from 'Components/pages/rsvp/Error';
 import { Footer } from 'Components/pages/rsvp/Footer';
+import { Form } from 'Components/pages/rsvp/Form';
 import { Guests } from 'Components/pages/rsvp/Guests';
 import { Success } from 'Components/pages/rsvp/Success';
 import { MarkdownWrapper } from 'Components/shared/MarkdownWrapper';
@@ -70,7 +72,7 @@ class Rsvp extends React.Component {
     } = this.props;
 
     return (
-      <form>
+      <Form>
         <Grid container spacing={8}>
           <Grid item xs={12}>
             <FieldArray
@@ -106,20 +108,22 @@ class Rsvp extends React.Component {
             </Button>
           </Grid>
         </Grid>
-      </form>
+      </Form>
     );
   }
 
   render() {
     const { body } = this.props;
     return (
-      <PageWrapper>
-        <MarkdownWrapper>
-          <ReactMarkdown source={body} />
-          {this.subRender()}
-          <Footer />
-        </MarkdownWrapper>
-      </PageWrapper>
+      <BgOverlay>
+        <PageWrapper>
+          <MarkdownWrapper>
+            <ReactMarkdown source={body} />
+            {this.subRender()}
+            <Footer />
+          </MarkdownWrapper>
+        </PageWrapper>
+      </BgOverlay>
     );
   }
 }
