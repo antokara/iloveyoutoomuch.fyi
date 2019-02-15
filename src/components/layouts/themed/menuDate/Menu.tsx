@@ -7,6 +7,7 @@ import styledComponents from 'styled-components';
 
 const Icon: React.FunctionComponent = styledComponents(MenuRounded)`
   margin-right: ${p => p.theme.spacing.unit}px;
+  filter: drop-shadow(1px 1px 1px rgba(0, 0, 0, 0.9));
 `;
 
 const Label: React.FunctionComponent = styledComponents.span`
