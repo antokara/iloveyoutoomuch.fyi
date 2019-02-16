@@ -1,13 +1,15 @@
 /**
  * Rsvp page Component
  */
-import { Button, CircularProgress, Grid } from '@material-ui/core';
+import { Button, Grid } from '@material-ui/core';
 import { BgOverlay } from 'Components/layouts/themed/BgOverlay';
 import { PageWrapper } from 'Components/layouts/themed/PageWrapper';
+import { AddMoreGuests } from 'Components/pages/rsvp/AddMoreGuests';
 import { Error } from 'Components/pages/rsvp/Error';
 import { Footer } from 'Components/pages/rsvp/Footer';
 import { Form } from 'Components/pages/rsvp/Form';
 import { Guests } from 'Components/pages/rsvp/Guests';
+import { Progress } from 'Components/pages/rsvp/Progress';
 import { Success } from 'Components/pages/rsvp/Success';
 import { MarkdownWrapper } from 'Components/shared/MarkdownWrapper';
 import { STATUSES } from 'Constants/STATUSES';
@@ -29,7 +31,9 @@ class Rsvp extends React.Component {
       error,
       successAccept,
       successDecline,
-      accepted
+      accepted,
+      addMoreGuests,
+      resetRsvp
     } = this.props;
 
     switch (status) {
@@ -45,16 +49,28 @@ class Rsvp extends React.Component {
           </React.Fragment>
         );
       case STATUSES.PENDING:
-        return <CircularProgress />;
+        return <Progress />;
       case STATUSES.SUCCEEDED:
         let message: string;
+        let addMore: React.ReactNode;
         if (accepted) {
           message = successAccept;
+          addMore = (
+            <AddMoreGuests
+              resetRsvp={resetRsvp}
+              addMoreGuests={addMoreGuests}
+            />
+          );
         } else {
           message = successDecline;
         }
 
-        return <Success>{message}</Success>;
+        return (
+          <React.Fragment>
+            <Success>{message}</Success>
+            {addMore}
+          </React.Fragment>
+        );
     }
   }
 
@@ -131,6 +147,7 @@ class Rsvp extends React.Component {
 Rsvp.propTypes = {
   onAccept: PropTypes.func.isRequired,
   onDecline: PropTypes.func.isRequired,
+  resetRsvp: PropTypes.func.isRequired,
   addGuest: PropTypes.string.isRequired,
   age: PropTypes.string.isRequired,
   body: PropTypes.string.isRequired,
@@ -141,6 +158,7 @@ Rsvp.propTypes = {
   removeGuest: PropTypes.string.isRequired,
   successAccept: PropTypes.string.isRequired,
   successDecline: PropTypes.string.isRequired,
+  addMoreGuests: PropTypes.string.isRequired,
   status: PropTypes.string.isRequired,
   accepted: PropTypes.bool
 };

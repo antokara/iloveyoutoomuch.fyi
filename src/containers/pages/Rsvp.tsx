@@ -3,6 +3,7 @@
  * returns the Loading indicator component while the GraphQL is pending and
  * when loaded, it returns the Generic component
  */
+import { resetRsvp } from 'Actions/resetRsvp';
 import { rsvp } from 'Actions/rsvp';
 import { Rsvp as RsvpComponent } from 'Components/pages/rsvp/Rsvp';
 import { Loading } from 'Components/shared/Loading';
@@ -55,7 +56,13 @@ class RsvpContainer extends React.Component {
   }
 
   render() {
-    const { data, accepted, status, googleReCaptchaToken } = this.props;
+    const {
+      data,
+      accepted,
+      status,
+      googleReCaptchaToken,
+      resetRsvp
+    } = this.props;
     if (data.loading || !googleReCaptchaToken) {
       return <Loading />;
     }
@@ -64,6 +71,7 @@ class RsvpContainer extends React.Component {
       <RsvpComponent
         body={data.rsvp.body}
         accept={data.rsvp.accept}
+        resetRsvp={resetRsvp}
         addGuest={data.rsvp.addGuest}
         age={data.rsvp.age}
         body={data.rsvp.body}
@@ -78,6 +86,7 @@ class RsvpContainer extends React.Component {
         onDecline={this.onDecline}
         status={status}
         accepted={accepted}
+        addMoreGuests={data.rsvp.addMoreGuests}
       />
     );
   }
@@ -101,7 +110,8 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  rsvp: bindActionCreators(rsvp, dispatch)
+  rsvp: bindActionCreators(rsvp, dispatch),
+  resetRsvp: bindActionCreators(resetRsvp, dispatch)
 });
 
 const Rsvp: React.ComponentClass = graphql(getRsvp)(

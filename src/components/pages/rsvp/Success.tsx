@@ -10,6 +10,7 @@ const Wrapper: React.FunctionComponent = styledComponents.div`
   color: green;
   font-size: 1.1em;
   margin: 1em 0 2em 0;
+  text-align: center;
 `;
 
 const Success: React.FunctionComponent = ({

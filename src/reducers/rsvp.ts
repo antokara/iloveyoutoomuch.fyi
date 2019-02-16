@@ -14,9 +14,12 @@ const reducer = handleAction(
       ...state,
       status: action.meta.status
     };
-    // only set the accepted state on the initial pending status dispatched action
     if (action.meta.status === STATUSES.PENDING) {
+      // set the accepted state on the initial pending status dispatched action
       newState.accepted = action.payload.accepted;
+    } else if (action.meta.status === STATUSES.DEFAULT) {
+      // reset the accepted state on the default status dispatched action
+      newState.accepted = undefined;
     }
 
     return newState;
