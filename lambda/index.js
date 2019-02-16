@@ -68,7 +68,7 @@ exports.handler = async event => {
   const data = await reCaptchaResponse.json();
   // verify the token and the validate the score
   if (!data.success || data.score < 0.5) {
-    throw new Error('code: 400, failed');
+    throw new Error(`code: 400, failed: ${data.success}, ${data.score}`);
   }
 
   // iterate and store each guest
