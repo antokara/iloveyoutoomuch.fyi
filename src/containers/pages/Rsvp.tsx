@@ -14,7 +14,7 @@ import * as React from 'react';
 import { graphql } from 'react-apollo';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { reduxForm } from 'redux-form';
+import { reduxForm, reset } from 'redux-form';
 
 class RsvpContainer extends React.Component {
   constructor(props) {
@@ -22,6 +22,7 @@ class RsvpContainer extends React.Component {
     this.submitHandler = this.submitHandler.bind(this);
     this.onAccept = this.onAccept.bind(this);
     this.onDecline = this.onDecline.bind(this);
+    this.resetRsvp = this.resetRsvp.bind(this);
   }
 
   /**
@@ -53,14 +54,19 @@ class RsvpContainer extends React.Component {
     )();
   }
 
+  private resetRsvp(): void {
+    const { resetRsvp, resetForm } = this.props;
+    resetForm();
+    resetRsvp();
+  }
+
   render() {
     const {
       data,
       accepted,
       status,
       googleReCaptchaReady,
-      googleReCaptchaRetrieving,
-      resetRsvp
+      googleReCaptchaRetrieving
     } = this.props;
     if (data.loading || !googleReCaptchaReady) {
       return <Loading />;
@@ -70,7 +76,7 @@ class RsvpContainer extends React.Component {
       <RsvpComponent
         body={data.rsvp.body}
         accept={data.rsvp.accept}
-        resetRsvp={resetRsvp}
+        resetRsvp={this.resetRsvp}
         addGuest={data.rsvp.addGuest}
         age={data.rsvp.age}
         body={data.rsvp.body}
@@ -114,7 +120,8 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
   rsvp: bindActionCreators(rsvp, dispatch),
-  resetRsvp: bindActionCreators(resetRsvp, dispatch)
+  resetRsvp: bindActionCreators(resetRsvp, dispatch),
+  resetForm: (): void => dispatch(reset('rsvp'))
 });
 
 const Rsvp: React.ComponentClass = graphql(getRsvp)(
