@@ -26,6 +26,7 @@ const withGoogleReCaptcha = (WrappedComponent, { action, siteKey }) => {
         token: undefined
       };
       this.isAvailable = this.isAvailable.bind(this);
+      this.getToken = this.getToken.bind(this);
     }
 
     protected componentDidMount(): void {
@@ -56,15 +57,25 @@ const withGoogleReCaptcha = (WrappedComponent, { action, siteKey }) => {
         this.setState({ available: true });
         window.grecaptcha.ready(() => {
           this.setState({ ready: true });
-          window.grecaptcha.execute(siteKey, { action }).then(
-            (token: string): void => {
-              this.setState({
-                token
-              });
-            }
-          );
         });
       }
+    }
+
+    private getToken(): Promise<string> {
+      const { ready } = this.state;
+      if (ready) {
+        return window.grecaptcha.execute(siteKey, { action }).then(
+          (token: string): Promise<string> => {
+            this.setState({
+              token
+            });
+
+            return Promise.resolve(token);
+          }
+        );
+      }
+
+      return Promise.reject();
     }
 
     render() {
@@ -77,6 +88,7 @@ const withGoogleReCaptcha = (WrappedComponent, { action, siteKey }) => {
           googleReCaptchaAvailable={available}
           googleReCaptchaReady={ready}
           googleReCaptchaToken={token}
+          googleReCaptchaGetToken={this.getToken}
         />
       );
     }
