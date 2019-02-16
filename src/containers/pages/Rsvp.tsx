@@ -59,6 +59,7 @@ class RsvpContainer extends React.Component {
       accepted,
       status,
       googleReCaptchaReady,
+      googleReCaptchaRetrieving,
       resetRsvp
     } = this.props;
     if (data.loading || !googleReCaptchaReady) {
@@ -85,6 +86,7 @@ class RsvpContainer extends React.Component {
         status={status}
         accepted={accepted}
         addMoreGuests={data.rsvp.addMoreGuests}
+        googleReCaptchaRetrieving={googleReCaptchaRetrieving}
       />
     );
   }
@@ -96,11 +98,13 @@ RsvpContainer.propTypes = {
   submit: PropTypes.func.isRequired,
   rsvp: PropTypes.func.isRequired,
   googleReCaptchaReady: PropTypes.bool,
+  googleReCaptchaRetrieving: PropTypes.bool,
   googleReCaptchaGetToken: PropTypes.func.isRequired
 };
 
 RsvpContainer.defaultProps = {
-  googleReCaptchaReady: false
+  googleReCaptchaReady: false,
+  googleReCaptchaRetrieving: false
 };
 
 const mapStateToProps = state => ({

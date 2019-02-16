@@ -20,9 +20,9 @@ import { FieldArray } from 'redux-form';
 
 class Rsvp extends React.Component {
   isInProgress() {
-    const { status } = this.props;
+    const { status, googleReCaptchaRetrieving } = this.props;
 
-    return status === STATUSES.PENDING;
+    return status === STATUSES.PENDING || googleReCaptchaRetrieving;
   }
 
   subRender() {
@@ -36,6 +36,10 @@ class Rsvp extends React.Component {
       resetRsvp
     } = this.props;
 
+    if (this.isInProgress()) {
+      return <Progress />;
+    }
+
     switch (status) {
       default:
         return this.form();
@@ -48,8 +52,6 @@ class Rsvp extends React.Component {
             {this.form()}
           </React.Fragment>
         );
-      case STATUSES.PENDING:
-        return <Progress />;
       case STATUSES.SUCCEEDED:
         let message: string;
         let addMore: React.ReactNode;
@@ -160,11 +162,13 @@ Rsvp.propTypes = {
   successDecline: PropTypes.string.isRequired,
   addMoreGuests: PropTypes.string.isRequired,
   status: PropTypes.string.isRequired,
-  accepted: PropTypes.bool
+  accepted: PropTypes.bool,
+  googleReCaptchaRetrieving: PropTypes.bool
 };
 
 Rsvp.defaultProps = {
-  accepted: undefined
+  accepted: undefined,
+  googleReCaptchaRetrieving: false
 };
 
 export { Rsvp };

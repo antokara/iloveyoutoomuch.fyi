@@ -21,9 +21,10 @@ const withGoogleReCaptcha = (WrappedComponent, { action, siteKey }) => {
     constructor(props) {
       super(props);
       this.state = {
-        available: false,
-        ready: false,
-        token: undefined
+        available: false, // available in global
+        ready: false, // ready to accept calls
+        retrieving: false, // when getting the token
+        token: undefined // initially undefined and when retrieving
       };
       this.isAvailable = this.isAvailable.bind(this);
       this.getToken = this.getToken.bind(this);
@@ -64,10 +65,18 @@ const withGoogleReCaptcha = (WrappedComponent, { action, siteKey }) => {
     private getToken(): Promise<string> {
       const { ready } = this.state;
       if (ready) {
+        // reset any previous stored token
+        // since we will attempt to get a new one
+        this.setState({
+          token: undefined,
+          retrieving: true
+        });
+
         return window.grecaptcha.execute(siteKey, { action }).then(
           (token: string): Promise<string> => {
             this.setState({
-              token
+              token,
+              retrieving: false
             });
 
             return Promise.resolve(token);
@@ -81,12 +90,13 @@ const withGoogleReCaptcha = (WrappedComponent, { action, siteKey }) => {
     render() {
       // filter out unused props
       const { action, ...passThroughProps } = this.props;
-      const { available, ready, token } = this.state;
+      const { available, ready, token, retrieving } = this.state;
       return (
         <WrappedComponent
           {...passThroughProps}
           googleReCaptchaAvailable={available}
           googleReCaptchaReady={ready}
+          googleReCaptchaRetrieving={retrieving}
           googleReCaptchaToken={token}
           googleReCaptchaGetToken={this.getToken}
         />
