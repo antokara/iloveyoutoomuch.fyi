@@ -19,6 +19,11 @@ import * as ReactMarkdown from 'react-markdown';
 import { FieldArray } from 'redux-form';
 
 class Rsvp extends React.Component {
+  constructor(props) {
+    super(props);
+    this.v2Ref = React.createRef();
+  }
+
   isInProgress() {
     const { status, googleReCaptchaRetrieving } = this.props;
 
@@ -33,7 +38,8 @@ class Rsvp extends React.Component {
       successDecline,
       accepted,
       addMoreGuests,
-      resetRsvp
+      resetRsvp,
+      googleReCaptchaV2Render
     } = this.props;
 
     if (this.isInProgress()) {
@@ -43,6 +49,17 @@ class Rsvp extends React.Component {
     switch (status) {
       default:
         return this.form();
+      case STATUSES.CHALLENGED:
+        googleReCaptchaV2Render(this.v2Ref.current);
+
+        // show captcha v2 checkbox challenge and form,
+        // to allow the user to retry
+        return (
+          <React.Fragment>
+            <Error>Challenged</Error>
+            {this.form()}
+          </React.Fragment>
+        );
       case STATUSES.FAILED:
         // show error message and form,
         // to allow the user to retry
@@ -137,6 +154,11 @@ class Rsvp extends React.Component {
         <PageWrapper>
           <MarkdownWrapper>
             <ReactMarkdown source={body} />
+            <div
+              ref={this.v2Ref}
+              className="g-recaptcha"
+              data-sitekey={process.env.RE_CAPTCHA_V2_SITE_KEY}
+            />
             {this.subRender()}
             <Footer />
           </MarkdownWrapper>
@@ -163,7 +185,8 @@ Rsvp.propTypes = {
   addMoreGuests: PropTypes.string.isRequired,
   status: PropTypes.string.isRequired,
   accepted: PropTypes.bool,
-  googleReCaptchaRetrieving: PropTypes.bool
+  googleReCaptchaRetrieving: PropTypes.bool,
+  googleReCaptchaV2Render: PropTypes.func.isRequired
 };
 
 Rsvp.defaultProps = {

@@ -20,7 +20,18 @@ export const rsvp = data => dispatch => {
     body: JSON.stringify(data)
   })
     .then(response => {
-      if (response.status !== 201) {
+      if (response.status === 401) {
+        // Captchav3 failed, try v2
+        return dispatch({
+          type: ACTION_TYPES.RSVP,
+          payload: new Error('failed'),
+          error: true,
+          meta: {
+            data,
+            status: STATUSES.CHALLENGED
+          }
+        });
+      } else if (response.status !== 201) {
         // failure - API failed
         return dispatch({
           type: ACTION_TYPES.RSVP,

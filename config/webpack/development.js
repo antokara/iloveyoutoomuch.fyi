@@ -16,7 +16,7 @@ module.exports = env =>
       contentBase: path.join(__dirname, '../../dist'),
       compress: true,
       port: 9000,
-      https: false,
+      https: true,
       open: false,
       historyApiFallback: true,
       hot: true,

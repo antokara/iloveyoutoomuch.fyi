@@ -59,18 +59,39 @@ const storeGuest = (accepted, firstName, lastName, age) => {
 
 // @see https://docs.aws.amazon.com/lambda/latest/dg/nodejs-prog-model-handler.html
 exports.handler = async event => {
-  // Google reCaptcha v3
-  const reCaptchaResponse = await fetch(GOOGLE_RECAPTCHA_VERIFY_URL, {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-    body: `secret=${process.env.RE_CAPTCHA_V3_SECRET_KEY}&response=${
-      event.token
-    }`
-  });
-  const data = await reCaptchaResponse.json();
-  // verify the token and the validate the score
-  if (!data.success || data.score < 0.5) {
-    throw new Error(`code: 401, failed: ${data.success}, ${data.score}`);
+  // which token was provided?
+  if (event.tokenV2) {
+    // Google reCaptcha v2
+    const reCaptchaResponse = await fetch(GOOGLE_RECAPTCHA_VERIFY_URL, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+      body: `secret=${process.env.RE_CAPTCHA_V2_SECRET_KEY}&response=${
+        event.tokenV2
+      }`
+    });
+    const data = await reCaptchaResponse.json();
+    // verify the token and the validate the score
+    if (!data.success) {
+      throw new Error(`code: 401, failed: ${data.success}`);
+    }
+  } else if (event.tokenV3) {
+    throw new Error(`code: 401, failed:`);
+    // Google reCaptcha v3
+    const reCaptchaResponse = await fetch(GOOGLE_RECAPTCHA_VERIFY_URL, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+      body: `secret=${process.env.RE_CAPTCHA_V3_SECRET_KEY}&response=${
+        event.tokenV3
+      }`
+    });
+    const data = await reCaptchaResponse.json();
+    // verify the token and the validate the score
+    if (!data.success || data.score < 0.5) {
+      throw new Error(`code: 401, failed: ${data.success}, ${data.score}`);
+    }
+  } else {
+    // we need a token
+    throw new Error('code: 400');
   }
 
   // iterate and store each guest

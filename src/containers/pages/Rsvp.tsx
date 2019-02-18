@@ -7,6 +7,7 @@ import { resetRsvp } from 'Actions/resetRsvp';
 import { rsvp } from 'Actions/rsvp';
 import { Rsvp as RsvpComponent } from 'Components/pages/rsvp/Rsvp';
 import { Loading } from 'Components/shared/Loading';
+import { STATUSES } from 'Constants/STATUSES';
 import * as getRsvp from 'Gql/getRsvp';
 import { withGoogleReCaptcha } from 'Helpers/withGoogleReCaptcha';
 import * as PropTypes from 'prop-types';
@@ -30,8 +31,17 @@ class RsvpContainer extends React.Component {
    * @see onDecline()
    */
   private submitHandler(values: object): void {
-    const { rsvp, googleReCaptchaGetToken } = this.props;
-    googleReCaptchaGetToken().then(token => rsvp({ ...values, token }));
+    const {
+      rsvp,
+      googleReCaptchaV2GetToken,
+      googleReCaptchaV3GetToken,
+      status
+    } = this.props;
+    if (status === STATUSES.CHALLENGED) {
+      rsvp({ ...values, tokenV2: googleReCaptchaV2GetToken() });
+    } else {
+      googleReCaptchaV3GetToken().then(tokenV3 => rsvp({ ...values, tokenV3 }));
+    }
   }
 
   private onAccept(): void {
@@ -56,7 +66,7 @@ class RsvpContainer extends React.Component {
 
   private resetRsvp(): void {
     const { resetRsvp, resetForm } = this.props;
-    resetForm();
+    // resetForm();
     resetRsvp();
   }
 
@@ -66,7 +76,8 @@ class RsvpContainer extends React.Component {
       accepted,
       status,
       googleReCaptchaReady,
-      googleReCaptchaRetrieving
+      googleReCaptchaV3Retrieving,
+      googleReCaptchaV2Render
     } = this.props;
     if (data.loading || !googleReCaptchaReady) {
       return <Loading />;
@@ -92,7 +103,8 @@ class RsvpContainer extends React.Component {
         status={status}
         accepted={accepted}
         addMoreGuests={data.rsvp.addMoreGuests}
-        googleReCaptchaRetrieving={googleReCaptchaRetrieving}
+        googleReCaptchaRetrieving={googleReCaptchaV3Retrieving}
+        googleReCaptchaV2Render={googleReCaptchaV2Render}
       />
     );
   }
@@ -104,13 +116,15 @@ RsvpContainer.propTypes = {
   submit: PropTypes.func.isRequired,
   rsvp: PropTypes.func.isRequired,
   googleReCaptchaReady: PropTypes.bool,
-  googleReCaptchaRetrieving: PropTypes.bool,
-  googleReCaptchaGetToken: PropTypes.func.isRequired
+  googleReCaptchaV3Retrieving: PropTypes.bool,
+  googleReCaptchaV2GetToken: PropTypes.func.isRequired,
+  googleReCaptchaV3GetToken: PropTypes.func.isRequired,
+  googleReCaptchaV2Render: PropTypes.func.isRequired
 };
 
 RsvpContainer.defaultProps = {
   googleReCaptchaReady: false,
-  googleReCaptchaRetrieving: false
+  googleReCaptchaV3Retrieving: false
 };
 
 const mapStateToProps = state => ({
@@ -135,7 +149,8 @@ const Rsvp: React.ComponentClass = graphql(getRsvp)(
         mapDispatchToProps
       )(RsvpContainer),
       {
-        siteKey: process.env.RE_CAPTCHA_SITE_KEY,
+        siteKeyV2: process.env.RE_CAPTCHA_V2_SITE_KEY,
+        siteKeyV3: process.env.RE_CAPTCHA_V3_SITE_KEY,
         action: 'rsvp'
       }
     )
