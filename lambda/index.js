@@ -63,12 +63,14 @@ exports.handler = async event => {
   const reCaptchaResponse = await fetch(GOOGLE_RECAPTCHA_VERIFY_URL, {
     method: 'POST',
     headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-    body: `secret=${process.env.RE_CAPTCHA_SECRET_KEY}&response=${event.token}`
+    body: `secret=${process.env.RE_CAPTCHA_V3_SECRET_KEY}&response=${
+      event.token
+    }`
   });
   const data = await reCaptchaResponse.json();
   // verify the token and the validate the score
   if (!data.success || data.score < 0.5) {
-    throw new Error(`code: 400, failed: ${data.success}, ${data.score}`);
+    throw new Error(`code: 401, failed: ${data.success}, ${data.score}`);
   }
 
   // iterate and store each guest
@@ -86,4 +88,10 @@ exports.handler = async event => {
       throw new Error('code: 500, failed to write to db');
     }
   });
+
+  // only if this was returned consider the response successful
+  // we use mapping to convert it to a 201 http code response
+  // that way, if the lambda times-out, we return a 500 instead
+  // because a blank/time-out response, will not match...
+  throw new Error('result: success');
 };
