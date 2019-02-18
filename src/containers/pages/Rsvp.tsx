@@ -93,6 +93,7 @@ class RsvpContainer extends React.Component {
         body={data.rsvp.body}
         decline={data.rsvp.decline}
         error={data.rsvp.error}
+        captchaChallenge={data.rsvp.captchaChallenge}
         firstName={data.rsvp.firstName}
         lastName={data.rsvp.lastName}
         removeGuest={data.rsvp.removeGuest}

@@ -8,6 +8,7 @@ import { AddMoreGuests } from 'Components/pages/rsvp/AddMoreGuests';
 import { Error } from 'Components/pages/rsvp/Error';
 import { Footer } from 'Components/pages/rsvp/Footer';
 import { Form } from 'Components/pages/rsvp/Form';
+import { GoogleReCaptchaV2 } from 'Components/pages/rsvp/GoogleReCaptchaV2';
 import { Guests } from 'Components/pages/rsvp/Guests';
 import { Progress } from 'Components/pages/rsvp/Progress';
 import { Success } from 'Components/pages/rsvp/Success';
@@ -30,6 +31,13 @@ class Rsvp extends React.Component {
     return status === STATUSES.PENDING || googleReCaptchaRetrieving;
   }
 
+  componentDidUpdate(prevProps) {
+    const { googleReCaptchaV2Render, status } = this.props;
+    if (status !== prevProps.status && status === STATUSES.CHALLENGED) {
+      googleReCaptchaV2Render(this.v2Ref.current);
+    }
+  }
+
   subRender() {
     const {
       status,
@@ -38,8 +46,7 @@ class Rsvp extends React.Component {
       successDecline,
       accepted,
       addMoreGuests,
-      resetRsvp,
-      googleReCaptchaV2Render
+      resetRsvp
     } = this.props;
 
     if (this.isInProgress()) {
@@ -49,17 +56,6 @@ class Rsvp extends React.Component {
     switch (status) {
       default:
         return this.form();
-      case STATUSES.CHALLENGED:
-        googleReCaptchaV2Render(this.v2Ref.current);
-
-        // show captcha v2 checkbox challenge and form,
-        // to allow the user to retry
-        return (
-          <React.Fragment>
-            <Error>Challenged</Error>
-            {this.form()}
-          </React.Fragment>
-        );
       case STATUSES.FAILED:
         // show error message and form,
         // to allow the user to retry
@@ -103,7 +99,9 @@ class Rsvp extends React.Component {
       lastName,
       removeGuest,
       onAccept,
-      onDecline
+      onDecline,
+      status,
+      captchaChallenge
     } = this.props;
 
     return (
@@ -122,6 +120,15 @@ class Rsvp extends React.Component {
               }}
             />
           </Grid>
+          {status === STATUSES.CHALLENGED && (
+            <Grid item xs={12}>
+              {captchaChallenge}
+              <GoogleReCaptchaV2
+                siteKey={process.env.RE_CAPTCHA_V2_SITE_KEY}
+                fRef={this.v2Ref}
+              />
+            </Grid>
+          )}
           <Grid item xs={6}>
             <Button
               variant="outlined"
@@ -154,11 +161,6 @@ class Rsvp extends React.Component {
         <PageWrapper>
           <MarkdownWrapper>
             <ReactMarkdown source={body} />
-            <div
-              ref={this.v2Ref}
-              className="g-recaptcha"
-              data-sitekey={process.env.RE_CAPTCHA_V2_SITE_KEY}
-            />
             {this.subRender()}
             <Footer />
           </MarkdownWrapper>
@@ -177,6 +179,7 @@ Rsvp.propTypes = {
   body: PropTypes.string.isRequired,
   decline: PropTypes.string.isRequired,
   error: PropTypes.string.isRequired,
+  captchaChallenge: PropTypes.string.isRequired,
   firstName: PropTypes.string.isRequired,
   lastName: PropTypes.string.isRequired,
   removeGuest: PropTypes.string.isRequired,
