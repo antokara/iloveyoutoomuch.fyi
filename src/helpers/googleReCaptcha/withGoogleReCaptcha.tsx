@@ -12,7 +12,6 @@ const isGoogleReCaptchaAvailable: () => boolean = (): boolean =>
 
 /**
  * HOC
- * @param WrappedComponent
  */
 const withGoogleReCaptcha = (
   WrappedComponent,
@@ -22,17 +21,18 @@ const withGoogleReCaptcha = (
     constructor(props) {
       super(props);
       this.state = {
-        v3WidgetId: undefined,
         available: false, // available in global
         ready: false, // ready to accept calls
-        retrieving: false, // when getting the token
-        tokenV2: undefined, // initially undefined and when retrieving
+        retrieving: false, // when getting the v3 token
         tokenV3: undefined // initially undefined and when retrieving
       };
       this.isAvailable = this.isAvailable.bind(this);
-      this.renderV2 = this.renderV2.bind(this);
       this.getTokenV2 = this.getTokenV2.bind(this);
       this.getTokenV3 = this.getTokenV3.bind(this);
+      this.addV2Widget = this.addV2Widget.bind(this);
+      this.removeV2Widget = this.removeV2Widget.bind(this);
+      this.renderV2Widget = this.renderV2Widget.bind(this);
+      this.v2Widgets = [];
       window.GoogleReCaptchaV3_onload = () => this.isAvailable();
     }
 
@@ -56,6 +56,7 @@ const withGoogleReCaptcha = (
      * it sets it in the state "googleReCaptchaToken"
      */
     private isAvailable(): void {
+      delete window.GoogleReCaptchaV3_onload;
       if (isGoogleReCaptchaAvailable()) {
         this.setState({ available: true });
         window.grecaptcha.ready(() => {
@@ -64,23 +65,43 @@ const withGoogleReCaptcha = (
       }
     }
 
-    private renderV2(widget): Promise<string> {
-      const { v3WidgetId } = this.state;
+    /**
+     * add and return the functional component
+     */
+    private addV2Widget({ siteKey }) {
+      // generate ref
+      const ref = React.createRef();
+      const newWidget = {
+        id: this.v2Widgets.length,
+        wId: undefined,
+        ref,
+        siteKey,
+        rendered: false
+      };
+      this.v2Widgets.push(newWidget);
+      return newWidget;
+    }
+
+    private removeV2Widget(id) {
+      this.v2Widgets = this.v2Widgets.filter(w => w.id !== id);
+    }
+
+    private renderV2Widget(id) {
+      const widget = this.v2Widgets.find(w => w.id === id);
       // do not render twice the same
-      if (v3WidgetId === undefined) {
+      if (widget.wId === undefined) {
         // render and get widget id
-        this.setState({
-          v3WidgetId: window.grecaptcha.render(widget)
-        });
+        if (widget.ref.current) {
+          widget.wId = window.grecaptcha.render(widget.ref.current);
+        }
       } else {
         //reset it
-        window.grecaptcha.reset(v3WidgetId);
+        window.grecaptcha.reset(widget.wId);
       }
     }
 
-    private getTokenV2(widgetId) {
-      const { v3WidgetId } = this.state;
-      return grecaptcha.getResponse(widgetId || v3WidgetId);
+    private getTokenV2(id) {
+      return grecaptcha.getResponse(this.v2Widgets.find(w => w.id === id.wId));
     }
 
     private getTokenV3(): Promise<string> {
@@ -122,7 +143,9 @@ const withGoogleReCaptcha = (
           googleReCaptchaV3Token={tokenV3}
           googleReCaptchaV3GetToken={this.getTokenV3}
           googleReCaptchaV2GetToken={this.getTokenV2}
-          googleReCaptchaV2Render={this.renderV2}
+          googleReCaptchaV2AddWidget={this.addV2Widget}
+          googleReCaptchaV2RenderWidget={this.renderV2Widget}
+          googleReCaptchaV2RemoveWidget={this.removeV2Widget}
         />
       );
     }

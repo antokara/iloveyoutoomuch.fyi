@@ -9,7 +9,7 @@ import { Rsvp as RsvpComponent } from 'Components/pages/rsvp/Rsvp';
 import { Loading } from 'Components/shared/Loading';
 import { STATUSES } from 'Constants/STATUSES';
 import * as getRsvp from 'Gql/getRsvp';
-import { withGoogleReCaptcha } from 'Helpers/withGoogleReCaptcha';
+import { withGoogleReCaptcha } from 'Helpers/googleReCaptcha/withGoogleReCaptcha';
 import * as PropTypes from 'prop-types';
 import * as React from 'react';
 import { graphql } from 'react-apollo';
@@ -24,6 +24,33 @@ class RsvpContainer extends React.Component {
     this.onAccept = this.onAccept.bind(this);
     this.onDecline = this.onDecline.bind(this);
     this.resetRsvp = this.resetRsvp.bind(this);
+    this.state = {
+      widget: undefined
+    };
+  }
+
+  componentDidUpdate(prevProps) {
+    const {
+      googleReCaptchaV2AddWidget,
+      googleReCaptchaV2RenderWidget,
+      googleReCaptchaV2RemoveWidget,
+      status
+    } = this.props;
+    const { widget } = this.state;
+    if (status !== prevProps.status && status === STATUSES.CHALLENGED) {
+      // just became challenged
+      this.setState({
+        widget: googleReCaptchaV2AddWidget({
+          siteKey: process.env.RE_CAPTCHA_V2_SITE_KEY
+        })
+      });
+    } else if (
+      status !== prevProps.status &&
+      prevProps.status === STATUSES.CHALLENGED
+    ) {
+      // was challenged but not any more
+      googleReCaptchaV2RemoveWidget(widget.id);
+    }
   }
 
   /**
@@ -37,8 +64,12 @@ class RsvpContainer extends React.Component {
       googleReCaptchaV3GetToken,
       status
     } = this.props;
+    const { widget } = this.state;
     if (status === STATUSES.CHALLENGED) {
-      rsvp({ ...values, tokenV2: googleReCaptchaV2GetToken() });
+      rsvp({
+        ...values,
+        tokenV2: googleReCaptchaV2GetToken(widget.wId)
+      });
     } else {
       googleReCaptchaV3GetToken().then(tokenV3 => rsvp({ ...values, tokenV3 }));
     }
@@ -66,7 +97,7 @@ class RsvpContainer extends React.Component {
 
   private resetRsvp(): void {
     const { resetRsvp, resetForm } = this.props;
-    // resetForm();
+    resetForm();
     resetRsvp();
   }
 
@@ -77,8 +108,9 @@ class RsvpContainer extends React.Component {
       status,
       googleReCaptchaReady,
       googleReCaptchaV3Retrieving,
-      googleReCaptchaV2Render
+      googleReCaptchaV2RenderWidget
     } = this.props;
+    const { widget } = this.state;
     if (data.loading || !googleReCaptchaReady) {
       return <Loading />;
     }
@@ -105,7 +137,8 @@ class RsvpContainer extends React.Component {
         accepted={accepted}
         addMoreGuests={data.rsvp.addMoreGuests}
         googleReCaptchaRetrieving={googleReCaptchaV3Retrieving}
-        googleReCaptchaV2Render={googleReCaptchaV2Render}
+        googleReCaptchaV2RenderWidget={googleReCaptchaV2RenderWidget}
+        googleReCaptchaV2Widget={widget}
       />
     );
   }
@@ -120,7 +153,9 @@ RsvpContainer.propTypes = {
   googleReCaptchaV3Retrieving: PropTypes.bool,
   googleReCaptchaV2GetToken: PropTypes.func.isRequired,
   googleReCaptchaV3GetToken: PropTypes.func.isRequired,
-  googleReCaptchaV2Render: PropTypes.func.isRequired
+  googleReCaptchaV2AddWidget: PropTypes.func.isRequired,
+  googleReCaptchaV2RenderWidget: PropTypes.func.isRequired,
+  googleReCaptchaV2RemoveWidget: PropTypes.func.isRequired
 };
 
 RsvpContainer.defaultProps = {

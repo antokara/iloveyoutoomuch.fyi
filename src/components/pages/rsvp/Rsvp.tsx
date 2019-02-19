@@ -20,11 +20,6 @@ import * as ReactMarkdown from 'react-markdown';
 import { FieldArray } from 'redux-form';
 
 class Rsvp extends React.Component {
-  constructor(props) {
-    super(props);
-    this.v2Ref = React.createRef();
-  }
-
   isInProgress() {
     const { status, googleReCaptchaRetrieving } = this.props;
 
@@ -32,9 +27,16 @@ class Rsvp extends React.Component {
   }
 
   componentDidUpdate(prevProps) {
-    const { googleReCaptchaV2Render, status } = this.props;
-    if (status !== prevProps.status && status === STATUSES.CHALLENGED) {
-      googleReCaptchaV2Render(this.v2Ref.current);
+    const {
+      googleReCaptchaV2RenderWidget,
+      googleReCaptchaV2Widget,
+      status
+    } = this.props;
+    if (
+      googleReCaptchaV2Widget !== prevProps.googleReCaptchaV2Widget &&
+      googleReCaptchaV2Widget
+    ) {
+      googleReCaptchaV2RenderWidget(googleReCaptchaV2Widget.id);
     }
   }
 
@@ -101,7 +103,8 @@ class Rsvp extends React.Component {
       onAccept,
       onDecline,
       status,
-      captchaChallenge
+      captchaChallenge,
+      googleReCaptchaV2Widget
     } = this.props;
 
     return (
@@ -120,12 +123,12 @@ class Rsvp extends React.Component {
               }}
             />
           </Grid>
-          {status === STATUSES.CHALLENGED && (
+          {status === STATUSES.CHALLENGED && googleReCaptchaV2Widget && (
             <Grid item xs={12}>
               {captchaChallenge}
               <GoogleReCaptchaV2
-                siteKey={process.env.RE_CAPTCHA_V2_SITE_KEY}
-                fRef={this.v2Ref}
+                siteKey={googleReCaptchaV2Widget.siteKey}
+                fRef={googleReCaptchaV2Widget.ref}
               />
             </Grid>
           )}
@@ -189,7 +192,8 @@ Rsvp.propTypes = {
   status: PropTypes.string.isRequired,
   accepted: PropTypes.bool,
   googleReCaptchaRetrieving: PropTypes.bool,
-  googleReCaptchaV2Render: PropTypes.func.isRequired
+  googleReCaptchaV2RenderWidget: PropTypes.func.isRequired,
+  googleReCaptchaV2Widget: PropTypes.objectOf(PropTypes.any)
 };
 
 Rsvp.defaultProps = {
