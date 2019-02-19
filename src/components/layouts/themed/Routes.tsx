@@ -2,11 +2,11 @@
  * themed Routes Component
  * defines which themed page component will be applied to the current route
  */
-import { Home } from 'Components/pages/Home';
 import { NotFound } from 'Components/pages/NotFound';
 import { ROUTES } from 'Constants/ROUTES';
 import { Contact } from 'Containers/pages/Contact';
 import { Gallery } from 'Containers/pages/Gallery';
+import { Home } from 'Containers/pages/Home';
 import { Information } from 'Containers/pages/Information';
 import { Registry } from 'Containers/pages/Registry';
 import { Rsvp } from 'Containers/pages/Rsvp';
