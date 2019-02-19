@@ -15,7 +15,11 @@ const HomeContainer: React.FunctionComponent = ({
   data.loading ? (
     <Loading />
   ) : (
-    <Component hashtag1={data.home.hashtag1} hashtag2={data.home.hashtag2} />
+    <Component
+      hashtag1={data.home.hashtag1}
+      hashtag2={data.home.hashtag2}
+      eventDateTime={data.theme.eventDateTime}
+    />
   );
 
 const Home: React.ComponentClass = graphql(getHome)(HomeContainer);
