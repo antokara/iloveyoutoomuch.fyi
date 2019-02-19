@@ -30,7 +30,12 @@ const Loaded: React.FunctionComponent = ({
   data
 }): React.ReactElement<React.ReactNode> => (
   <React.Fragment>
-    <Background img={imgUrl(data.background.path, '?fit=max&w=1920')} />
+    <Background
+      img={imgUrl(
+        data.background.path,
+        '?fp-x=0.5&fp-y=0.55&fit=crop&crop=focalpoint'
+      )}
+    />
     <Page>
       <Upper>
         <Header>{data.header}</Header>

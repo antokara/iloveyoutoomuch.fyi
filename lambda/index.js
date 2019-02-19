@@ -75,7 +75,6 @@ exports.handler = async event => {
       throw new Error(`code: 401, failed: ${data.success}`);
     }
   } else if (event.tokenV3) {
-    throw new Error(`code: 401, failed:`);
     // Google reCaptcha v3
     const reCaptchaResponse = await fetch(GOOGLE_RECAPTCHA_VERIFY_URL, {
       method: 'POST',

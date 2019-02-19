@@ -59,6 +59,7 @@
     "redux-mock-store": "^1.5.3",
     "semantic-release": "^15.13.3",
     "stylelint": "^9.10.1",
+    "stylelint-config-prettier": "^4.0.0",
     "stylelint-config-recommended": "^2.1.0",
     "stylelint-config-standard": "^18.2.0",
     "stylelint-config-styled-components": "^0.1.1",
@@ -272,7 +273,8 @@
     "extends": [
       "stylelint-config-standard",
       "stylelint-config-recommended",
-      "stylelint-config-styled-components"
+      "stylelint-config-styled-components",
+      "stylelint-config-prettier"
     ]
   }
 }
