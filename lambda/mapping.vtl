@@ -1,0 +1,16 @@
+#set($inputRoot = $input.path('$'))
+{
+    "sourceIP" : "$context.identity.sourceIp",
+    "accepted" : $inputRoot.accepted,
+    "tokenV2" : "$inputRoot.tokenV2",
+    "tokenV3" : "$inputRoot.tokenV3",
+    "guests" : [
+    #foreach($elem in $inputRoot.guests)
+    {
+        "firstName" : "$elem.firstName",
+        "lastName" : "$elem.lastName",
+        "age" : "$elem.age"
+    }
+    #end
+    ]
+}

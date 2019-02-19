@@ -27,9 +27,10 @@ async function asyncForEach(array, callback) {
  * @param {string} firstName
  * @param {string} lastName
  * @param {string} age
+ * @param {string} sourceIP
  * @return Promise
  */
-const storeGuest = (accepted, firstName, lastName, age) => {
+const storeGuest = (accepted, firstName, lastName, age, sourceIP) => {
   var params = {
     Item: {
       id: {
@@ -49,6 +50,9 @@ const storeGuest = (accepted, firstName, lastName, age) => {
       },
       created: {
         S: new Date().toISOString()
+      },
+      sourceIP: {
+        S: sourceIP
       }
     },
     TableName: 'iloveyoutoomuch.fyi-rsvp'
@@ -100,7 +104,8 @@ exports.handler = async event => {
         event.accepted,
         guest.firstName,
         guest.lastName,
-        guest.age
+        guest.age,
+        event.sourceIP
       );
     } catch (e) {
       console.log('failed to write to dynamodb, with code:', e.code);
