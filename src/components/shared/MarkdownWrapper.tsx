@@ -99,6 +99,20 @@ const MarkdownWrapper: React.FunctionComponent = styledComponents.div`
     padding-inline-start: 0.5em;
   }
 
+  blockquote {
+    font-style: italic;
+    color: gray;
+    margin: 0;
+
+    p {
+      margin: 0;
+    }
+
+    p:nth-of-type(2) {
+      font-size: 0.7em;
+    }
+  }
+
   @media (min-width: 768px) {
     font-size: 0.8em;
   }
