@@ -1,0 +1,14 @@
+query getGallery {
+  gallery {
+    photos {
+      photo {
+        _id
+        caption
+        credit
+        description
+        path
+        title
+      }
+    }
+  }
+}

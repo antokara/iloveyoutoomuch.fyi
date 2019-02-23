@@ -1,0 +1,35 @@
+{
+  "defaultSeverity": "error",
+  "extends": ["tslint:recommended", "tslint-react", "tslint-microsoft-contrib"],
+  "jsRules": {},
+  "rules": {
+    // @see https://github.com/palantir/tslint/issues/3364
+    "no-implicit-dependencies": [
+      true,
+      [
+        "Assets",
+        "Actions",
+        "Components",
+        "Constants",
+        "Containers",
+        "Helpers",
+        "Reducers",
+        "Gql"
+      ]
+    ],
+    "no-submodule-imports": [
+      true,
+      "Assets",
+      "Actions",
+      "Components",
+      "Constants",
+      "Containers",
+      "Helpers",
+      "Reducers",
+      "Gql"
+    ],
+    // @see https://github.com/palantir/tslint-react/issues/120
+    "variable-name": [true, "ban-keywords", "check-format", "allow-pascal-case"]
+  },
+  "rulesDirectory": ["node_modules/tslint-microsoft-contrib"]
+}

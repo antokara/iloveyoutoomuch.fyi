@@ -1,0 +1,20 @@
+query getTheme {
+  theme {
+    background {
+      caption
+      credit
+      description
+      filename
+      path
+      title
+    }
+    eventDateTime
+    header
+    menu {
+      _id
+      title
+      url
+    }
+    subHeader
+  }
+}

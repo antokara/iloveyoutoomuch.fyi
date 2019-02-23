@@ -1,0 +1,18 @@
+query getSaveTheDate {
+  saveTheDate {
+    coupleNames
+    dateTime
+    location
+    photos {
+      photo {
+        caption
+        credit
+        description
+        filename
+        path
+        title
+      }
+    }
+    title
+  }
+}

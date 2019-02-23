@@ -1,0 +1,9 @@
+query getHome {
+  home {
+    hashtag1
+    hashtag2
+  }
+  theme {
+    eventDateTime
+  }
+}

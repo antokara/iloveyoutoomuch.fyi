@@ -1,0 +1,25 @@
+{
+  "compilerOptions": {
+    "module": "commonjs",
+    "noImplicitAny": true,
+    "removeComments": true,
+    "preserveConstEnums": true,
+    "sourceMap": true,
+    "jsx": "react",
+    "target": "es2015",
+    "allowSyntheticDefaultImports": true,
+    "baseUrl": ".",
+    "paths": {
+      "Actions/*": ["src/actions/*"],
+      "Components/*": ["src/components/*"],
+      "Constants/*": ["src/constants/*"],
+      "Containers/*": ["src/containers/*"],
+      "Helpers/*": ["src/helpers/*"],
+      "Reducers/*": ["src/reducers/*"],
+      "Gql/*": ["src/gql/*"],
+      "Assets/*": ["assets/*"],
+      "ReduxLogger/*": ["redux-logger"],
+      "ReduxDevtoolsExtension/*": ["redux-devtools-extension"]
+    }
+  }
+}
