@@ -57,7 +57,7 @@
     "mockdate": "^2.0.2",
     "prettier": "^1.16.4",
     "redux-mock-store": "^1.5.3",
-    "semantic-release": "^15.13.3",
+    "semantic-release": "^17.2.3",
     "stylelint": "^9.10.1",
     "stylelint-config-prettier": "^4.0.0",
     "stylelint-config-recommended": "^2.1.0",
