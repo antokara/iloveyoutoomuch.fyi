@@ -1,5 +1,5 @@
 query getStory {
-  story {
+  getStory {
     body
   }
 }

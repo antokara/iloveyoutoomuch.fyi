@@ -12,7 +12,7 @@ import { graphql } from 'react-apollo';
 const GalleryContainer: React.FunctionComponent = ({
   data
 }): React.ReactElement<React.ReactNode> =>
-  data.loading ? <Loading /> : <GalleryComponent data={data.gallery} />;
+  data.loading ? <Loading /> : <GalleryComponent data={data.getGallery} />;
 
 const Gallery: React.ComponentClass = graphql(getGallery)(GalleryContainer);
 

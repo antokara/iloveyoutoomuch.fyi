@@ -16,9 +16,9 @@ const HomeContainer: React.FunctionComponent = ({
     <Loading />
   ) : (
     <Component
-      hashtag1={data.home.hashtag1}
-      hashtag2={data.home.hashtag2}
-      eventDateTime={data.theme.eventDateTime}
+      hashtag1={data.getHome.hashtag1}
+      hashtag2={data.getHome.hashtag2}
+      eventDateTime={data.getTheme.eventDateTime}
     />
   );
 

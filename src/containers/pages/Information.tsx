@@ -12,7 +12,7 @@ import { graphql } from 'react-apollo';
 const InformationContainer: React.FunctionComponent = ({
   data
 }): React.ReactElement<React.ReactNode> =>
-  data.loading ? <Loading /> : <Generic body={data.information.body} />;
+  data.loading ? <Loading /> : <Generic body={data.getInformation.body} />;
 
 const Information: React.ComponentClass = graphql(getInformation)(
   InformationContainer

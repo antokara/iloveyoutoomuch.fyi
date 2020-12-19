@@ -1,5 +1,5 @@
 query getInformation {
-  information {
+  getInformation {
     body
   }
 }
