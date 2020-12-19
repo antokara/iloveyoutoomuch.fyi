@@ -8,6 +8,6 @@ import * as React from 'react';
 const Themed: React.FunctionComponent = ({
   data
 }): React.ReactElement<React.ReactNode> =>
-  data.loading ? <Loading /> : <Loaded data={data.theme} />;
+  data.loading ? <Loading /> : <Loaded data={data.getTheme} />;
 
 export { Themed };

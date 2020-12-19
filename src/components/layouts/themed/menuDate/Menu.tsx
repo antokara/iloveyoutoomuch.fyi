@@ -35,7 +35,7 @@ const buildItems = (handleClose, items) =>
       onClick={handleClose}
       component={NavLink}
       to={item.url}
-      exact
+      exact={true}
     >
       {item.title}
     </Item>

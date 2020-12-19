@@ -1,5 +1,5 @@
 query getSaveTheDate {
-  saveTheDate {
+  getSaveTheDate {
     coupleNames
     dateTime
     location

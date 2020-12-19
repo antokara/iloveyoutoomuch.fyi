@@ -12,7 +12,7 @@ import { graphql } from 'react-apollo';
 const ContactContainer: React.FunctionComponent = ({
   data
 }): React.ReactElement<React.ReactNode> =>
-  data.loading ? <Loading /> : <Generic body={data.contact.body} />;
+  data.loading ? <Loading /> : <Generic body={data.getContact.body} />;
 
 const Contact: React.ComponentClass = graphql(getContact)(ContactContainer);
 

@@ -1,5 +1,5 @@
 query getRsvp {
-  rsvp {
+  getRsvp {
     accept
     addGuest
     age

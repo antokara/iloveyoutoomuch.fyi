@@ -8,6 +8,6 @@ import * as React from 'react';
 const SaveTheDate: React.FunctionComponent = ({
   data
 }): React.ReactElement<React.ReactNode> =>
-  data.loading ? <Loading /> : <Loaded data={data.saveTheDate} />;
+  data.loading ? <Loading /> : <Loaded data={data.getSaveTheDate} />;
 
 export { SaveTheDate };

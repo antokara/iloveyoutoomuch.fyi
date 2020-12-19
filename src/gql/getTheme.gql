@@ -1,5 +1,5 @@
 query getTheme {
-  theme {
+  getTheme {
     background {
       caption
       credit

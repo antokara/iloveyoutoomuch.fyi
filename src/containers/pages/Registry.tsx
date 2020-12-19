@@ -12,7 +12,7 @@ import { graphql } from 'react-apollo';
 const RegistryContainer: React.FunctionComponent = ({
   data
 }): React.ReactElement<React.ReactNode> =>
-  data.loading ? <Loading /> : <Generic body={data.registry.body} />;
+  data.loading ? <Loading /> : <Generic body={data.getRegistry.body} />;
 
 const Registry: React.ComponentClass = graphql(getRegistry)(RegistryContainer);
 

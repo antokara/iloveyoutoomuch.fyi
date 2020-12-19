@@ -1,5 +1,5 @@
 query getGallery {
-  gallery {
+  getGallery {
     photos {
       photo {
         _id

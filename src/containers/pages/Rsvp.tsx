@@ -117,25 +117,25 @@ class RsvpContainer extends React.Component {
 
     return (
       <RsvpComponent
-        body={data.rsvp.body}
-        accept={data.rsvp.accept}
+        body={data.getRsvp.body}
+        accept={data.getRsvp.accept}
         resetRsvp={this.resetRsvp}
-        addGuest={data.rsvp.addGuest}
-        age={data.rsvp.age}
-        body={data.rsvp.body}
-        decline={data.rsvp.decline}
-        error={data.rsvp.error}
-        captchaChallenge={data.rsvp.captchaChallenge}
-        firstName={data.rsvp.firstName}
-        lastName={data.rsvp.lastName}
-        removeGuest={data.rsvp.removeGuest}
-        successAccept={data.rsvp.successAccept}
-        successDecline={data.rsvp.successDecline}
+        addGuest={data.getRsvp.addGuest}
+        age={data.getRsvp.age}
+        body={data.getRsvp.body}
+        decline={data.getRsvp.decline}
+        error={data.getRsvp.error}
+        captchaChallenge={data.getRsvp.captchaChallenge}
+        firstName={data.getRsvp.firstName}
+        lastName={data.getRsvp.lastName}
+        removeGuest={data.getRsvp.removeGuest}
+        successAccept={data.getRsvp.successAccept}
+        successDecline={data.getRsvp.successDecline}
         onAccept={this.onAccept}
         onDecline={this.onDecline}
         status={status}
         accepted={accepted}
-        addMoreGuests={data.rsvp.addMoreGuests}
+        addMoreGuests={data.getRsvp.addMoreGuests}
         googleReCaptchaRetrieving={googleReCaptchaV3Retrieving}
         googleReCaptchaV2RenderWidget={googleReCaptchaV2RenderWidget}
         googleReCaptchaV2Widget={widget}
